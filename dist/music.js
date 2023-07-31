@@ -6,8 +6,8 @@ const ap = new APlayer({
 	  {
         name: '写不完的温柔',
         artist: 'G.E.M.邓紫棋',
-        url: 'https://other-web-nf01-sycdn.kuwo.cn/c6944a20100c7b83f4e68e78cc08701e/64c7cf26/resource/n3/84/54/2396262633.mp3?from$unkown&plat$web_www',
-        cover: 'https://img2.kuwo.cn/star/albumcover/500/46/61/3850187071.jpg',
+        url: 'http://lc-bNCpnuu1.cn-n1.lcfile.com/8tnqrfAIIpuKMjRBSluEV6qxWhOUcs1C/%E5%86%99%E4%B8%8D%E5%AE%8C%E7%9A%84%E6%B8%A9%E6%9F%94.mp3',
+        cover: 'http://lc-bNCpnuu1.cn-n1.lcfile.com/tKrNeJquUWEFemzne9RBhFEglO2rjYkN/3850187071.jpg',
       }
      
     ]
