@@ -328,44 +328,34 @@ mjx-container[display="true"] + br {
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="任意文件下载与目录穿越">任意文件下载与目录穿越</h1>
-<h2 id="任意文件下载">任意文件下载</h2>
-<p>如果网站对用户的查看或下载的文件不做限制，则恶意用户就能查看或下载任意敏感文件，这就是文件查看与下载漏洞，属于owasp
-top10的失效访问控制类型。</p>
-<h2 id="实例">实例</h2>
-<h3 id="任意文件下载-1">任意文件下载</h3>
-<p>站点：pikachu</p>
-<p><img src="/2023/08/12/%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8B%E8%BD%BD%E4%B8%8E%E7%9B%AE%E5%BD%95%E7%A9%BF%E8%B6%8A/No1.png"></p>
+        <h1 id="任意文件下载与目录穿越"><a href="#任意文件下载与目录穿越" class="headerlink" title="任意文件下载与目录穿越"></a>任意文件下载与目录穿越</h1><h2 id="任意文件下载"><a href="#任意文件下载" class="headerlink" title="任意文件下载"></a>任意文件下载</h2><p>如果网站对用户的查看或下载的文件不做限制，则恶意用户就能查看或下载任意敏感文件，这就是文件查看与下载漏洞，属于owasp top10的失效访问控制类型。</p>
+<h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><h3 id="任意文件下载-1"><a href="#任意文件下载-1" class="headerlink" title="任意文件下载"></a>任意文件下载</h3><p>站点：pikachu</p>
+<p><img src="/2023/08/12/%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8B%E8%BD%BD%E4%B8%8E%E7%9B%AE%E5%BD%95%E7%A9%BF%E8%B6%8A/No1.png" alt></p>
 <p>下载地址为相对地址</p>
-<p><img src="/2023/08/12/%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8B%E8%BD%BD%E4%B8%8E%E7%9B%AE%E5%BD%95%E7%A9%BF%E8%B6%8A/No2.png"></p>
-<p>请求地址：http://127.0.0.1/pikachu/vul/unsafedownload/execdownload.php?filename=kb.png</p>
-<p><img src="/2023/08/12/%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8B%E8%BD%BD%E4%B8%8E%E7%9B%AE%E5%BD%95%E7%A9%BF%E8%B6%8A/No3.png"></p>
+<p><img src="/2023/08/12/%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8B%E8%BD%BD%E4%B8%8E%E7%9B%AE%E5%BD%95%E7%A9%BF%E8%B6%8A/No2.png" alt></p>
+<p>请求地址：<a target="_blank" rel="noopener" href="http://127.0.0.1/pikachu/vul/unsafedownload/execdownload.php?filename=kb.png">http://127.0.0.1/pikachu/vul/unsafedownload/execdownload.php?filename=kb.png</a></p>
+<p><img src="/2023/08/12/%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8B%E8%BD%BD%E4%B8%8E%E7%9B%AE%E5%BD%95%E7%A9%BF%E8%B6%8A/No3.png" alt></p>
 <p>我们可以直接访问对应的url来下载数据，其中可以更改filename来下载不同的文件</p>
-<h3 id="目录穿越">目录穿越</h3>
-<p>在pikachu文件夹下新建一个1.txt的文件</p>
-<p><img src="/2023/08/12/%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8B%E8%BD%BD%E4%B8%8E%E7%9B%AE%E5%BD%95%E7%A9%BF%E8%B6%8A/No4.png"></p>
-<p>访问url：http://127.0.0.1/pikachu/vul/unsafedownload/execdownload.php?filename=../../../1.txt</p>
-<p><img src="/2023/08/12/%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8B%E8%BD%BD%E4%B8%8E%E7%9B%AE%E5%BD%95%E7%A9%BF%E8%B6%8A/No5.png"></p>
+<h3 id="目录穿越"><a href="#目录穿越" class="headerlink" title="目录穿越"></a>目录穿越</h3><p>在pikachu文件夹下新建一个1.txt的文件</p>
+<p><img src="/2023/08/12/%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8B%E8%BD%BD%E4%B8%8E%E7%9B%AE%E5%BD%95%E7%A9%BF%E8%B6%8A/No4.png" alt></p>
+<p>访问url：<a target="_blank" rel="noopener" href="http://127.0.0.1/pikachu/vul/unsafedownload/execdownload.php?filename=../../../1.txt">http://127.0.0.1/pikachu/vul/unsafedownload/execdownload.php?filename=../../../1.txt</a></p>
+<p><img src="/2023/08/12/%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8B%E8%BD%BD%E4%B8%8E%E7%9B%AE%E5%BD%95%E7%A9%BF%E8%B6%8A/No5.png" alt></p>
 <p>../就是访问上一层目录</p>
-<h3 id="产生原理">产生原理</h3>
-<p><img src="/2023/08/12/%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8B%E8%BD%BD%E4%B8%8E%E7%9B%AE%E5%BD%95%E7%A9%BF%E8%B6%8A/No6.png"></p>
+<h3 id="产生原理"><a href="#产生原理" class="headerlink" title="产生原理"></a>产生原理</h3><p><img src="/2023/08/12/%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8B%E8%BD%BD%E4%B8%8E%E7%9B%AE%E5%BD%95%E7%A9%BF%E8%B6%8A/No6.png" alt></p>
 <p>对用户输入的数据没有过滤，没有限定只能在当前路径下下载</p>
 <p>敏感文件：/etc/passwd /etc/shadow /etc/nginx/nginx.conf</p>
-<h3 id="利用方式">利用方式</h3>
-<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">一般链接形式：</span><br><span class="line">download.<span class="property">php</span>?path=</span><br><span class="line">down.<span class="property">php</span>?file=</span><br><span class="line">data.<span class="property">php</span>?file=</span><br><span class="line">download.<span class="property">php</span>?filename=</span><br><span class="line">或者包含参数“</span><br><span class="line">&amp;<span class="title class_">Src</span>=</span><br><span class="line">&amp;<span class="title class_">Inputfile</span>=</span><br><span class="line">&amp;<span class="title class_">Path</span>=</span><br><span class="line">&amp;<span class="title class_">Data</span>=</span><br></pre></td></tr></table></figure>
-<h3 id="利用思路">利用思路</h3>
-<p>1，下载常规的配置文件，例如ssh，weblogic，ftp，mysql等相关配置</p>
+<h3 id="利用方式"><a href="#利用方式" class="headerlink" title="利用方式"></a>利用方式</h3><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">一般链接形式：</span><br><span class="line">download.<span class="property">php</span>?path=</span><br><span class="line">down.<span class="property">php</span>?file=</span><br><span class="line">data.<span class="property">php</span>?file=</span><br><span class="line">download.<span class="property">php</span>?filename=</span><br><span class="line">或者包含参数“</span><br><span class="line">&amp;<span class="title class_">Src</span>=</span><br><span class="line">&amp;<span class="title class_">Inputfile</span>=</span><br><span class="line">&amp;<span class="title class_">Path</span>=</span><br><span class="line">&amp;<span class="title class_">Data</span>=</span><br></pre></td></tr></table></figure>
+<h3 id="利用思路"><a href="#利用思路" class="headerlink" title="利用思路"></a>利用思路</h3><p>1，下载常规的配置文件，例如ssh，weblogic，ftp，mysql等相关配置</p>
 <p>2，下载各种.log文件，从中寻找一些后台地址，文件上传点之类的地方</p>
 <p>3，下载web业务文件进行白盒审计，利用漏洞进一步攻入服务器</p>
 <p>4，常见利用文件</p>
 <figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">/root/.<span class="property">ssh</span>/authorized_keys  <span class="comment">//ssh免密登陆</span></span><br><span class="line">/root/.<span class="property">ssh</span>/id_rsa</span><br><span class="line">/root/.<span class="property">ssh</span>/id_rsa.<span class="property">keystore</span></span><br><span class="line">/root/.<span class="property">ssh</span>/known_hosts  <span class="comment">//记录每个访问计算机用户的公钥</span></span><br><span class="line">/etc/passwd  <span class="comment">//用户名</span></span><br><span class="line">/etc/shadow  <span class="comment">//密码</span></span><br><span class="line">/etc/my.<span class="property">cnf</span>  <span class="comment">//mysql配置文件</span></span><br><span class="line">/etc/httpd/conf/httpd.<span class="property">conf</span>  <span class="comment">//apache配置文件</span></span><br><span class="line">/root/.<span class="property">bash_history</span>  <span class="comment">//用户历史命令记录文件</span></span><br><span class="line">/root/.<span class="property">mysql_history</span>  <span class="comment">//mysql历史命令记录文件</span></span><br><span class="line">/proc/mounts  <span class="comment">//记录系统挂载设备</span></span><br><span class="line">/proc/config.<span class="property">gz</span>  <span class="comment">//内核配置文件</span></span><br><span class="line">/<span class="keyword">var</span>/lib/mlocate/mlocate.<span class="property">db</span>  <span class="comment">//全文件路径</span></span><br><span class="line">/porc/self/cmdline  <span class="comment">//当前进程的cmdline参数</span></span><br></pre></td></tr></table></figure>
-<h3 id="漏洞修复">漏洞修复</h3>
-<ul>
+<h3 id="漏洞修复"><a href="#漏洞修复" class="headerlink" title="漏洞修复"></a>漏洞修复</h3><ul>
 <li>过滤“.”，使用户不能跨目录访问</li>
 <li>正则严格判断用户输入参数的格式</li>
 <li>php.ini配置open_basedir限定文件访问范围</li>
 </ul>
-<p><img src="/2023/08/12/%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8B%E8%BD%BD%E4%B8%8E%E7%9B%AE%E5%BD%95%E7%A9%BF%E8%B6%8A/No7.png"></p>
+<p><img src="/2023/08/12/%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8B%E8%BD%BD%E4%B8%8E%E7%9B%AE%E5%BD%95%E7%A9%BF%E8%B6%8A/No7.png" alt></p>
 
     </div>
 

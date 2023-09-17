@@ -1,131 +1,66 @@
-<h1 id="hexo-symbols-count-time">hexo-symbols-count-time</h1>
-<p><a href="https://www.npmjs.com/package/hexo-symbols-count-time"><img
-src="https://img.shields.io/npm/v/hexo-symbols-count-time?style=flat-square"
-alt="npm-image" /></a> <a
-href="https://nodejs.org/en/download/releases"><img
-src="https://img.shields.io/node/v/hexo-symbols-count-time?style=flat-square"
-alt="node-image" /></a> <a href="https://hexo.io"><img
-src="https://img.shields.io/badge/hexo-%3E%3D%203.0-blue?style=flat-square"
-alt="hexo-image" /></a> <a
-href="https://coveralls.io/github/theme-next/hexo-symbols-count-time?branch=master"
-title="Coverage of Tests"><img
-src="https://img.shields.io/coveralls/theme-next/hexo-symbols-count-time/master?style=flat-square"
-alt="cover-image" /></a> <a
-href="https://travis-ci.org/theme-next/hexo-symbols-count-time?branch=master"
-title="Travis CI [Linux]"><img
-src="https://img.shields.io/travis/theme-next/hexo-symbols-count-time/master?style=flat-square"
-alt="travis-image" /></a> <a
-href="https://ci.appveyor.com/project/ivan-nginx/hexo-symbols-count-time/branch/master"
-title="AppVeyor [Windows]"><img
-src="https://img.shields.io/appveyor/ci/ivan-nginx/hexo-symbols-count-time/master?style=flat-square"
-alt="appveyor-image" /></a> <a href="LICENSE"><img
-src="https://img.shields.io/npm/l/hexo-symbols-count-time?style=flat-square"
-alt="lic-image" /></a></p>
+<h1 id="hexo-symbols-count-time"><a href="#hexo-symbols-count-time" class="headerlink" title="hexo-symbols-count-time"></a>hexo-symbols-count-time</h1><p><a href="https://www.npmjs.com/package/hexo-symbols-count-time"><img src="https://img.shields.io/npm/v/hexo-symbols-count-time?style=flat-square" alt="npm-image"></a><br><a href="https://nodejs.org/en/download/releases"><img src="https://img.shields.io/node/v/hexo-symbols-count-time?style=flat-square" alt="node-image"></a><br><a href="https://hexo.io"><img src="https://img.shields.io/badge/hexo-%3E%3D%203.0-blue?style=flat-square" alt="hexo-image"></a><br><a href="https://coveralls.io/github/theme-next/hexo-symbols-count-time?branch=master" title="Coverage of Tests"><img src="https://img.shields.io/coveralls/theme-next/hexo-symbols-count-time/master?style=flat-square" alt="cover-image"></a><br><a href="https://travis-ci.org/theme-next/hexo-symbols-count-time?branch=master" title="Travis CI [Linux]"><img src="https://img.shields.io/travis/theme-next/hexo-symbols-count-time/master?style=flat-square" alt="travis-image"></a><br><a href="https://ci.appveyor.com/project/ivan-nginx/hexo-symbols-count-time/branch/master" title="AppVeyor [Windows]"><img src="https://img.shields.io/appveyor/ci/ivan-nginx/hexo-symbols-count-time/master?style=flat-square" alt="appveyor-image"></a><br><a href="LICENSE"><img src="https://img.shields.io/npm/l/hexo-symbols-count-time?style=flat-square" alt="lic-image"></a></p>
 <p>Symbols count and time to read for articles in Hexo blog.</p>
-<p>Better than <a
-href="https://github.com/ierhyna/hexo-reading-time"><code>hexo-reading-time</code></a>
-and faster than <a
-href="https://github.com/willin/hexo-wordcount"><code>hexo-wordcount</code></a>.
-No external dependencies.</p>
-<h2 id="installation">Installation</h2>
-<p><img
-src="https://img.shields.io/github/languages/code-size/theme-next/hexo-symbols-count-time?style=flat-square"
-alt="size-image" /> <a
-href="https://www.npmjs.com/package/hexo-symbols-count-time"><img
-src="https://img.shields.io/npm/dm/hexo-symbols-count-time?style=flat-square"
-alt="dm-image" /></a> <a
-href="https://www.npmjs.com/package/hexo-symbols-count-time"><img
-src="https://img.shields.io/npm/dt/hexo-symbols-count-time?style=flat-square"
-alt="dt-image" /></a></p>
-<div class="sourceCode" id="cb1"><pre
-class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> npm install hexo-symbols-count-time</span></code></pre></div>
-<h2 id="usage">Usage</h2>
-<p>You can set options of hexo-symbols-count-time in the <strong>Hexo's
-<code>_config.yml</code></strong> (which locates in the root dir of your
-blog):</p>
-<div class="sourceCode" id="cb2"><pre
-class="sourceCode yml"><code class="sourceCode yaml"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">symbols_count_time</span><span class="kw">:</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">symbols</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">time</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">total_symbols</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">total_time</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">exclude_codeblock</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">awl</span><span class="kw">:</span><span class="at"> </span><span class="dv">4</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">wpm</span><span class="kw">:</span><span class="at"> </span><span class="dv">275</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">suffix</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;mins.&quot;</span></span></code></pre></div>
-<p>If <code>symbols_count_time</code> option is not specified, the
-default parameters will be used.</p>
-<h3 id="parameters">Parameters</h3>
-<ul>
-<li><code>awl</code> – Average Word Length (chars count in word).
-Default: <code>4</code>. You can check this <a
-href="https://charactercounttool.com">here</a>.
-<ul>
-<li>CN ≈ <code>2</code></li>
-<li>EN ≈ <code>5</code></li>
-<li>RU ≈ <code>6</code></li>
-</ul></li>
-<li><code>wpm</code> – Words Per Minute. Default: <code>275</code>. You
-can check this <a href="https://wordcounter.net">here</a>.
-<ul>
-<li>Slow ≈ <code>200</code></li>
-<li>Normal ≈ <code>275</code></li>
-<li>Fast ≈ <code>350</code></li>
-</ul></li>
-<li><code>suffix</code> – If time to read less then 60 minutes, added
-suffix as string parameter.<br />
-If not defined, <code>mins.</code> will be used as default.</li>
-<li><code>exclude_codeblock</code> – Allow to exclude all content inside
-code blocks for more accurate words counting.<br />
-If not defined, <code>false</code> will be used as default.</li>
+<p>Better than <a href="https://github.com/ierhyna/hexo-reading-time"><code>hexo-reading-time</code></a> and faster than <a href="https://github.com/willin/hexo-wordcount"><code>hexo-wordcount</code></a>. No external dependencies.</p>
+<h2 id="Installation"><a href="#Installation" class="headerlink" title="Installation"></a>Installation</h2><p>![size-image]<br><a href="https://www.npmjs.com/package/hexo-symbols-count-time"><img src="https://img.shields.io/npm/dm/hexo-symbols-count-time?style=flat-square" alt="dm-image"></a><br><a href="https://www.npmjs.com/package/hexo-symbols-count-time"><img src="https://img.shields.io/npm/dt/hexo-symbols-count-time?style=flat-square" alt="dt-image"></a></p>
+<pre><code class="lang-bash">$ npm install hexo-symbols-count-time
+</code></pre>
+<h2 id="Usage"><a href="#Usage" class="headerlink" title="Usage"></a>Usage</h2><p>You can set options of hexo-symbols-count-time in the <strong>Hexo’s <code>_config.yml</code></strong> (which locates in the root dir of your blog):</p>
+<pre><code class="lang-yml">symbols_count_time:
+  symbols: true
+  time: true
+  total_symbols: true
+  total_time: true
+  exclude_codeblock: false
+  awl: 4
+  wpm: 275
+  suffix: &quot;mins.&quot;
+</code></pre>
+<p>If <code>symbols_count_time</code> option is not specified, the default parameters will be used.</p>
+<h3 id="Parameters"><a href="#Parameters" class="headerlink" title="Parameters"></a>Parameters</h3><ul>
+<li><code>awl</code> – Average Word Length (chars count in word). Default: <code>4</code>. You can check this <a href="https://charactercounttool.com">here</a>.<ul>
+<li>CN &asymp; <code>2</code></li>
+<li>EN &asymp; <code>5</code></li>
+<li>RU &asymp; <code>6</code></li>
 </ul>
-<p><strong>Note for Chinese users:</strong> because in Chinese language
-average word length about <code>~1.5</code> and if you at most cases
-write posts in Chinese (without mixed English), recommended to set
-<code>awl</code> to <code>2</code> and <code>wpm</code> to
-<code>300</code>.<br />
-But if you usualy mix your posts with English, <code>awl</code> to
-<code>4</code> and <code>wpm</code> to <code>275</code> will be
-nice.</p>
-<h3 id="next-theme">NexT theme</h3>
-<p>This plugin integrated in «NexT» and after plugin enabled in main
-Hexo config, you may adjust options in NexT config:</p>
-<div class="sourceCode" id="cb3"><pre
-class="sourceCode yml"><code class="sourceCode yaml"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">symbols_count_time</span><span class="kw">:</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">separated_meta</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">item_text_post</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">item_text_total</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span></code></pre></div>
-<h2 id="development">Development</h2>
-<div class="sourceCode" id="cb4"><pre
-class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> cd hexo</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git clone https://github.com/theme-next/hexo-symbols-count-time.git node_modules/hexo-symbols-count-time</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> cd node_modules/hexo-symbols-count-time</span></code></pre></div>
-<h3 id="tests">Tests</h3>
-<div class="sourceCode" id="cb5"><pre
-class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> npm install mocha chai <span class="at">--save-dev</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> npm test</span></code></pre></div>
-<h3 id="tests-with-coverage">Tests with coverage</h3>
-<div class="sourceCode" id="cb6"><pre
-class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> npm install <span class="at">-g</span> nyc</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> nyc <span class="at">--print</span> both node_modules/.bin/_mocha <span class="at">--</span> test/index.js</span></code></pre></div>
-<h3 id="templates">Templates</h3>
-<h4 id="symbols-count">Symbols Count</h4>
-<div class="sourceCode" id="cb7"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>{{ <span class="fu">symbolsCount</span>(post) }}</span></code></pre></div>
-<h4 id="symbols-time">Symbols Time</h4>
-<div class="sourceCode" id="cb8"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>{{ <span class="fu">symbolsTime</span>(post) }}</span></code></pre></div>
+</li>
+<li><code>wpm</code> – Words Per Minute. Default: <code>275</code>. You can check this <a href="https://wordcounter.net">here</a>.<ul>
+<li>Slow &asymp; <code>200</code></li>
+<li>Normal &asymp; <code>275</code></li>
+<li>Fast &asymp; <code>350</code></li>
+</ul>
+</li>
+<li><code>suffix</code> – If time to read less then 60 minutes, added suffix as string parameter.\<br>If not defined, <code>mins.</code> will be used as default.</li>
+<li><code>exclude_codeblock</code> – Allow to exclude all content inside code blocks for more accurate words counting.\<br>If not defined, <code>false</code> will be used as default.</li>
+</ul>
+<p><strong>Note for Chinese users:</strong> because in Chinese language average word length about <code>~1.5</code> and if you at most cases write posts in Chinese (without mixed English), recommended to set <code>awl</code> to <code>2</code> and <code>wpm</code> to <code>300</code>.\<br>But if you usualy mix your posts with English, <code>awl</code> to <code>4</code> and <code>wpm</code> to <code>275</code> will be nice.</p>
+<h3 id="NexT-theme"><a href="#NexT-theme" class="headerlink" title="NexT theme"></a>NexT theme</h3><p>This plugin integrated in «NexT» and after plugin enabled in main Hexo config, you may adjust options in NexT config:</p>
+<pre><code class="lang-yml">symbols_count_time:
+  separated_meta: true
+  item_text_post: true
+  item_text_total: false
+</code></pre>
+<h2 id="Development"><a href="#Development" class="headerlink" title="Development"></a>Development</h2><pre><code class="lang-bash">$ cd hexo
+$ git clone https://github.com/theme-next/hexo-symbols-count-time.git node_modules/hexo-symbols-count-time
+$ cd node_modules/hexo-symbols-count-time
+</code></pre>
+<h3 id="Tests"><a href="#Tests" class="headerlink" title="Tests"></a>Tests</h3><pre><code class="lang-bash">$ npm install mocha chai --save-dev
+$ npm test
+</code></pre>
+<h3 id="Tests-with-coverage"><a href="#Tests-with-coverage" class="headerlink" title="Tests with coverage"></a>Tests with coverage</h3><pre><code class="lang-bash">$ npm install -g nyc
+$ nyc --print both node_modules/.bin/_mocha -- test/index.js
+</code></pre>
+<h3 id="Templates"><a href="#Templates" class="headerlink" title="Templates"></a>Templates</h3><h4 id="Symbols-Count"><a href="#Symbols-Count" class="headerlink" title="Symbols Count"></a>Symbols Count</h4><pre><code class="lang-js">{{ symbolsCount(post) }}
+</code></pre>
+<h4 id="Symbols-Time"><a href="#Symbols-Time" class="headerlink" title="Symbols Time"></a>Symbols Time</h4><pre><code class="lang-js">{{ symbolsTime(post) }}
+</code></pre>
 <p>Or with predefined parameters:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>{{ <span class="fu">symbolsTime</span>(post<span class="op">,</span> awl<span class="op">,</span> wpm<span class="op">,</span> suffix) }}</span></code></pre></div>
-<h4 id="symbols-count-total">Symbols Count Total</h4>
-<div class="sourceCode" id="cb10"><pre
-class="sourceCode js"><code class="sourceCode javascript"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>{{ <span class="fu">symbolsCountTotal</span>(site) }}</span></code></pre></div>
-<h4 id="symbols-time-total">Symbols Time Total</h4>
-<div class="sourceCode" id="cb11"><pre
-class="sourceCode js"><code class="sourceCode javascript"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>{{ <span class="fu">symbolsTimeTotal</span>(site) }}</span></code></pre></div>
+<pre><code class="lang-js">{{ symbolsTime(post, awl, wpm, suffix) }}
+</code></pre>
+<h4 id="Symbols-Count-Total"><a href="#Symbols-Count-Total" class="headerlink" title="Symbols Count Total"></a>Symbols Count Total</h4><pre><code class="lang-js">{{ symbolsCountTotal(site) }}
+</code></pre>
+<h4 id="Symbols-Time-Total"><a href="#Symbols-Time-Total" class="headerlink" title="Symbols Time Total"></a>Symbols Time Total</h4><pre><code class="lang-js">{{ symbolsTimeTotal(site) }}
+</code></pre>
 <p>Or with predefined parameters:</p>
-<div class="sourceCode" id="cb12"><pre
-class="sourceCode js"><code class="sourceCode javascript"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>{{ <span class="fu">symbolsTimeTotal</span>(site<span class="op">,</span> awl<span class="op">,</span> wpm<span class="op">,</span> suffix) }}</span></code></pre></div>
-<h4 id="renderers-syntax">Renderers syntax</h4>
-<p>SWIG / Nunjucks: <code>{{</code> <code>template</code>
-<code>}}</code><br />
-EJS: <code>&lt;%-</code> <code>template</code> <code>%&gt;</code><br />
-Jade: <code>span=</code> <code>template</code></p>
+<pre><code class="lang-js">{{ symbolsTimeTotal(site, awl, wpm, suffix) }}
+</code></pre>
+<h4 id="Renderers-syntax"><a href="#Renderers-syntax" class="headerlink" title="Renderers syntax"></a>Renderers syntax</h4><p>SWIG / Nunjucks: <code>{{</code> <code>template</code> <code>}}</code>\<br>EJS: <code>&lt;%-</code> <code>template</code> <code>%&gt;</code>\<br>Jade: <code>span=</code> <code>template</code></p>
