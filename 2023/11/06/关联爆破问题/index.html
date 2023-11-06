@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="比赛上遇到了不少次，这里也算是学习记录一下">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关联爆破问题">
+<meta property="og:url" content="http://example.com/2023/11/06/%E5%85%B3%E8%81%94%E7%88%86%E7%A0%B4%E9%97%AE%E9%A2%98/index.html">
+<meta property="og:site_name" content="zzZxby&#39;s blog">
+<meta property="og:description" content="比赛上遇到了不少次，这里也算是学习记录一下">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2023/11/06/%E5%85%B3%E8%81%94%E7%88%86%E7%A0%B4%E9%97%AE%E9%A2%98/image-20231106095317182.png">
+<meta property="article:published_time" content="2023-11-06T03:20:31.000Z">
+<meta property="article:modified_time" content="2023-11-06T03:21:46.910Z">
+<meta property="article:author" content="zzZxby">
+<meta property="article:tag" content="保持学习的热情">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2023/11/06/%E5%85%B3%E8%81%94%E7%88%86%E7%A0%B4%E9%97%AE%E9%A2%98/image-20231106095317182.png">
+
+<link rel="canonical" href="http://example.com/2023/11/06/%E5%85%B3%E8%81%94%E7%88%86%E7%A0%B4%E9%97%AE%E9%A2%98/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>关联爆破问题 | zzZxby's blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+<link rel="stylesheet" href="/dist/APlayer.min.css">
+<div id="aplayer"></div>
+<script type="text/javascript" src="/dist/APlayer.min.js"></script>
+<script type="text/javascript" src="/dist/music.js"></script>
+
+
+
+
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">zzZxby's blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/11/06/%E5%85%B3%E8%81%94%E7%88%86%E7%A0%B4%E9%97%AE%E9%A2%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/zzZ.jpg">
+      <meta itemprop="name" content="zzZxby">
+      <meta itemprop="description" content="看山是山，看水是水">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zzZxby's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          关联爆破问题
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-11-06 11:20:31 / 修改时间：11:21:46" itemprop="dateCreated datePublished" datetime="2023-11-06T11:20:31+08:00">2023-11-06</time>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.2k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>8 分钟</span>
+            </span>
+            <div class="post-description">比赛上遇到了不少次，这里也算是学习记录一下</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="关联爆破">关联爆破</h1>
+<p>比赛也遇到不少形式了，知道要用剪枝操作，但是代码有时候总是操作不好，这里特记录一下，也算是一种脚本的总结</p>
+<h2 id="已知pq和pq">已知p*q和p^q</h2>
+<h3 id="方法一">方法一</h3>
+<p>github有一个开源的工具，别人写好的<a target="_blank" rel="noopener" href="https://github.com/sliedes/xor_factor">sliedes/xor_factor: Given p
+xor q and n=p*q for two unknown primes p and q, factor n and output p
+and q. (github.com)</a></p>
+<p><img src="/2023/11/06/%E5%85%B3%E8%81%94%E7%88%86%E7%A0%B4%E9%97%AE%E9%A2%98/image-20231106095317182.png"></p>
+<p>终端直接运行就行</p>
+<h3 id="方法二">方法二</h3>
+<p>逐位爆破，从低位开始爆破</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">假设p的第一个低位为1（可以通过给出的n和p^q的值判断）</span><br><span class="line">那么q的的第一个低位为p^q^(p_low)</span><br><span class="line">如何得到低位：初始爆破p的长度为l，对爆破的p的长度取模2的l次方，就能得到当前爆破的低位</span><br><span class="line">随着l的增加，就能一位一位的爆破p的值</span><br><span class="line">如何缩短代码时间：剪枝，我们在爆破的时候，需要利用p*q=n这个条件进行判断，当然这个判断也是在当前已爆破的条件上进行爆破的，也需要模操作</span><br></pre></td></tr></table></figure>
+<h3 id="题目">题目</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> uuid</span><br><span class="line"></span><br><span class="line">flag = <span class="string">"flag{"</span> + <span class="built_in">str</span>(uuid.uuid4()) + <span class="string">"}"</span></span><br><span class="line"><span class="built_in">print</span>(flag)</span><br><span class="line">m = bytes_to_long(flag.encode())</span><br><span class="line"></span><br><span class="line">p = getPrime(<span class="number">512</span>)</span><br><span class="line">q = getPrime(<span class="number">512</span>)</span><br><span class="line"></span><br><span class="line">e = <span class="number">65537</span></span><br><span class="line">gift = p ^ q</span><br><span class="line">n = p * q</span><br><span class="line"><span class="built_in">print</span>(gift)</span><br><span class="line"><span class="built_in">print</span>(n)</span><br><span class="line">c = <span class="built_in">pow</span>(m, e, n)</span><br><span class="line"><span class="built_in">print</span>(c)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="代码">代码</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> gmpy2</span><br><span class="line"></span><br><span class="line">gift = <span class="number">5520334853495597921735282792166474758537682627339127498954775990336701482531773669053625647418049894056334409075702944146409439712371560727802612587423576</span></span><br><span class="line">n = <span class="number">90953945774792756402916737109273975426357572658472176129183499734542261231983536804533066141420383787137958313774094775411685770452817100792494381703646324445395313669011509397270148851177163554009707972993229758769302747845721871354197178531162476854683289202160901890815940019978013477363717912092956560017</span></span><br><span class="line">c = <span class="number">31570336967305212810337242412988841595290143627570694567917834395186087584933155229160817706741004691313049985541057824934010303831623853556679763568764200542586524525825411267374231726119739885331942334870376589607884116048533774547927311974187637817762430069769951277133378621019494159949051340681289187672</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">findp</span>(<span class="params">p, rp</span>):</span><br><span class="line">    l = <span class="built_in">len</span>(p)</span><br><span class="line">    <span class="keyword">if</span> l == <span class="number">512</span>:</span><br><span class="line">        rp.append(<span class="built_in">int</span>(p, <span class="number">2</span>))</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        pp = <span class="built_in">int</span>(p, <span class="number">2</span>)</span><br><span class="line">        qq = (gift ^ pp) % <span class="number">2</span> ** l</span><br><span class="line">        <span class="keyword">if</span> pp * qq % <span class="number">2</span> ** l == n % <span class="number">2</span> ** l:</span><br><span class="line">            findp(<span class="string">'1'</span> + p, rp)</span><br><span class="line">            findp(<span class="string">'0'</span> + p, rp)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">rp = []</span><br><span class="line">findp(<span class="string">'1'</span>, rp)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> rp:</span><br><span class="line">    <span class="keyword">if</span> isPrime(<span class="built_in">int</span>(i)) <span class="keyword">and</span> n % <span class="built_in">int</span>(i) == <span class="number">0</span>:</span><br><span class="line">        <span class="built_in">print</span>(i)</span><br><span class="line"></span><br><span class="line">p = <span class="number">7518983858891685120046966723075954148773111773672072879887196103108934947677867057681541156965806462970842762209541610909751267864510748749931185542870859</span></span><br><span class="line">q = n // p</span><br><span class="line">e = <span class="number">65537</span></span><br><span class="line">phi = (p - <span class="number">1</span>) * (q - <span class="number">1</span>)</span><br><span class="line">d = gmpy2.invert(e, phi)</span><br><span class="line">m = <span class="built_in">pow</span>(c, d, n)</span><br><span class="line"><span class="built_in">print</span>(long_to_bytes(m))</span><br></pre></td></tr></table></figure>
+<h2 id="已知pq和pqbits">已知p*q和(p^q&gt;&gt;bits)</h2>
+<p>这个题目和上面不一样就是p^q的值进行了移位操作，那么我们就不知道低位的值，也就不能从低位爆破了</p>
+<p>那么能不能从高位爆破，问题就在于如何提取高位，我们在上面通过取模得到低位，那么高位只能通过移位获取</p>
+<p>这里有个问题就是我们没办法爆破得到所有的位数，因为移位后的数据被抹掉了</p>
+<p>但是我们可以爆破到已知的位数，然后利用coppersmith定理求取未知的部分</p>
+<p>总结就是第一个情况需要从低位开始爆破，第二个情况就是从高位开始</p>
+<p>下面总结两个脚本方法，原理都是从高位开始</p>
+<h3 id="题目一">题目一</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> uuid</span><br><span class="line"></span><br><span class="line">flag = <span class="string">"flag{"</span> + <span class="built_in">str</span>(uuid.uuid4()) + <span class="string">"}"</span></span><br><span class="line"><span class="built_in">print</span>(flag)</span><br><span class="line">m = bytes_to_long(flag.encode())</span><br><span class="line"></span><br><span class="line">p = getPrime(<span class="number">1024</span>)</span><br><span class="line">q = getPrime(<span class="number">1024</span>)</span><br><span class="line"></span><br><span class="line">e = <span class="number">65537</span></span><br><span class="line">gift = (p ^ q) &gt;&gt; <span class="number">400</span></span><br><span class="line">n = p * q</span><br><span class="line"><span class="built_in">print</span>(gift)</span><br><span class="line"><span class="built_in">print</span>(n)</span><br><span class="line">c = <span class="built_in">pow</span>(m, e, n)</span><br><span class="line"><span class="built_in">print</span>(c)</span><br></pre></td></tr></table></figure>
+<h3 id="代码-1">代码</h3>
+<p>爆破思路：当p,q相同位相同时为0，不同时为1，爆破的时候只需要逐位判断两种情况，当为0时p,q都置0或者都置1，当为1时p,q分别置1</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">N = <span class="number">18706855965472342624057939763424482872214329403736588022670810823830284968210885370388661001166733799554843541458754316300002655734547865499832294251476719959685339472505232553318035696334043294583493018799085665100973395464171935497665253854897019585848130524402110067723380001729487763295805724049305195847415832438554371670757918022485495294646131894414072289025724167436635324722072486662116496042680216887523471775800611333173420803326625619428964822316053642973227668518358385684985208861639528026293678346064873875113765964212781464014313025439732581964381711834800618756897046018036356342152039250047100962433</span></span><br><span class="line">gift = <span class="number">31804842194481800642289237939366333950938402156162359676516215207202180995245509557106597907613130513998342782732102690555165790483400730844362691314157824965589453046147635163730354622709</span></span><br><span class="line">gift &lt;&lt;=<span class="number">400</span></span><br><span class="line"> </span><br><span class="line">PR.&lt;x&gt; = PolynomialRing(Zmod(N))</span><br><span class="line">ok = <span class="literal">False</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">pq_xor</span>(<span class="params">tp,tq,idx</span>):</span><br><span class="line">    <span class="keyword">global</span> ok </span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> ok:</span><br><span class="line">        <span class="keyword">return</span> </span><br><span class="line">    <span class="keyword">if</span> tp*tq&gt;N:</span><br><span class="line">        <span class="keyword">return</span> </span><br><span class="line">    <span class="keyword">if</span> (tp+(<span class="number">2</span>&lt;&lt;idx))*(tq+(<span class="number">2</span>&lt;&lt;idx))&lt;N:</span><br><span class="line">        <span class="keyword">return</span> </span><br><span class="line">        </span><br><span class="line">    <span class="keyword">if</span> idx&lt;=<span class="number">400</span>:</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            f = tp + x </span><br><span class="line">            rr = f.monic().small_roots(X=<span class="number">2</span>^<span class="number">400</span>, beta=<span class="number">0.4</span>)</span><br><span class="line">            <span class="keyword">if</span> rr != []:</span><br><span class="line">                <span class="built_in">print</span>(rr)</span><br><span class="line">                <span class="built_in">print</span>(tp)</span><br><span class="line">                <span class="built_in">print</span>(<span class="string">'p = '</span>,f(rr[<span class="number">0</span>]))</span><br><span class="line">                ok = <span class="literal">True</span></span><br><span class="line">                <span class="keyword">return</span></span><br><span class="line">        <span class="keyword">except</span>:</span><br><span class="line">            <span class="keyword">pass</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    </span><br><span class="line">    idx -=<span class="number">1</span></span><br><span class="line">    b = (gift &gt;&gt;idx)&amp;<span class="number">1</span></span><br><span class="line">    one = <span class="number">1</span>&lt;&lt;idx </span><br><span class="line">    <span class="keyword">if</span> b==<span class="number">0</span>:</span><br><span class="line">        pq_xor(tp,tq,idx)    </span><br><span class="line">        pq_xor(tp+one,tq+one,idx)    </span><br><span class="line">    <span class="keyword">else</span>:   <span class="comment">#1</span></span><br><span class="line">        pq_xor(tp+one,tq,idx)</span><br><span class="line">        pq_xor(tp,tq+one,idx)</span><br><span class="line"></span><br><span class="line">tp = <span class="number">1</span>&lt;&lt;<span class="number">1023</span></span><br><span class="line">tq = <span class="number">1</span>&lt;&lt;<span class="number">1023</span></span><br><span class="line">pq_xor(tp,tq,<span class="number">1023</span>)</span><br></pre></td></tr></table></figure>
+<p>求出p后就能解rsa了</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> gmpy2</span><br><span class="line"></span><br><span class="line">p = <span class="number">156312751820343202096817187657750965338488513824160102689481418250930593561890157208297426377931154984541743793038361097646017514839938385390736541319606636813885703108633813056309263784287743708451256148800766745678286950582276290297988042362295244649958953352082941635077301979033537464807142198273440123613</span></span><br><span class="line">gift = <span class="number">31804842194481800642289237939366333950938402156162359676516215207202180995245509557106597907613130513998342782732102690555165790483400730844362691314157824965589453046147635163730354622709</span></span><br><span class="line">n = <span class="number">18706855965472342624057939763424482872214329403736588022670810823830284968210885370388661001166733799554843541458754316300002655734547865499832294251476719959685339472505232553318035696334043294583493018799085665100973395464171935497665253854897019585848130524402110067723380001729487763295805724049305195847415832438554371670757918022485495294646131894414072289025724167436635324722072486662116496042680216887523471775800611333173420803326625619428964822316053642973227668518358385684985208861639528026293678346064873875113765964212781464014313025439732581964381711834800618756897046018036356342152039250047100962433</span></span><br><span class="line">c = <span class="number">12794209312573575749100915624211637292155365912707165305418491442314056699524137698990172074503800252273733761237854112762666157382998208601175150915064715204047907876367016385260965822781044525231089378759441364134208537808855535974753177409801491254478458330987262277165144909736422815482607722757203398963207791454184689820020716763711923377454162849497041563361402795290662590809159204490290459091960419194993377210983171994701178608788724920126553968410593513625304851116511549261271900279711693939689339127996950002029576453531700368097632402268119653383995840345178053336060126043684143615733387687606189824034</span></span><br><span class="line">e = <span class="number">65537</span></span><br><span class="line"></span><br><span class="line">q = n // p</span><br><span class="line">phi = (p - <span class="number">1</span>) * (q - <span class="number">1</span>)</span><br><span class="line">d = gmpy2.invert(e, phi)</span><br><span class="line">m = <span class="built_in">pow</span>(c, d, n)</span><br><span class="line"><span class="built_in">print</span>(long_to_bytes(m))</span><br></pre></td></tr></table></figure>
+<h3 id="题目二">题目二</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> secret <span class="keyword">import</span> flag</span><br><span class="line"></span><br><span class="line">nbits=<span class="number">512</span></span><br><span class="line">p=getPrime(nbits)</span><br><span class="line">q=getPrime(nbits)</span><br><span class="line"></span><br><span class="line">leakBits = <span class="number">262</span></span><br><span class="line">leak = (p ^ q)  &gt;&gt; (nbits - leakBits)</span><br><span class="line"></span><br><span class="line">n=p*q</span><br><span class="line">e=<span class="number">65537</span></span><br><span class="line">m = bytes_to_long(flag)</span><br><span class="line">c = <span class="built_in">pow</span>(m,e,n)</span><br><span class="line"><span class="built_in">print</span>(p)</span><br><span class="line"><span class="built_in">print</span>(q)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">"n=%d"</span> %n)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">"c=%d"</span> %c)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">"leak=%d"</span> %leak)</span><br><span class="line"><span class="comment"># n=73822410148110759760164946405270228269255384237831275745269402590230495569279769799226813942899942423718229747478982630879557319063920515141217164980012063064986634632452289290326704640527699568662492105204165609614169349755365956569362139057327962393611139347462018186440108621311077722819578905265976612923      </span></span><br><span class="line"><span class="comment"># c=71808322808599218331233291542779486534747913572475630198802984648982830332628443972652322590637382696027943799004331488098592525306523343649935216419522329722152742610560398216737030893090641493326477786720839849938277402743820773957184083430369443325368720115515840174745825798187125454448297155036065857691      </span></span><br><span class="line"><span class="comment"># leak=2223117424030234543005449667053988296724455736030907136592525175314696509716321</span></span><br></pre></td></tr></table></figure>
+<h3 id="代码-2">代码</h3>
+<p>这里个上一题也有一些不一样，泄露的位数没有那么多，在用coppersmith时需要调小参数</p>
+<p>代码来源：<a target="_blank" rel="noopener" href="https://tangcuxiaojikuai.xyz/post/e872e217.html">2023-鹏城杯-wp-crypto
+| 糖醋小鸡块的blog (tangcuxiaojikuai.xyz)</a></p>
+<p>这里还有一个比较不同的，就是上个我们是移位操作，这个就假设未爆破的位数为全0或者全1，原理其实都一样</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line">sys.setrecursionlimit(<span class="number">1500</span>)</span><br><span class="line"></span><br><span class="line">nbits=<span class="number">512</span></span><br><span class="line">leakBits = <span class="number">262</span></span><br><span class="line">leakbits = nbits - leakBits</span><br><span class="line">e = <span class="number">65537</span></span><br><span class="line"></span><br><span class="line">n=<span class="number">73822410148110759760164946405270228269255384237831275745269402590230495569279769799226813942899942423718229747478982630879557319063920515141217164980012063064986634632452289290326704640527699568662492105204165609614169349755365956569362139057327962393611139347462018186440108621311077722819578905265976612923</span>      </span><br><span class="line">c=<span class="number">71808322808599218331233291542779486534747913572475630198802984648982830332628443972652322590637382696027943799004331488098592525306523343649935216419522329722152742610560398216737030893090641493326477786720839849938277402743820773957184083430369443325368720115515840174745825798187125454448297155036065857691</span>      </span><br><span class="line">leak=<span class="number">2223117424030234543005449667053988296724455736030907136592525175314696509716321</span></span><br><span class="line"></span><br><span class="line">leak = leak &lt;&lt; leakbits</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">a1 = <span class="string">"0"</span> + <span class="built_in">str</span>(<span class="built_in">bin</span>(leak)[<span class="number">2</span>:])</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">find</span>(<span class="params">p,q</span>):</span><br><span class="line">    l = <span class="built_in">len</span>(p)</span><br><span class="line">    tmp0 = p + (<span class="number">512</span>-l)*<span class="string">"0"</span></span><br><span class="line">    tmp1 = p + (<span class="number">512</span>-l)*<span class="string">"1"</span></span><br><span class="line">    tmq0 = q + (<span class="number">512</span>-l)*<span class="string">"0"</span></span><br><span class="line">    tmq1 = q + (<span class="number">512</span>-l)*<span class="string">"1"</span></span><br><span class="line">    <span class="keyword">if</span>(<span class="built_in">int</span>(tmp0,<span class="number">2</span>) &lt; <span class="built_in">int</span>(tmq0,<span class="number">2</span>)):</span><br><span class="line">        <span class="keyword">return</span> </span><br><span class="line">    <span class="keyword">if</span>(<span class="built_in">int</span>(tmp0,<span class="number">2</span>)*<span class="built_in">int</span>(tmq0,<span class="number">2</span>) &gt; n):</span><br><span class="line">        <span class="keyword">return</span> </span><br><span class="line">    <span class="keyword">elif</span>(<span class="built_in">int</span>(tmp1,<span class="number">2</span>)*<span class="built_in">int</span>(tmq1,<span class="number">2</span>) &lt; n):</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(l == <span class="number">512</span> - leakbits):</span><br><span class="line">        pp = <span class="built_in">int</span>(tmp0,<span class="number">2</span>)</span><br><span class="line">        PR.&lt;x&gt; = PolynomialRing(Zmod(n))</span><br><span class="line">        f = pp + x*<span class="number">2</span> + <span class="number">1</span></span><br><span class="line">        f = f.monic()</span><br><span class="line">        res = f.small_roots(X=<span class="number">2</span>^leakbits-<span class="number">1</span>, beta=<span class="number">0.5</span>, epsilon=<span class="number">0.01</span>)</span><br><span class="line">        <span class="keyword">if</span>(res):</span><br><span class="line">            <span class="keyword">try</span>:</span><br><span class="line">                plow = <span class="built_in">int</span>(res[<span class="number">0</span>])</span><br><span class="line">                p = pp + plow * <span class="number">2</span> + <span class="number">1</span></span><br><span class="line">                q = n // p</span><br><span class="line">                d = inverse(e,(p-<span class="number">1</span>)*(q-<span class="number">1</span>))</span><br><span class="line">                <span class="built_in">print</span>(long_to_bytes(<span class="built_in">int</span>(<span class="built_in">pow</span>(c,d,n))))</span><br><span class="line">            <span class="keyword">except</span>:</span><br><span class="line">                <span class="keyword">pass</span></span><br><span class="line">                    </span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">if</span>(a1[l] == <span class="string">"1"</span>):</span><br><span class="line">            find(p+<span class="string">"1"</span>,q+<span class="string">"0"</span>)</span><br><span class="line">            find(p+<span class="string">"0"</span>,q+<span class="string">"1"</span>)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            find(p+<span class="string">"0"</span>,q+<span class="string">"0"</span>)</span><br><span class="line">            find(p+<span class="string">"1"</span>,q+<span class="string">"1"</span>)</span><br><span class="line"></span><br><span class="line">tempp = <span class="string">""</span></span><br><span class="line">tempq = <span class="string">""</span></span><br><span class="line">find(tempp,tempq)</span><br></pre></td></tr></table></figure>
+<h2 id="已知pq和pqbits-1">已知p*q和(p+q&gt;&gt;bits)</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">不同点</span><br><span class="line">只给p+q的话可以解方程求</span><br><span class="line">但是p+q进行移位操作，还是需要对数据逐位爆破求，和一种场景不同的是，这个+运算会产生进位操作</span><br><span class="line">所有情况如下：</span><br><span class="line">当gift当位剩余b</span><br><span class="line">b==0，p,q都不变进行下一步</span><br><span class="line">b==1，三种情况(p+1,q,gift-1)(p,q+1,gift-1)(p,q,gift)</span><br><span class="line">b==2，三种情况(p+1,q,gift-1)(p,q+1,gift-1)(p+1,q+1,gift-2)</span><br><span class="line">b==3，最后一种(p+1,q+1,gift-2)</span><br></pre></td></tr></table></figure>
+<h3 id="题目-1">题目</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> uuid</span><br><span class="line"></span><br><span class="line">flag = <span class="string">"flag{"</span> + <span class="built_in">str</span>(uuid.uuid4()) + <span class="string">"}"</span></span><br><span class="line"><span class="built_in">print</span>(flag)</span><br><span class="line">m = bytes_to_long(flag.encode())</span><br><span class="line"></span><br><span class="line">p = getPrime(<span class="number">1024</span>)</span><br><span class="line">q = getPrime(<span class="number">1024</span>)</span><br><span class="line"></span><br><span class="line">e = <span class="number">65537</span></span><br><span class="line">gift = (p + q) &gt;&gt; <span class="number">400</span></span><br><span class="line">n = p * q</span><br><span class="line"><span class="built_in">print</span>(gift)</span><br><span class="line"><span class="built_in">print</span>(n)</span><br><span class="line">c = <span class="built_in">pow</span>(m, e, n)</span><br><span class="line"><span class="built_in">print</span>(c)</span><br></pre></td></tr></table></figure>
+<h3 id="代码-3">代码</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">N = <span class="number">22398699297762429492240463695149209598953191913914250274334959408936466626709767203795928260632633526529986584516612990634853439372145270966645004610843264907486995514891241264900062942677946045045102531217747973015030965015115984831603228162539840321760619025278925339356880648514285731088578156632342855265866008190857967855561352802052119373432686410402584018364224892529791407346844329490691835861851663985544831188244011267819905082223999055440614384023833104923725075939687869221677886604547462159479192421742664500289270937685723384566928149675802958103124877898785273157964165967194692892199269557387215118229</span></span><br><span class="line">gift = <span class="number">115949464135543873667356544321114013642432063020632381195983542969535286109623221762809011120770679450341205761868649044031660422145112658119966580941713678634616521251250585930471772508493</span></span><br><span class="line">gift = gift&lt;&lt;<span class="number">400</span></span><br><span class="line"> </span><br><span class="line">PR.&lt;x&gt; = PolynomialRing(Zmod(N))</span><br><span class="line">ok = <span class="literal">False</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">pq_add</span>(<span class="params">tp,tq,tgift,idx</span>):</span><br><span class="line">    <span class="keyword">global</span> ok </span><br><span class="line">    <span class="keyword">if</span> ok:</span><br><span class="line">        <span class="keyword">return</span> </span><br><span class="line">    <span class="keyword">if</span> tp*tq&gt;N:</span><br><span class="line">        <span class="comment">#print('&gt;')</span></span><br><span class="line">        <span class="keyword">return</span> </span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> (tp+(<span class="number">2</span>&lt;&lt;idx))*(tq+(<span class="number">2</span>&lt;&lt;idx))&lt;N:</span><br><span class="line">        <span class="comment">#print('&lt;', hex((tp+(1&lt;&lt;(idx+2))))[:20], hex(tq+(2&lt;&lt;idx))[:20], hex(N)[:20])</span></span><br><span class="line">        <span class="keyword">return</span> </span><br><span class="line">        </span><br><span class="line">    <span class="keyword">if</span> idx&lt;=<span class="number">400</span>:</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            f = tp + x </span><br><span class="line">            rr = f.monic().small_roots(X=<span class="number">2</span>^<span class="number">400</span>, beta=<span class="number">0.4</span>)</span><br><span class="line">            <span class="keyword">if</span> rr != []:</span><br><span class="line">                <span class="built_in">print</span>(rr)</span><br><span class="line">                <span class="built_in">print</span>(tp)</span><br><span class="line">                <span class="built_in">print</span>(<span class="string">'p = '</span>,f(rr[<span class="number">0</span>]))</span><br><span class="line">                ok = <span class="literal">True</span></span><br><span class="line">                <span class="keyword">return</span></span><br><span class="line">        <span class="keyword">except</span>:</span><br><span class="line">            <span class="keyword">pass</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    </span><br><span class="line">    idx -=<span class="number">1</span></span><br><span class="line">    b = tgift &gt;&gt;idx </span><br><span class="line">    one = <span class="number">1</span>&lt;&lt;idx</span><br><span class="line">    </span><br><span class="line">    <span class="comment">#print(hex(tp)[:20],hex(tq)[:20],hex(tgift)[:20],idx,b)</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> b==<span class="number">0</span> <span class="keyword">or</span> b==<span class="number">1</span>:</span><br><span class="line">        pq_add(tp,tq,tgift,idx)    </span><br><span class="line">    <span class="keyword">if</span> b==<span class="number">1</span> <span class="keyword">or</span> b==<span class="number">2</span>:</span><br><span class="line">        pq_add(tp+one,tq,tgift-one,idx)</span><br><span class="line">        pq_add(tp,tq+one,tgift-one,idx)</span><br><span class="line">    <span class="keyword">if</span> b==<span class="number">2</span> <span class="keyword">or</span> b==<span class="number">3</span>:</span><br><span class="line">        pq_add(tp+one,tq+one,tgift-(one&lt;&lt;<span class="number">1</span>),idx)</span><br><span class="line">    </span><br><span class="line">tp = <span class="number">1</span>&lt;&lt;<span class="number">1023</span></span><br><span class="line">tq = <span class="number">1</span>&lt;&lt;<span class="number">1023</span></span><br><span class="line">tgift = gift -tp -tq </span><br><span class="line">pq_add(tp,tq,tgift,<span class="number">1023</span>)</span><br></pre></td></tr></table></figure>
+<p>然后解rsa</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> gmpy2</span><br><span class="line"></span><br><span class="line">n = <span class="number">22398699297762429492240463695149209598953191913914250274334959408936466626709767203795928260632633526529986584516612990634853439372145270966645004610843264907486995514891241264900062942677946045045102531217747973015030965015115984831603228162539840321760619025278925339356880648514285731088578156632342855265866008190857967855561352802052119373432686410402584018364224892529791407346844329490691835861851663985544831188244011267819905082223999055440614384023833104923725075939687869221677886604547462159479192421742664500289270937685723384566928149675802958103124877898785273157964165967194692892199269557387215118229</span></span><br><span class="line">c = <span class="number">19459058015255747979675566411760591387346930072958488102496553309827275614011341119722879974026004366424863422880372837878804781704271505404623120814555506455826259972089765470140479884289985712921947355761601869625995897130103364150827575977235103104847368754689754720329382142627108882164642140768775016478179380366695382520008383095848532521930405358232646114695494383241366145651188440368307287111495552004475154269836050543588580181088681136438760452956902516502218922299785695909716583660334898109530985544093303113936983845962257477613846013387047985121910005480321268621195236709378225161923355920272534358550</span></span><br><span class="line">p = <span class="number">153305387463348037357487373035059049858328853159142649103487512945187364968009787569616241281858216580389833745138207790411915561161286910364146345998580015250170791603381228114031585408080948659270513906658361657599207575631357250809353341546820477160639377447173754631313358720551110151520459451675836094943</span></span><br><span class="line">e = <span class="number">65537</span></span><br><span class="line">q = n // p</span><br><span class="line">phi = (p - <span class="number">1</span>) * (q - <span class="number">1</span>)</span><br><span class="line">d = gmpy2.invert(e, phi)</span><br><span class="line">m = <span class="built_in">pow</span>(c, d, n)</span><br><span class="line"><span class="built_in">print</span>(long_to_bytes(m))</span><br></pre></td></tr></table></figure>
+<h2 id="已知pq和p_q">已知p*q和(p^_q)</h2>
+<p>_q就是把q的二进制逆序</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">爆破思路：</span><br><span class="line">1，两端开始，中间结束</span><br><span class="line">2，当前p^q的值代表p的高位和q的低位异或</span><br><span class="line">3，如果但前最高位为1，那么存在两种可能，p的高位为1，q的低位为0；p的高位为0，q的低位为1</span><br><span class="line">如何剪枝：</span><br><span class="line">1，将p，q未搜索的位数全填0，乘积小于n</span><br><span class="line">2，将p，q未搜索的位数全填1，乘积大于n</span><br><span class="line">3，p和q第k位相乘再去低k位，应与n的低k位相同</span><br></pre></td></tr></table></figure>
+<h3 id="题目-2">题目</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> uuid</span><br><span class="line"></span><br><span class="line">flag = <span class="string">"flag{"</span> + <span class="built_in">str</span>(uuid.uuid4()) + <span class="string">"}"</span></span><br><span class="line"><span class="built_in">print</span>(flag)</span><br><span class="line">m = bytes_to_long(flag.encode())</span><br><span class="line">p = getPrime(<span class="number">256</span>)</span><br><span class="line">q = getPrime(<span class="number">256</span>)</span><br><span class="line">n = p * q</span><br><span class="line">e = <span class="number">65537</span></span><br><span class="line">_q = <span class="built_in">int</span>(<span class="built_in">bin</span>(q)[<span class="number">2</span>:][::-<span class="number">1</span>], <span class="number">2</span>)</span><br><span class="line">c = <span class="built_in">pow</span>(m, e, n)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(p ^ _q)</span><br><span class="line"><span class="built_in">print</span>(n)</span><br><span class="line"><span class="built_in">print</span>(c)</span><br></pre></td></tr></table></figure>
+<h3 id="代码-4">代码</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line">sys.setrecursionlimit(<span class="number">1500</span>)</span><br><span class="line"></span><br><span class="line">pxorq = <span class="number">51287709736576888935481948699419684645077512911004452954544449353000129825666</span></span><br><span class="line">n = <span class="number">7549646524692891529379305444522565345198070517965170637491013434396002300135441956108140101868033449923161114018585691925018270576670312096298867739915267</span></span><br><span class="line">c = <span class="number">2994980847727693507040660553883783304256037103745623354848049342746834808142159707589916983618996144073142775906508542462612795063698492450131178963281968</span></span><br><span class="line">e = <span class="number">65537</span></span><br><span class="line">pxorq = <span class="built_in">str</span>(<span class="built_in">bin</span>(pxorq)[<span class="number">2</span>:]).zfill(<span class="number">256</span>)</span><br><span class="line"> </span><br><span class="line"><span class="keyword">def</span> <span class="title function_">find</span>(<span class="params">ph,qh,pl,ql</span>):</span><br><span class="line">    l = <span class="built_in">len</span>(ph)</span><br><span class="line">    tmp0 = ph + (<span class="number">256</span>-<span class="number">2</span>*l)*<span class="string">"0"</span> + pl</span><br><span class="line">    tmp1 = ph + (<span class="number">256</span>-<span class="number">2</span>*l)*<span class="string">"1"</span> + pl</span><br><span class="line">    tmq0 = qh + (<span class="number">256</span>-<span class="number">2</span>*l)*<span class="string">"0"</span> + ql</span><br><span class="line">    tmq1 = qh + (<span class="number">256</span>-<span class="number">2</span>*l)*<span class="string">"1"</span> + ql</span><br><span class="line">    <span class="keyword">if</span>(<span class="built_in">int</span>(tmp0,<span class="number">2</span>)*<span class="built_in">int</span>(tmq0,<span class="number">2</span>) &gt; n):</span><br><span class="line">        <span class="keyword">return</span> </span><br><span class="line">    <span class="keyword">if</span>(<span class="built_in">int</span>(tmp1,<span class="number">2</span>)*<span class="built_in">int</span>(tmq1,<span class="number">2</span>) &lt; n):</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    <span class="keyword">if</span>(<span class="built_in">int</span>(pl,<span class="number">2</span>)*<span class="built_in">int</span>(ql,<span class="number">2</span>) % (<span class="number">2</span>**(l-<span class="number">1</span>)) != n % (<span class="number">2</span>**(l-<span class="number">1</span>))):</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(l == <span class="number">128</span>):</span><br><span class="line">        pp0 = <span class="built_in">int</span>(tmp0,<span class="number">2</span>)</span><br><span class="line">        <span class="keyword">if</span>(n % pp0 == <span class="number">0</span>):</span><br><span class="line">            pf = pp0</span><br><span class="line">            qf = n//pp0</span><br><span class="line">            phi = (pf-<span class="number">1</span>)*(qf-<span class="number">1</span>)</span><br><span class="line">            d = inverse(e,phi)</span><br><span class="line">            m1 = <span class="built_in">pow</span>(c,d,n)</span><br><span class="line">            <span class="built_in">print</span>(long_to_bytes(<span class="built_in">int</span>(m1)))</span><br><span class="line">            exit()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">if</span>(pxorq[l] == <span class="string">"1"</span> <span class="keyword">and</span> pxorq[<span class="number">255</span>-l] == <span class="string">"1"</span>):</span><br><span class="line">            find(ph+<span class="string">"1"</span>,qh+<span class="string">"0"</span>,<span class="string">"1"</span>+pl,<span class="string">"0"</span>+ql)</span><br><span class="line">            find(ph+<span class="string">"0"</span>,qh+<span class="string">"0"</span>,<span class="string">"1"</span>+pl,<span class="string">"1"</span>+ql)</span><br><span class="line">            find(ph+<span class="string">"1"</span>,qh+<span class="string">"1"</span>,<span class="string">"0"</span>+pl,<span class="string">"0"</span>+ql)</span><br><span class="line">            find(ph+<span class="string">"0"</span>,qh+<span class="string">"1"</span>,<span class="string">"0"</span>+pl,<span class="string">"1"</span>+ql)</span><br><span class="line">        <span class="keyword">elif</span>(pxorq[l] == <span class="string">"1"</span> <span class="keyword">and</span> pxorq[<span class="number">255</span>-l] == <span class="string">"0"</span>):</span><br><span class="line">            find(ph+<span class="string">"1"</span>,qh+<span class="string">"0"</span>,<span class="string">"0"</span>+pl,<span class="string">"0"</span>+ql)</span><br><span class="line">            find(ph+<span class="string">"0"</span>,qh+<span class="string">"0"</span>,<span class="string">"0"</span>+pl,<span class="string">"1"</span>+ql)</span><br><span class="line">            find(ph+<span class="string">"1"</span>,qh+<span class="string">"1"</span>,<span class="string">"1"</span>+pl,<span class="string">"0"</span>+ql)</span><br><span class="line">            find(ph+<span class="string">"0"</span>,qh+<span class="string">"1"</span>,<span class="string">"1"</span>+pl,<span class="string">"1"</span>+ql)</span><br><span class="line">        <span class="keyword">elif</span>(pxorq[l] == <span class="string">"0"</span> <span class="keyword">and</span> pxorq[<span class="number">255</span>-l] == <span class="string">"1"</span>):</span><br><span class="line">            find(ph+<span class="string">"0"</span>,qh+<span class="string">"0"</span>,<span class="string">"1"</span>+pl,<span class="string">"0"</span>+ql)</span><br><span class="line">            find(ph+<span class="string">"0"</span>,qh+<span class="string">"1"</span>,<span class="string">"0"</span>+pl,<span class="string">"0"</span>+ql)</span><br><span class="line">            find(ph+<span class="string">"1"</span>,qh+<span class="string">"0"</span>,<span class="string">"1"</span>+pl,<span class="string">"1"</span>+ql)</span><br><span class="line">            find(ph+<span class="string">"1"</span>,qh+<span class="string">"1"</span>,<span class="string">"0"</span>+pl,<span class="string">"1"</span>+ql)</span><br><span class="line">        <span class="keyword">elif</span>(pxorq[l] == <span class="string">"0"</span> <span class="keyword">and</span> pxorq[<span class="number">255</span>-l] == <span class="string">"0"</span>):</span><br><span class="line">            find(ph+<span class="string">"0"</span>,qh+<span class="string">"0"</span>,<span class="string">"0"</span>+pl,<span class="string">"0"</span>+ql)</span><br><span class="line">            find(ph+<span class="string">"1"</span>,qh+<span class="string">"0"</span>,<span class="string">"0"</span>+pl,<span class="string">"1"</span>+ql)</span><br><span class="line">            find(ph+<span class="string">"0"</span>,qh+<span class="string">"1"</span>,<span class="string">"1"</span>+pl,<span class="string">"0"</span>+ql)</span><br><span class="line">            find(ph+<span class="string">"1"</span>,qh+<span class="string">"1"</span>,<span class="string">"1"</span>+pl,<span class="string">"1"</span>+ql)</span><br><span class="line"></span><br><span class="line">find(<span class="string">"1"</span>,<span class="string">"1"</span>,<span class="string">"1"</span>,<span class="string">"1"</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="学习参考">学习参考</h2>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_52640415/article/details/130415368">关联爆破-RSA分解-CSDN博客</a></p>
+<p><a target="_blank" rel="noopener" href="https://tangcuxiaojikuai.xyz/post/342113ee.html">Crypto趣题-剪枝 |
+糖醋小鸡块的blog (tangcuxiaojikuai.xyz)</a></p>
+<p><a target="_blank" rel="noopener" href="https://tangcuxiaojikuai.xyz/post/e872e217.html#valine-comments">2023-鹏城杯-wp-crypto
+| 糖醋小鸡块的blog (tangcuxiaojikuai.xyz)</a></p>
+<p><a target="_blank" rel="noopener" href="https://zhevitz.top/archives/1699097256002">鹏城杯Crypto WP
+- Zhevitz的笔记小站</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/10/30/NewStarCTF-2023-WEEK4/" rel="prev" title="NewStarCTF-2023-WEEK4">
+      <i class="fa fa-chevron-left"></i> NewStarCTF-2023-WEEK4
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%B3%E8%81%94%E7%88%86%E7%A0%B4"><span class="nav-number">1.</span> <span class="nav-text">关联爆破</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B7%B2%E7%9F%A5pq%E5%92%8Cpq"><span class="nav-number">1.1.</span> <span class="nav-text">已知p*q和p^q</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E4%B8%80"><span class="nav-number">1.1.1.</span> <span class="nav-text">方法一</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E4%BA%8C"><span class="nav-number">1.1.2.</span> <span class="nav-text">方法二</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE"><span class="nav-number">1.1.3.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81"><span class="nav-number">1.1.4.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B7%B2%E7%9F%A5pq%E5%92%8Cpqbits"><span class="nav-number">1.2.</span> <span class="nav-text">已知p*q和(p^q&gt;&gt;bits)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE%E4%B8%80"><span class="nav-number">1.2.1.</span> <span class="nav-text">题目一</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81-1"><span class="nav-number">1.2.2.</span> <span class="nav-text">代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE%E4%BA%8C"><span class="nav-number">1.2.3.</span> <span class="nav-text">题目二</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81-2"><span class="nav-number">1.2.4.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B7%B2%E7%9F%A5pq%E5%92%8Cpqbits-1"><span class="nav-number">1.3.</span> <span class="nav-text">已知p*q和(p+q&gt;&gt;bits)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE-1"><span class="nav-number">1.3.1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81-3"><span class="nav-number">1.3.2.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B7%B2%E7%9F%A5pq%E5%92%8Cp_q"><span class="nav-number">1.4.</span> <span class="nav-text">已知p*q和(p^_q)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE-2"><span class="nav-number">1.4.1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81-4"><span class="nav-number">1.4.2.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%A6%E4%B9%A0%E5%8F%82%E8%80%83"><span class="nav-number">1.5.</span> <span class="nav-text">学习参考</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="zzZxby"
+      src="/images/zzZ.jpg">
+  <p class="site-author-name" itemprop="name">zzZxby</p>
+  <div class="site-description" itemprop="description">看山是山，看水是水</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">19</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zzZxby</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">35k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">2:06</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+    <script defer src="/lib/three/canvas_lines.min.js"></script>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    // window.MathJax = {
+    //   loader: {
+    //
+    //       load: ['[tex]/mhchem'],
+    //
+    //     source: {
+    //       '[tex]/amsCd': '[tex]/amscd',
+    //       '[tex]/AMScd': '[tex]/amscd'
+    //     }
+    //   },
+    //   tex: {
+    //     inlineMath: {'[+]': [['$', '$']]},
+    //
+    //       packages: {'[+]': ['mhchem']},
+    //
+    //     tags: 'ams'
+    //   },
+    //   options: {
+    //     renderActions: {
+    //       findScript: [10, doc => {
+    //         document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+    //           const display = !!node.type.match(/; *mode=display/);
+    //           const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+    //           const text = document.createTextNode('');
+    //           node.parentNode.replaceChild(text, node);
+    //           math.start = {node: text, delim: '', n: 0};
+    //           math.end = {node: text, delim: '', n: 0};
+    //           doc.math.push(math);
+    //         });
+    //       }, '', false],
+    //       insertedScript: [200, () => {
+    //         document.querySelectorAll('mjx-container').forEach(node => {
+    //           let target = node.parentNode;
+    //           if (target.nodeName.toLowerCase() === 'li') {
+    //             target.parentNode.classList.add('has-jax');
+    //           }
+    //         });
+    //       }, '', false]
+    //     }
+    //   }
+    // };
+    window.MathJax = {
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+        processEscapes: true
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = 'https://cdn.jsdelivr.net/npm/mathjax@2.7.8/unpacked/MathJax.js?config=TeX-MML-AM_CHTML';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+
+  <script async src="/js/cursor/fireworks.js"></script>
+
+
+    </div>
+  
+  <style>
+    .copy-btn {
+      display: inline-block;
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 20px;
+      color: #333;
+      white-space: nowrap;
+      vertical-align: middle;
+      cursor: pointer;
+      background-color: #eee;
+      background-image: linear-gradient(#fcfcfc, #eee);
+      border: 1px solid #d5d5d5;
+      border-radius: 3px;
+      user-select: none;
+      outline: 0;
+    }
+
+    .highlight-wrap .copy-btn {
+      transition: opacity .3s ease-in-out;
+      opacity: 0;
+      padding: 2px 6px;
+      position: absolute;
+      right: 4px;
+      top: 8px;
+    }
+
+    .highlight-wrap:hover .copy-btn,
+    .highlight-wrap .copy-btn:focus {
+      opacity: 1
+    }
+
+    .highlight-wrap {
+      position: relative;
+    }
+  </style>
+  
+  <script>
+    $('.highlight').each(function (i, e) {
+      var $wrap = $('<div>').addClass('highlight-wrap')
+      $(e).after($wrap)
+      $wrap.append($('<button>').addClass('copy-btn').append('复制').on('click', function (e) {
+        var code = $(this).parent().find('.code').find('.line').map(function (i, e) {
+          return $(e).text()
+        }).toArray().join('\n')
+        var ta = document.createElement('textarea')
+        document.body.appendChild(ta)
+        ta.style.position = 'absolute'
+        ta.style.top = '0px'
+        ta.style.left = '0px'
+        ta.value = code
+        ta.select()
+        ta.focus()
+        var result = document.execCommand('copy')
+        document.body.removeChild(ta)
+        
+          if(result)$(this).text('复制成功')
+          else $(this).text('复制失败')
+        
+        $(this).blur()
+      })).on('mouseleave', function (e) {
+        var $b = $(this).find('.copy-btn')
+        setTimeout(function () {
+          $b.text('复制')
+        }, 300)
+      }).append(e)
+    })
+  </script>
+
+
+
+</body>
+</html>
