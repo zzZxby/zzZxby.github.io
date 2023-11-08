@@ -20,35 +20,48 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="Vulfocus靶场搭建以及一些小问题解决">
+  <meta name="description" content="渗透靶机DC-1">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Vulfocus靶场搭建">
-<meta property="og:url" content="http://example.com/2023/09/25/Vulfocus%E9%9D%B6%E5%9C%BA%E6%90%AD%E5%BB%BA/index.html">
+<meta property="og:title" content="渗透DC-1">
+<meta property="og:url" content="http://example.com/2023/11/08/%E6%B8%97%E9%80%8FDC-1/index.html">
 <meta property="og:site_name" content="zzZxby&#39;s blog">
-<meta property="og:description" content="Vulfocus靶场搭建以及一些小问题解决">
+<meta property="og:description" content="渗透靶机DC-1">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/2023/09/25/Vulfocus%E9%9D%B6%E5%9C%BA%E6%90%AD%E5%BB%BA/No1.png">
-<meta property="og:image" content="http://example.com/2023/09/25/Vulfocus%E9%9D%B6%E5%9C%BA%E6%90%AD%E5%BB%BA/No2.png">
-<meta property="og:image" content="http://example.com/2023/09/25/Vulfocus%E9%9D%B6%E5%9C%BA%E6%90%AD%E5%BB%BA/No3.png">
-<meta property="og:image" content="http://example.com/2023/09/25/Vulfocus%E9%9D%B6%E5%9C%BA%E6%90%AD%E5%BB%BA/No4.png">
-<meta property="og:image" content="http://example.com/2023/09/25/Vulfocus%E9%9D%B6%E5%9C%BA%E6%90%AD%E5%BB%BA/No5.png">
-<meta property="og:image" content="http://example.com/2023/09/25/Vulfocus%E9%9D%B6%E5%9C%BA%E6%90%AD%E5%BB%BA/No6.png">
-<meta property="og:image" content="http://example.com/2023/09/25/Vulfocus%E9%9D%B6%E5%9C%BA%E6%90%AD%E5%BB%BA/No7.png">
-<meta property="og:image" content="http://example.com/2023/09/25/Vulfocus%E9%9D%B6%E5%9C%BA%E6%90%AD%E5%BB%BA/No8.png">
-<meta property="og:image" content="http://example.com/2023/09/25/Vulfocus%E9%9D%B6%E5%9C%BA%E6%90%AD%E5%BB%BA/No9.png">
-<meta property="og:image" content="http://example.com/2023/09/25/Vulfocus%E9%9D%B6%E5%9C%BA%E6%90%AD%E5%BB%BA/No10.png">
-<meta property="og:image" content="http://example.com/2023/09/25/Vulfocus%E9%9D%B6%E5%9C%BA%E6%90%AD%E5%BB%BA/No11.png">
-<meta property="og:image" content="http://example.com/2023/09/25/Vulfocus%E9%9D%B6%E5%9C%BA%E6%90%AD%E5%BB%BA/No12.png">
-<meta property="og:image" content="http://example.com/2023/09/25/Vulfocus%E9%9D%B6%E5%9C%BA%E6%90%AD%E5%BB%BA/No13.png">
-<meta property="og:image" content="http://example.com/2023/09/25/Vulfocus%E9%9D%B6%E5%9C%BA%E6%90%AD%E5%BB%BA/No14.png">
-<meta property="article:published_time" content="2023-09-25T01:23:03.000Z">
-<meta property="article:modified_time" content="2023-09-25T01:39:44.355Z">
+<meta property="og:image" content="http://example.com/2023/11/08/%E6%B8%97%E9%80%8FDC-1/No1.png">
+<meta property="og:image" content="http://example.com/2023/11/08/%E6%B8%97%E9%80%8FDC-1/No2.png">
+<meta property="og:image" content="http://example.com/2023/11/08/%E6%B8%97%E9%80%8FDC-1/No3.png">
+<meta property="og:image" content="http://example.com/2023/11/08/%E6%B8%97%E9%80%8FDC-1/No4.png">
+<meta property="og:image" content="http://example.com/2023/11/08/%E6%B8%97%E9%80%8FDC-1/No5.png">
+<meta property="og:image" content="http://example.com/2023/11/08/%E6%B8%97%E9%80%8FDC-1/No6.png">
+<meta property="og:image" content="http://example.com/2023/11/08/%E6%B8%97%E9%80%8FDC-1/No7.png">
+<meta property="og:image" content="http://example.com/2023/11/08/%E6%B8%97%E9%80%8FDC-1/No8.png">
+<meta property="og:image" content="http://example.com/2023/11/08/%E6%B8%97%E9%80%8FDC-1/No9.png">
+<meta property="og:image" content="http://example.com/2023/11/08/%E6%B8%97%E9%80%8FDC-1/No10.png">
+<meta property="og:image" content="http://example.com/2023/11/08/%E6%B8%97%E9%80%8FDC-1/No11.png">
+<meta property="og:image" content="http://example.com/2023/11/08/%E6%B8%97%E9%80%8FDC-1/No12.png">
+<meta property="og:image" content="http://example.com/2023/11/08/%E6%B8%97%E9%80%8FDC-1/NO13.png">
+<meta property="og:image" content="http://example.com/2023/11/08/%E6%B8%97%E9%80%8FDC-1/No14.png">
+<meta property="og:image" content="http://example.com/2023/11/08/%E6%B8%97%E9%80%8FDC-1/No15.png">
+<meta property="og:image" content="http://example.com/2023/11/08/%E6%B8%97%E9%80%8FDC-1/No16.png">
+<meta property="og:image" content="http://example.com/2023/11/08/%E6%B8%97%E9%80%8FDC-1/No17.png">
+<meta property="og:image" content="http://example.com/2023/11/08/%E6%B8%97%E9%80%8FDC-1/No18.png">
+<meta property="og:image" content="http://example.com/2023/11/08/%E6%B8%97%E9%80%8FDC-1/No19.png">
+<meta property="og:image" content="http://example.com/2023/11/08/%E6%B8%97%E9%80%8FDC-1/No20.png">
+<meta property="og:image" content="http://example.com/2023/11/08/%E6%B8%97%E9%80%8FDC-1/No21.png">
+<meta property="og:image" content="http://example.com/2023/11/08/%E6%B8%97%E9%80%8FDC-1/No22.png">
+<meta property="og:image" content="http://example.com/2023/11/08/%E6%B8%97%E9%80%8FDC-1/No23.png">
+<meta property="og:image" content="http://example.com/2023/11/08/%E6%B8%97%E9%80%8FDC-1/No24.png">
+<meta property="og:image" content="http://example.com/2023/11/08/%E6%B8%97%E9%80%8FDC-1/No25.png">
+<meta property="og:image" content="http://example.com/2023/11/08/%E6%B8%97%E9%80%8FDC-1/No26.png">
+<meta property="og:image" content="http://example.com/2023/11/08/%E6%B8%97%E9%80%8FDC-1/No27.png">
+<meta property="article:published_time" content="2023-11-08T14:02:30.000Z">
+<meta property="article:modified_time" content="2023-11-08T14:15:52.384Z">
 <meta property="article:author" content="zzZxby">
 <meta property="article:tag" content="保持学习的热情">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2023/09/25/Vulfocus%E9%9D%B6%E5%9C%BA%E6%90%AD%E5%BB%BA/No1.png">
+<meta name="twitter:image" content="http://example.com/2023/11/08/%E6%B8%97%E9%80%8FDC-1/No1.png">
 
-<link rel="canonical" href="http://example.com/2023/09/25/Vulfocus%E9%9D%B6%E5%9C%BA%E6%90%AD%E5%BB%BA/">
+<link rel="canonical" href="http://example.com/2023/11/08/%E6%B8%97%E9%80%8FDC-1/">
 
 
 <script id="page-configurations">
@@ -61,7 +74,7 @@
   };
 </script>
 
-  <title>Vulfocus靶场搭建 | zzZxby's blog</title>
+  <title>渗透DC-1 | zzZxby's blog</title>
   
 
 
@@ -282,7 +295,7 @@ mjx-container[display="true"] + br {
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/09/25/Vulfocus%E9%9D%B6%E5%9C%BA%E6%90%AD%E5%BB%BA/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/11/08/%E6%B8%97%E9%80%8FDC-1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/zzZ.jpg">
@@ -295,7 +308,7 @@ mjx-container[display="true"] + br {
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Vulfocus靶场搭建
+          渗透DC-1
         </h1>
 
         <div class="post-meta">
@@ -306,7 +319,7 @@ mjx-container[display="true"] + br {
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2023-09-25 09:23:03 / 修改时间：09:39:44" itemprop="dateCreated datePublished" datetime="2023-09-25T09:23:03+08:00">2023-09-25</time>
+              <time title="创建时间：2023-11-08 22:02:30 / 修改时间：22:15:52" itemprop="dateCreated datePublished" datetime="2023-11-08T22:02:30+08:00">2023-11-08</time>
             </span>
 
           <br>
@@ -315,16 +328,16 @@ mjx-container[display="true"] + br {
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>358</span>
+              <span>775</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
+              <span>3 分钟</span>
             </span>
-            <div class="post-description">Vulfocus靶场搭建以及一些小问题解决</div>
+            <div class="post-description">渗透靶机DC-1</div>
 
         </div>
       </header>
@@ -335,54 +348,97 @@ mjx-container[display="true"] + br {
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="下载安装vulfocus镜像">下载安装Vulfocus镜像</h1>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull vulfocus/vulfocus:latest</span><br></pre></td></tr></table></figure>
-<p><img src="/2023/09/25/Vulfocus%E9%9D%B6%E5%9C%BA%E6%90%AD%E5%BB%BA/No1.png"></p>
-<h1 id="查看下载的镜像">查看下载的镜像</h1>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker images</span><br></pre></td></tr></table></figure>
-<p><img src="/2023/09/25/Vulfocus%E9%9D%B6%E5%9C%BA%E6%90%AD%E5%BB%BA/No2.png"></p>
-<h1 id="查看docker服务器ip">查看docker服务器ip</h1>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ifconfig</span><br></pre></td></tr></table></figure>
-<p><img src="/2023/09/25/Vulfocus%E9%9D%B6%E5%9C%BA%E6%90%AD%E5%BB%BA/No3.png"></p>
-<h1 id="运行vulfocus">运行Vulfocus</h1>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker create -p 8081:80 -v /var/run/docker.sock:/var/run/docker.sock -e VUL_IP=172.18.1.128 vulfocus/vulfocus</span><br></pre></td></tr></table></figure>
-<p>参数解释</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-p ：前边的端口代表物理机的端口，后边的端口是docker的端口</span><br><span class="line">-v ：/var/run/docker.sock:/var/run/docker.sock为docker交互连接。</span><br><span class="line">-e：</span><br><span class="line">VUL_IP=172.18.1.128 为Docker服务器 IP，不能为 127.0.0.1。ip建议用虚拟机的ip，方便本机访问</span><br><span class="line">vulfocus/vulfocus是上面的仓库镜像名，也可以用镜像ID。</span><br></pre></td></tr></table></figure>
-<p><img src="/2023/09/25/Vulfocus%E9%9D%B6%E5%9C%BA%E6%90%AD%E5%BB%BA/No4.png"></p>
-<h1 id="查看docker服务">查看docker服务</h1>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker ps -a</span><br></pre></td></tr></table></figure>
-<p><img src="/2023/09/25/Vulfocus%E9%9D%B6%E5%9C%BA%E6%90%AD%E5%BB%BA/No5.png"></p>
-<h1 id="启动容器">启动容器</h1>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 启动容器</span><br><span class="line">docker start</span><br><span class="line"># 关闭容器</span><br><span class="line">docker stop</span><br></pre></td></tr></table></figure>
-<p><img src="/2023/09/25/Vulfocus%E9%9D%B6%E5%9C%BA%E6%90%AD%E5%BB%BA/No6.png"></p>
-<p><img src="/2023/09/25/Vulfocus%E9%9D%B6%E5%9C%BA%E6%90%AD%E5%BB%BA/No7.png"></p>
-<h1 id="启动靶场">启动靶场</h1>
-<p>网址对应的虚拟的ip，端口对应80</p>
-<p>网站登录初始账号密码为admin/admin</p>
-<p><img src="/2023/09/25/Vulfocus%E9%9D%B6%E5%9C%BA%E6%90%AD%E5%BB%BA/No8.png"></p>
-<h1 id="添加镜像">添加镜像</h1>
-<p><img src="/2023/09/25/Vulfocus%E9%9D%B6%E5%9C%BA%E6%90%AD%E5%BB%BA/No9.png"></p>
-<p>直接点这个现在不能用了，需要重新换镜像</p>
-<p>参考链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_64563956/article/details/131229046?ops_request_misc=%7B%22request%5Fid%22%3A%22169556179216800222876206%22%2C%22scm%22%3A%2220140713.130102334.pc%5Fall.%22%7D&amp;request_id=169556179216800222876206&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~first_rank_ecpm_v1~times_rank-6-131229046-null-null.142%5Ev94%5Einsert_down1&amp;utm_term=vulfocus&amp;spm=1018.2226.3001.4187">vulfocus不能同步的解决方法/vulfocus同步失败_key_info的博客-CSDN博客</a></p>
-<h1 id="更改镜像源">更改镜像源</h1>
-<p>/etc/docker/daemon.json文件做如下修改</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">{</span><br><span class="line">  <span class="string">"registry-mirrors"</span>: [</span><br><span class="line">	  <span class="string">"&lt;https://dockerproxy.com/&gt;"</span></span><br><span class="line">  ]</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
-<p>重新拉取镜像</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull dockerproxy.com/vulfocus/vulfocus:latest</span><br></pre></td></tr></table></figure>
-<p>重命名镜像</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker tag dockerproxy.com/vulfocus/vulfocus:latest vulfocus/vulfocus:latest</span><br></pre></td></tr></table></figure>
-<p>删除代理镜像</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker rmi dockerproxy.com/vulfocus/vulfocus:latest</span><br></pre></td></tr></table></figure>
-<p>然后就可以按照上面重新启动镜像了</p>
-<p>然后就可以通过一键同步获取靶场，选择需要的进行下载就ok了</p>
-<p><img src="/2023/09/25/Vulfocus%E9%9D%B6%E5%9C%BA%E6%90%AD%E5%BB%BA/No10.png"></p>
-<h1 id="配置阿里云加速源">配置阿里云加速源</h1>
-<p>网址：https://www.aliyun.com/</p>
-<p><img src="/2023/09/25/Vulfocus%E9%9D%B6%E5%9C%BA%E6%90%AD%E5%BB%BA/No11.png"></p>
-<p><img src="/2023/09/25/Vulfocus%E9%9D%B6%E5%9C%BA%E6%90%AD%E5%BB%BA/No12.png"></p>
-<p><img src="/2023/09/25/Vulfocus%E9%9D%B6%E5%9C%BA%E6%90%AD%E5%BB%BA/No13.png"></p>
-<p><img src="/2023/09/25/Vulfocus%E9%9D%B6%E5%9C%BA%E6%90%AD%E5%BB%BA/No14.png"></p>
-<p>然后重新启动镜像</p>
+        <h1 id="靶机描述">靶机描述</h1>
+<p>下载地址：http://www.five86.com/downloads/DC-1.zip</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">The DC challenges are a series of purposely vulnerable labs for the purpose of gaining experience in the world of penetration testing.</span><br><span class="line"></span><br><span class="line">I started creating these vulnerable VMs so that beginners (people like me) can get an idea of what is involved with trying to break into a system (legally).</span><br><span class="line"></span><br><span class="line">When I started doing these kind of challenges late last year, I found that quite a few were more like puzzles. While they were fun, I was also a bit disappointed as I wanted to find some challenges that were more...realistic. That isn't to say that they were bad or not challenging, but I did get a bit tired of seeing the same things over and over again.</span><br><span class="line"></span><br><span class="line">So, with that in mind, you won't see:</span><br><span class="line">Any flags that have been base64 encoded</span><br><span class="line">Any brainfuck encoded flags</span><br><span class="line">Any "secret" text hidden in images (steganography)</span><br><span class="line">While DC-1 and DC-2 both have hints/clues as flags, from DC-3 onwards, there are no clues, just one flag that can be obtained with root privileges (directly, or indirectly).</span><br><span class="line"></span><br><span class="line">There are 9 DC releases in total, all of which were released in 2019.</span><br><span class="line"></span><br><span class="line">While the DC series has come to an official end after the release of DC-9, I have created a new series called Five86.</span><br><span class="line"></span><br><span class="line">I hope you enjoy the challenges as much as I enjoyed creating them.</span><br></pre></td></tr></table></figure>
+<h1 id="信息收集">信息收集</h1>
+<h2 id="目标主机发现">目标主机发现</h2>
+<p>扫描同网段存活主机</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">arp-scan -l</span><br></pre></td></tr></table></figure>
+<p><img src="/2023/11/08/%E6%B8%97%E9%80%8FDC-1/No1.png"></p>
+<h2 id="端口扫描">端口扫描</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap 172.18.1.135</span><br></pre></td></tr></table></figure>
+<p>发现开启了三个端口，其中包括web应用</p>
+<p><img src="/2023/11/08/%E6%B8%97%E9%80%8FDC-1/No2.png"></p>
+<h2 id="web应用">web应用</h2>
+<p>采用drupal框架搭建的一套系统</p>
+<p><img src="/2023/11/08/%E6%B8%97%E9%80%8FDC-1/No3.png"></p>
+<h1 id="漏洞发现">漏洞发现</h1>
+<h2 id="漏洞探测">漏洞探测</h2>
+<p>工具：matesploit</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">search drupal</span><br></pre></td></tr></table></figure>
+<p><img src="/2023/11/08/%E6%B8%97%E9%80%8FDC-1/No4.png"></p>
+<h2 id="漏洞攻击">漏洞攻击</h2>
+<p><img src="/2023/11/08/%E6%B8%97%E9%80%8FDC-1/No5.png"></p>
+<p>设置目标主机ip，并运行payload</p>
+<p><img src="/2023/11/08/%E6%B8%97%E9%80%8FDC-1/No6.png"></p>
+<h1 id="漏洞利用">漏洞利用</h1>
+<h2 id="获取会话">获取会话</h2>
+<p>ls发现第一个flag</p>
+<p><img src="/2023/11/08/%E6%B8%97%E9%80%8FDC-1/No7.png"></p>
+<p><img src="/2023/11/08/%E6%B8%97%E9%80%8FDC-1/No8.png"></p>
+<p>获取完第一个flag，以及提示，需要查看config文件</p>
+<h2 id="反弹shell">反弹shell</h2>
+<p>利用python反弹一个shell</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python -c "import pty;pty.spawn('/bin/bash')"</span><br></pre></td></tr></table></figure>
+<p><img src="/2023/11/08/%E6%B8%97%E9%80%8FDC-1/No9.png"></p>
+<h2 id="查找配置文件">查找配置文件</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find -name settings.php</span><br></pre></td></tr></table></figure>
+<p>查看配置文件，可以看到flag2</p>
+<p><img src="/2023/11/08/%E6%B8%97%E9%80%8FDC-1/No10.png"></p>
+<p>以及后面的数据库账号密码</p>
+<p><img src="/2023/11/08/%E6%B8%97%E9%80%8FDC-1/No11.png"></p>
+<h2 id="登录数据库">登录数据库</h2>
+<p>登录数据库，修改管理员账号密码，然后登录网站后台</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -udbuser -pR0ck3t</span><br></pre></td></tr></table></figure>
+<p><img src="/2023/11/08/%E6%B8%97%E9%80%8FDC-1/No12.png"></p>
+<p>查看管理员的密码</p>
+<p><img src="/2023/11/08/%E6%B8%97%E9%80%8FDC-1/NO13.png"></p>
+<p><img src="/2023/11/08/%E6%B8%97%E9%80%8FDC-1/No14.png"></p>
+<p><img src="/2023/11/08/%E6%B8%97%E9%80%8FDC-1/No15.png"></p>
+<h2 id="修改管理员密码">修改管理员密码</h2>
+<p>这里加密方式我们不知道，但是我们可以尝试修改这个数据库的内容</p>
+<p>查询可知：drupal提供了可以直接修改管理员密码的方法。在scripts目录下存在一个password-hash.sh的文件，这可以将你输入进去明文密码转为hash值</p>
+<p>获取这个hash，然后去修改数据库的内容，就相当于修改了管理员的密码</p>
+<p><img src="/2023/11/08/%E6%B8%97%E9%80%8FDC-1/No16.png"></p>
+<p>在/var/www/下使用php scripts/password-hash.sh 123
+即可生成123这个字符串的hash值</p>
+<p>（这里php没有配置环境，需要再www/下运行）</p>
+<p><img src="/2023/11/08/%E6%B8%97%E9%80%8FDC-1/No17.png"></p>
+<p>得到这个hash，然后修改管理员密码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">update drupaldb.users set pass="$S$DJvkDG3OZUlM4pWJ84LzDaiHEbuj5vdrCI06IX3FePe5b9C8Cdv/" where name="admin";</span><br></pre></td></tr></table></figure>
+<p><img src="/2023/11/08/%E6%B8%97%E9%80%8FDC-1/No18.png"></p>
+<p><img src="/2023/11/08/%E6%B8%97%E9%80%8FDC-1/No19.png"></p>
+<h2 id="登录后台">登录后台</h2>
+<p><img src="/2023/11/08/%E6%B8%97%E9%80%8FDC-1/No20.png"></p>
+<h2 id="找到flag3">找到flag3</h2>
+<p><img src="/2023/11/08/%E6%B8%97%E9%80%8FDC-1/No21.png"></p>
+<p><img src="/2023/11/08/%E6%B8%97%E9%80%8FDC-1/No22.png"></p>
+<h2 id="找到flag4">找到flag4</h2>
+<p>根据flag3的提示，后面我们需要做的就是提权操作</p>
+<p>首先我们查找所有flag字段的文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find / -name "flag*"</span><br></pre></td></tr></table></figure>
+<p>查找到flag4</p>
+<p><img src="/2023/11/08/%E6%B8%97%E9%80%8FDC-1/No23.png"></p>
+<p>查找到flag4</p>
+<p><img src="/2023/11/08/%E6%B8%97%E9%80%8FDC-1/No24.png"></p>
+<h2 id="提权并找到flag5">提权并找到flag5</h2>
+<p>suid提权</p>
+<p>查找suid权限的所有文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find / -perm -4000</span><br></pre></td></tr></table></figure>
+<p><img src="/2023/11/08/%E6%B8%97%E9%80%8FDC-1/No25.png"></p>
+<p>再进行提权操作，find需要一个指向性的查找，参数需要一个目标文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find /var/www/misc -exec "/bin/sh" \;</span><br></pre></td></tr></table></figure>
+<p><img src="/2023/11/08/%E6%B8%97%E9%80%8FDC-1/No26.png"></p>
+<p>最后找到最后一个flag</p>
+<p><img src="/2023/11/08/%E6%B8%97%E9%80%8FDC-1/No27.png"></p>
+<h1 id="总结">总结</h1>
+<ul>
+<li>信息收集，namp扫描</li>
+<li>msf的payload利用</li>
+<li>python反弹shell</li>
+<li>suid提权</li>
+</ul>
 
     </div>
 
@@ -398,13 +454,10 @@ mjx-container[display="true"] + br {
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2023/09/24/%E6%9C%8D%E5%8A%A1%E7%AB%AF%E5%BC%80%E5%8F%91%E5%9F%BA%E7%A1%80/" rel="prev" title="服务端开发基础">
-      <i class="fa fa-chevron-left"></i> 服务端开发基础
+    <a href="/2023/11/06/%E5%85%B3%E8%81%94%E7%88%86%E7%A0%B4%E9%97%AE%E9%A2%98/" rel="prev" title="关联爆破问题">
+      <i class="fa fa-chevron-left"></i> 关联爆破问题
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2023/09/27/2023%E5%8D%8E%E4%B8%BA%E6%9D%AF/" rel="next" title="2023华为杯">
-      2023华为杯 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -463,7 +516,7 @@ mjx-container[display="true"] + br {
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD%E5%AE%89%E8%A3%85vulfocus%E9%95%9C%E5%83%8F"><span class="nav-number">1.</span> <span class="nav-text">下载安装Vulfocus镜像</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E4%B8%8B%E8%BD%BD%E7%9A%84%E9%95%9C%E5%83%8F"><span class="nav-number">2.</span> <span class="nav-text">查看下载的镜像</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8Bdocker%E6%9C%8D%E5%8A%A1%E5%99%A8ip"><span class="nav-number">3.</span> <span class="nav-text">查看docker服务器ip</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BF%90%E8%A1%8Cvulfocus"><span class="nav-number">4.</span> <span class="nav-text">运行Vulfocus</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8Bdocker%E6%9C%8D%E5%8A%A1"><span class="nav-number">5.</span> <span class="nav-text">查看docker服务</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%90%AF%E5%8A%A8%E5%AE%B9%E5%99%A8"><span class="nav-number">6.</span> <span class="nav-text">启动容器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%90%AF%E5%8A%A8%E9%9D%B6%E5%9C%BA"><span class="nav-number">7.</span> <span class="nav-text">启动靶场</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E9%95%9C%E5%83%8F"><span class="nav-number">8.</span> <span class="nav-text">添加镜像</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9B%B4%E6%94%B9%E9%95%9C%E5%83%8F%E6%BA%90"><span class="nav-number">9.</span> <span class="nav-text">更改镜像源</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E9%98%BF%E9%87%8C%E4%BA%91%E5%8A%A0%E9%80%9F%E6%BA%90"><span class="nav-number">10.</span> <span class="nav-text">配置阿里云加速源</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%9D%B6%E6%9C%BA%E6%8F%8F%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">靶机描述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86"><span class="nav-number">2.</span> <span class="nav-text">信息收集</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9B%AE%E6%A0%87%E4%B8%BB%E6%9C%BA%E5%8F%91%E7%8E%B0"><span class="nav-number">2.1.</span> <span class="nav-text">目标主机发现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F"><span class="nav-number">2.2.</span> <span class="nav-text">端口扫描</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web%E5%BA%94%E7%94%A8"><span class="nav-number">2.3.</span> <span class="nav-text">web应用</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%BC%8F%E6%B4%9E%E5%8F%91%E7%8E%B0"><span class="nav-number">3.</span> <span class="nav-text">漏洞发现</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%BC%8F%E6%B4%9E%E6%8E%A2%E6%B5%8B"><span class="nav-number">3.1.</span> <span class="nav-text">漏洞探测</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%BC%8F%E6%B4%9E%E6%94%BB%E5%87%BB"><span class="nav-number">3.2.</span> <span class="nav-text">漏洞攻击</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8"><span class="nav-number">4.</span> <span class="nav-text">漏洞利用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E4%BC%9A%E8%AF%9D"><span class="nav-number">4.1.</span> <span class="nav-text">获取会话</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%8D%E5%BC%B9shell"><span class="nav-number">4.2.</span> <span class="nav-text">反弹shell</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E6%89%BE%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-number">4.3.</span> <span class="nav-text">查找配置文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%99%BB%E5%BD%95%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-number">4.4.</span> <span class="nav-text">登录数据库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E7%AE%A1%E7%90%86%E5%91%98%E5%AF%86%E7%A0%81"><span class="nav-number">4.5.</span> <span class="nav-text">修改管理员密码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%99%BB%E5%BD%95%E5%90%8E%E5%8F%B0"><span class="nav-number">4.6.</span> <span class="nav-text">登录后台</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%BE%E5%88%B0flag3"><span class="nav-number">4.7.</span> <span class="nav-text">找到flag3</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%BE%E5%88%B0flag4"><span class="nav-number">4.8.</span> <span class="nav-text">找到flag4</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8F%90%E6%9D%83%E5%B9%B6%E6%89%BE%E5%88%B0flag5"><span class="nav-number">4.9.</span> <span class="nav-text">提权并找到flag5</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
