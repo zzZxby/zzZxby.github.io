@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="2023古剑山杯Crypto题目">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2023古剑山杯">
+<meta property="og:url" content="http://example.com/2023/12/09/2023%E5%8F%A4%E5%89%91%E5%B1%B1%E6%9D%AF/index.html">
+<meta property="og:site_name" content="zzZxby&#39;s blog">
+<meta property="og:description" content="2023古剑山杯Crypto题目">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2023/12/09/2023%E5%8F%A4%E5%89%91%E5%B1%B1%E6%9D%AF/image-20231209195611849.png">
+<meta property="article:published_time" content="2023-12-09T11:57:58.000Z">
+<meta property="article:modified_time" content="2023-12-09T11:59:15.159Z">
+<meta property="article:author" content="zzZxby">
+<meta property="article:tag" content="保持学习的热情">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2023/12/09/2023%E5%8F%A4%E5%89%91%E5%B1%B1%E6%9D%AF/image-20231209195611849.png">
+
+<link rel="canonical" href="http://example.com/2023/12/09/2023%E5%8F%A4%E5%89%91%E5%B1%B1%E6%9D%AF/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>2023古剑山杯 | zzZxby's blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+<link rel="stylesheet" href="/dist/APlayer.min.css">
+<div id="aplayer"></div>
+<script type="text/javascript" src="/dist/APlayer.min.js"></script>
+<script type="text/javascript" src="/dist/music.js"></script>
+
+
+
+
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">zzZxby's blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/12/09/2023%E5%8F%A4%E5%89%91%E5%B1%B1%E6%9D%AF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/zzZ.jpg">
+      <meta itemprop="name" content="zzZxby">
+      <meta itemprop="description" content="看山是山，看水是水">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zzZxby's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          2023古剑山杯
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-12-09 19:57:58 / 修改时间：19:59:15" itemprop="dateCreated datePublished" datetime="2023-12-09T19:57:58+08:00">2023-12-09</time>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>958</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>3 分钟</span>
+            </span>
+            <div class="post-description">2023古剑山杯Crypto题目</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="guess-the-key">guess the key</h1>
+<h2 id="题目">题目</h2>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> **argv)</span> {</span><br><span class="line">	<span class="keyword">if</span> (argc != <span class="number">3</span>) {</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"USAGE: %s INPUT OUTPUT\n"</span>, argv[<span class="number">0</span>]);</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	}</span><br><span class="line">	FILE* input  = fopen(argv[<span class="number">1</span>], <span class="string">"rb"</span>);</span><br><span class="line">	FILE* output = fopen(argv[<span class="number">2</span>], <span class="string">"wb"</span>);</span><br><span class="line">	<span class="keyword">if</span> (!input || !output) {</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"Error\n"</span>);</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	}</span><br><span class="line">	<span class="type">char</span> key[] = <span class="string">"guessthekey"</span>;</span><br><span class="line">	<span class="type">char</span> d, q, t = <span class="number">0</span>;</span><br><span class="line">	<span class="type">int</span> ijk = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">while</span> ((q = fgetc(input)) != EOF) {</span><br><span class="line">		d = (q + (key[ijk % <span class="built_in">strlen</span>( key )] ^ t) + ijk*ijk) &amp; <span class="number">0xff</span>;</span><br><span class="line">		t = q;</span><br><span class="line">        ijk++;</span><br><span class="line">		fputc(d, output);</span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+<h2 id="题解">题解</h2>
+<p>加密函数如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> ((q = fgetc(input)) != EOF) {</span><br><span class="line">		d = (q + (key[ijk % <span class="built_in">strlen</span>( key )] ^ t) + ijk*ijk) &amp; <span class="number">0xff</span>;</span><br><span class="line">		t = q;</span><br><span class="line">        ijk++;</span><br><span class="line">		fputc(d, output);</span><br><span class="line">	}</span><br></pre></td></tr></table></figure>
+<p>给了四个文件，加密脚本，明文1和对应的密文，flag的密文</p>
+<p>我们需要写一个求key的脚本来还原key，然后再用key去解密flag</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># python</span></span><br><span class="line"><span class="comment"># 求密钥</span></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">"msg01.enc"</span>, <span class="string">"rb"</span>) <span class="keyword">as</span> f:</span><br><span class="line">    result = f.read()</span><br><span class="line">cipher = []</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> result:</span><br><span class="line">    cipher.append(i)</span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">"msg01"</span>,<span class="string">"rb"</span>) <span class="keyword">as</span> f:</span><br><span class="line">    result1 = f.read()</span><br><span class="line">message = result1.decode()</span><br><span class="line">key = <span class="string">''</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(message)):</span><br><span class="line">    <span class="keyword">if</span> i == <span class="number">0</span>:</span><br><span class="line">        key = key + <span class="built_in">chr</span>((cipher[i] - <span class="built_in">ord</span>(message[i])) &amp; <span class="number">0xff</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        key = key + <span class="built_in">chr</span>(((cipher[i] - i * i - <span class="built_in">ord</span>(message[i])) ^ <span class="built_in">ord</span>(message[i - <span class="number">1</span>])) &amp; <span class="number">0xff</span>)</span><br><span class="line"><span class="built_in">print</span>(key)</span><br><span class="line"><span class="comment"># VeryVeryLongKeyYouWillNeverKnowVeryV</span></span><br></pre></td></tr></table></figure>
+<p>然后就是解密flag，主要考察对代码的逆行分析</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">key = <span class="string">"VeryVeryLongKeyYouWillNeverKnow"</span></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">"msg02.enc"</span>, <span class="string">"rb"</span>) <span class="keyword">as</span> f:</span><br><span class="line">    result = f.read()</span><br><span class="line">cipher = [i <span class="keyword">for</span> i <span class="keyword">in</span> result]</span><br><span class="line">new_flag = <span class="string">""</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(cipher)):</span><br><span class="line">    <span class="keyword">if</span> i == <span class="number">0</span>:</span><br><span class="line">        new_flag = new_flag + <span class="built_in">chr</span>((cipher[i] - <span class="built_in">ord</span>(key[i % <span class="built_in">len</span>(key)])) &amp; <span class="number">0xff</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        new_flag = new_flag + <span class="built_in">chr</span>((cipher[i] - i * i - (<span class="built_in">ord</span>(key[i % <span class="built_in">len</span>(key)]) ^ (<span class="built_in">ord</span>(new_flag[i - <span class="number">1</span>])))) &amp; <span class="number">0xff</span>)</span><br><span class="line"><span class="built_in">print</span>(new_flag)</span><br><span class="line"><span class="comment"># She had been shopping with her Mom in Wal-Mart. She must have been 6 years old, this beautiful brown haired, freckle-faced image of innocence. It was pouring outside. The kind of rain that gushes over the top of rain gutters, so much in a hurry to hit the Earth, it has no time to flow down the spout.flag{101a6ec9f938885df0a44f20458d2eb4}</span></span><br></pre></td></tr></table></figure>
+<h1 id="vigenere">Vigenere+++</h1>
+<h2 id="题目-1">题目</h2>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">from</span> secret_file  <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">_l</span>(<span class="params">idx, s</span>):</span><br><span class="line">    <span class="keyword">return</span> s[idx:] + s[:idx]</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">main</span>(<span class="params">p, k1, k2</span>):</span><br><span class="line">    s = <span class="string">"ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz_{}"</span></span><br><span class="line">    t = [[_l((i+j) % <span class="built_in">len</span>(s), s) <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(s))] <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(s))]</span><br><span class="line">    i1 = <span class="number">0</span></span><br><span class="line">    i2 = <span class="number">0</span></span><br><span class="line">    c = <span class="string">""</span></span><br><span class="line">    <span class="keyword">for</span> a <span class="keyword">in</span> p:</span><br><span class="line">        c += t[s.find(a)][s.find(k1[i1])][s.find(k2[i2])]</span><br><span class="line">        i1 = (i1 + <span class="number">1</span>) % <span class="built_in">len</span>(k1)</span><br><span class="line">        i2 = (i2 + <span class="number">1</span>) % <span class="built_in">len</span>(k2)</span><br><span class="line">    <span class="keyword">return</span> c</span><br><span class="line"></span><br><span class="line">flag=<span class="string">"flag{************************}"</span></span><br><span class="line">key=<span class="string">"**********"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># * 为马赛克，长度为1。 </span></span><br><span class="line"><span class="comment"># hint：  可以自己尝试下运行加密函数，看看秘钥对加密结果的影响。 </span></span><br><span class="line"><span class="comment"># hint：  首先根据线索求秘钥，秘钥不唯一，找到一个有效的，就能爆破flag了。 </span></span><br><span class="line"><span class="built_in">print</span> main(flag, key, key[::-<span class="number">1</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 程序运行结果（即密文为）:</span></span><br><span class="line">kY0awfsdlY1FFL8C3bi4GSYCF{8W_E</span><br></pre></td></tr></table></figure>
+<h2 id="题解-1">题解</h2>
+<p>又是考察对代码的理解，先生成一个三维数组，然后根据索引变化进行替换，以下有三个详解</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/SECCON/SECCON2017_online_CTF/tree/master/crypto/100_Vigenere3d">SECCON2017_online_CTF</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/ctf-wiki/ctf-wiki/blob/master/docs/zh/docs/crypto/classical/summary.md#2017-seccon-vigenere3d">2017-seccon-vigenere3d</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/0cea36bbf0f5">SECCON -Vigenere3d -
+简书 (jianshu.com)</a></p>
+<p>原题exp：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">s = <span class="string">"ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz_{}"</span></span><br><span class="line">p = <span class="string">"flag{"</span></span><br><span class="line">c = <span class="string">"kY0awfsdlY1FFL8C3bi4GSYCF{8W_E"</span></span><br><span class="line">k = []</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(p)):</span><br><span class="line">    P = s.find(p[i])</span><br><span class="line">    C = s.find(c[i])</span><br><span class="line">    <span class="keyword">if</span> P &lt;= C:</span><br><span class="line">        k.append(C - P)</span><br><span class="line">        <span class="keyword">continue</span></span><br><span class="line">    k.append((<span class="built_in">len</span>(s) - P) + C)</span><br><span class="line">k += k[::-<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line">p = <span class="string">""</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(c)):</span><br><span class="line">    num = s.find(c[i]) - k[i % <span class="built_in">len</span>(k)]</span><br><span class="line">    <span class="keyword">if</span> num &lt; <span class="number">0</span>:</span><br><span class="line">        num = <span class="built_in">len</span>(s) + num</span><br><span class="line">    p += s[num % <span class="built_in">len</span>(s)]</span><br><span class="line"><span class="built_in">print</span>(p)</span><br><span class="line"><span class="comment"># flag{kynFTW2PRdH9lCZBf8IKDe6U}</span></span><br></pre></td></tr></table></figure>
+<h1 id="babyrsa">babyrsa</h1>
+<h2 id="题目-2">题目</h2>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">p=<span class="number">99953143645521177803735736579862987978862371986511271698200985860201988406992228386886156846586231189239404587468167638582713706975074975095727260756176495410112202900481714278106482237042151820865564725276149585814994889786992973857194861525113159772858254617684500040455709375098668578359761863035737111267</span></span><br><span class="line">q=<span class="number">144415372074346358936965217477364683051506736832213069585643471901123120042657943921784778727610246832089508711511238996211478269698835592459553943833822992073553406476612087363775487608432193298596184833040136548627895587404676857891089403674492469390040235812377341690429548455672577876836346349155761346539</span></span><br><span class="line">e=<span class="number">33</span></span><br><span class="line">c=<span class="number">4680829915415870812281211152563428503064428938545028703923300734232338068354295969972680757130810558048976936545188308560554377453985439453266037425448718819398465160447125914374998787262482155999561262960844933980653294627047305816081836575351082731041044949829430251347574643312482000741462798688236290589605488420424275245156052958633122356128869507698293504468309282445294456290016179763445958393524340855750009260045863820907397341573311035964124325775286456112377652121280951592885961330916279791805340581920797766244059325031828233048008219032638906348454752719287896458438932064109933805037308289230985109854</span></span><br></pre></td></tr></table></figure>
+<h2 id="题解-2">题解</h2>
+<p>题目还给了服务端口，但是那个是判断输入值为奇数还是偶数，不知道和题目有什么关联</p>
+<p>既然给了p和q，直接求解就行，但是这里e=33，和n的欧拉函数不互素，考虑在模p和模q上进行有限域开放，然后再利用中国剩余定理求真正的明文</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># sage</span></span><br><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> gmpy2 <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">p=<span class="number">99953143645521177803735736579862987978862371986511271698200985860201988406992228386886156846586231189239404587468167638582713706975074975095727260756176495410112202900481714278106482237042151820865564725276149585814994889786992973857194861525113159772858254617684500040455709375098668578359761863035737111267</span></span><br><span class="line">q=<span class="number">144415372074346358936965217477364683051506736832213069585643471901123120042657943921784778727610246832089508711511238996211478269698835592459553943833822992073553406476612087363775487608432193298596184833040136548627895587404676857891089403674492469390040235812377341690429548455672577876836346349155761346539</span></span><br><span class="line">e=<span class="number">33</span></span><br><span class="line">c=<span class="number">4680829915415870812281211152563428503064428938545028703923300734232338068354295969972680757130810558048976936545188308560554377453985439453266037425448718819398465160447125914374998787262482155999561262960844933980653294627047305816081836575351082731041044949829430251347574643312482000741462798688236290589605488420424275245156052958633122356128869507698293504468309282445294456290016179763445958393524340855750009260045863820907397341573311035964124325775286456112377652121280951592885961330916279791805340581920797766244059325031828233048008219032638906348454752719287896458438932064109933805037308289230985109854</span></span><br><span class="line">n=p*q</span><br><span class="line"></span><br><span class="line">R.&lt;x&gt; = Zmod(p)[]</span><br><span class="line">f = x ^ e - c</span><br><span class="line">f = f.monic()</span><br><span class="line">res1 = f.roots()</span><br><span class="line"></span><br><span class="line">R.&lt;x&gt; = Zmod(q)[]</span><br><span class="line">f = x ^ e - c</span><br><span class="line">f = f.monic()</span><br><span class="line">res2 = f.roots()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># b是密文列表  m是模数列表</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">crtcrt</span>(<span class="params">b, m</span>):</span><br><span class="line">    <span class="comment"># 传入的参数分别为密文 和 模数n</span></span><br><span class="line">    <span class="comment"># 乘积计算</span></span><br><span class="line">    M = <span class="number">1</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(m)):</span><br><span class="line">        M *= m[i]</span><br><span class="line"></span><br><span class="line">    Mm = []</span><br><span class="line">    <span class="comment"># 求余数 M/m[i]</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(m)):</span><br><span class="line">        Mm.append(M // m[i])</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 求Mm[i]的乘法逆元</span></span><br><span class="line">    Mm_ = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(m)):</span><br><span class="line">        t, a, _ = gmpy2.gcdext(Mm[i], m[i])</span><br><span class="line">        Mm_.append(<span class="built_in">int</span>(a % m[i]))</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 求的累加</span></span><br><span class="line">    y = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(m)):</span><br><span class="line">        y += (Mm[i] * Mm_[i] * b[i])</span><br><span class="line">    y = y % M</span><br><span class="line">    <span class="keyword">return</span> y, M</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> res1:</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> res2:</span><br><span class="line">        <span class="comment"># 普普通通中国剩余定理</span></span><br><span class="line">        m = crtcrt([<span class="built_in">int</span>(i[<span class="number">0</span>]),<span class="built_in">int</span>(j[<span class="number">0</span>])],[p,q])[<span class="number">0</span>]</span><br><span class="line">        <span class="built_in">print</span>(long_to_bytes(<span class="built_in">int</span>(m)))</span><br><span class="line"><span class="comment"># flag{9cddd5588513a46a54f02ef72330eaed}</span></span><br></pre></td></tr></table></figure>
+<p><img src="/2023/12/09/2023%E5%8F%A4%E5%89%91%E5%B1%B1%E6%9D%AF/image-20231209195611849.png"></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/12/07/%E6%B8%97%E9%80%8FDC-6/" rel="prev" title="渗透DC-6">
+      <i class="fa fa-chevron-left"></i> 渗透DC-6
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#guess-the-key"><span class="nav-number">1.</span> <span class="nav-text">guess the key</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE"><span class="nav-number">1.1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%98%E8%A7%A3"><span class="nav-number">1.2.</span> <span class="nav-text">题解</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#vigenere"><span class="nav-number">2.</span> <span class="nav-text">Vigenere+++</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE-1"><span class="nav-number">2.1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%98%E8%A7%A3-1"><span class="nav-number">2.2.</span> <span class="nav-text">题解</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#babyrsa"><span class="nav-number">3.</span> <span class="nav-text">babyrsa</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE-2"><span class="nav-number">3.1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%98%E8%A7%A3-2"><span class="nav-number">3.2.</span> <span class="nav-text">题解</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="zzZxby"
+      src="/images/zzZ.jpg">
+  <p class="site-author-name" itemprop="name">zzZxby</p>
+  <div class="site-description" itemprop="description">看山是山，看水是水</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">28</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zzZxby</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">44k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">2:41</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+    <script defer src="/lib/three/canvas_lines.min.js"></script>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    // window.MathJax = {
+    //   loader: {
+    //
+    //       load: ['[tex]/mhchem'],
+    //
+    //     source: {
+    //       '[tex]/amsCd': '[tex]/amscd',
+    //       '[tex]/AMScd': '[tex]/amscd'
+    //     }
+    //   },
+    //   tex: {
+    //     inlineMath: {'[+]': [['$', '$']]},
+    //
+    //       packages: {'[+]': ['mhchem']},
+    //
+    //     tags: 'ams'
+    //   },
+    //   options: {
+    //     renderActions: {
+    //       findScript: [10, doc => {
+    //         document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+    //           const display = !!node.type.match(/; *mode=display/);
+    //           const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+    //           const text = document.createTextNode('');
+    //           node.parentNode.replaceChild(text, node);
+    //           math.start = {node: text, delim: '', n: 0};
+    //           math.end = {node: text, delim: '', n: 0};
+    //           doc.math.push(math);
+    //         });
+    //       }, '', false],
+    //       insertedScript: [200, () => {
+    //         document.querySelectorAll('mjx-container').forEach(node => {
+    //           let target = node.parentNode;
+    //           if (target.nodeName.toLowerCase() === 'li') {
+    //             target.parentNode.classList.add('has-jax');
+    //           }
+    //         });
+    //       }, '', false]
+    //     }
+    //   }
+    // };
+    window.MathJax = {
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+        processEscapes: true
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = 'https://cdn.jsdelivr.net/npm/mathjax@2.7.8/unpacked/MathJax.js?config=TeX-MML-AM_CHTML';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+
+  <script async src="/js/cursor/fireworks.js"></script>
+
+
+    </div>
+  
+  <style>
+    .copy-btn {
+      display: inline-block;
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 20px;
+      color: #333;
+      white-space: nowrap;
+      vertical-align: middle;
+      cursor: pointer;
+      background-color: #eee;
+      background-image: linear-gradient(#fcfcfc, #eee);
+      border: 1px solid #d5d5d5;
+      border-radius: 3px;
+      user-select: none;
+      outline: 0;
+    }
+
+    .highlight-wrap .copy-btn {
+      transition: opacity .3s ease-in-out;
+      opacity: 0;
+      padding: 2px 6px;
+      position: absolute;
+      right: 4px;
+      top: 8px;
+    }
+
+    .highlight-wrap:hover .copy-btn,
+    .highlight-wrap .copy-btn:focus {
+      opacity: 1
+    }
+
+    .highlight-wrap {
+      position: relative;
+    }
+  </style>
+  
+  <script>
+    $('.highlight').each(function (i, e) {
+      var $wrap = $('<div>').addClass('highlight-wrap')
+      $(e).after($wrap)
+      $wrap.append($('<button>').addClass('copy-btn').append('复制').on('click', function (e) {
+        var code = $(this).parent().find('.code').find('.line').map(function (i, e) {
+          return $(e).text()
+        }).toArray().join('\n')
+        var ta = document.createElement('textarea')
+        document.body.appendChild(ta)
+        ta.style.position = 'absolute'
+        ta.style.top = '0px'
+        ta.style.left = '0px'
+        ta.value = code
+        ta.select()
+        ta.focus()
+        var result = document.execCommand('copy')
+        document.body.removeChild(ta)
+        
+          if(result)$(this).text('复制成功')
+          else $(this).text('复制失败')
+        
+        $(this).blur()
+      })).on('mouseleave', function (e) {
+        var $b = $(this).find('.copy-btn')
+        setTimeout(function () {
+          $b.text('复制')
+        }, 300)
+      }).append(e)
+    })
+  </script>
+
+
+
+</body>
+</html>
