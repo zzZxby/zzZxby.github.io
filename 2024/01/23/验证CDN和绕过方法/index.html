@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="验证是否存在CDN并尝试绕过的方法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="验证CDN和绕过方法">
+<meta property="og:url" content="http://example.com/2024/01/23/%E9%AA%8C%E8%AF%81CDN%E5%92%8C%E7%BB%95%E8%BF%87%E6%96%B9%E6%B3%95/index.html">
+<meta property="og:site_name" content="zzZxby&#39;s blog">
+<meta property="og:description" content="验证是否存在CDN并尝试绕过的方法">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2024/01/23/%E9%AA%8C%E8%AF%81CDN%E5%92%8C%E7%BB%95%E8%BF%87%E6%96%B9%E6%B3%95/image-20240123101910277.png">
+<meta property="og:image" content="http://example.com/2024/01/23/%E9%AA%8C%E8%AF%81CDN%E5%92%8C%E7%BB%95%E8%BF%87%E6%96%B9%E6%B3%95/image-20240123102213321.png">
+<meta property="og:image" content="http://example.com/2024/01/23/%E9%AA%8C%E8%AF%81CDN%E5%92%8C%E7%BB%95%E8%BF%87%E6%96%B9%E6%B3%95/image-20240123102442017.png">
+<meta property="og:image" content="http://example.com/2024/01/23/%E9%AA%8C%E8%AF%81CDN%E5%92%8C%E7%BB%95%E8%BF%87%E6%96%B9%E6%B3%95/image-20240123102451189.png">
+<meta property="og:image" content="http://example.com/2024/01/23/%E9%AA%8C%E8%AF%81CDN%E5%92%8C%E7%BB%95%E8%BF%87%E6%96%B9%E6%B3%95/image-20240123102505513.png">
+<meta property="og:image" content="http://example.com/2024/01/23/%E9%AA%8C%E8%AF%81CDN%E5%92%8C%E7%BB%95%E8%BF%87%E6%96%B9%E6%B3%95/image-20240123103200521.png">
+<meta property="og:image" content="http://example.com/2024/01/23/%E9%AA%8C%E8%AF%81CDN%E5%92%8C%E7%BB%95%E8%BF%87%E6%96%B9%E6%B3%95/image-20240123103214762.png">
+<meta property="og:image" content="http://example.com/2024/01/23/%E9%AA%8C%E8%AF%81CDN%E5%92%8C%E7%BB%95%E8%BF%87%E6%96%B9%E6%B3%95/image-20240123103252067.png">
+<meta property="og:image" content="http://example.com/2024/01/23/%E9%AA%8C%E8%AF%81CDN%E5%92%8C%E7%BB%95%E8%BF%87%E6%96%B9%E6%B3%95/image-20240123103459842.png">
+<meta property="og:image" content="http://example.com/2024/01/23/%E9%AA%8C%E8%AF%81CDN%E5%92%8C%E7%BB%95%E8%BF%87%E6%96%B9%E6%B3%95/image-20240123103620177.png">
+<meta property="og:image" content="http://example.com/2024/01/23/%E9%AA%8C%E8%AF%81CDN%E5%92%8C%E7%BB%95%E8%BF%87%E6%96%B9%E6%B3%95/image-20240123104422426.png">
+<meta property="og:image" content="http://example.com/2024/01/23/%E9%AA%8C%E8%AF%81CDN%E5%92%8C%E7%BB%95%E8%BF%87%E6%96%B9%E6%B3%95/image-20240123104531413.png">
+<meta property="og:image" content="http://example.com/2024/01/23/%E9%AA%8C%E8%AF%81CDN%E5%92%8C%E7%BB%95%E8%BF%87%E6%96%B9%E6%B3%95/image-20240123104442965.png">
+<meta property="og:image" content="http://example.com/2024/01/23/%E9%AA%8C%E8%AF%81CDN%E5%92%8C%E7%BB%95%E8%BF%87%E6%96%B9%E6%B3%95/image-20240123104711731.png">
+<meta property="og:image" content="http://example.com/2024/01/23/%E9%AA%8C%E8%AF%81CDN%E5%92%8C%E7%BB%95%E8%BF%87%E6%96%B9%E6%B3%95/image-20240123105211055.png">
+<meta property="og:image" content="http://example.com/2024/01/23/%E9%AA%8C%E8%AF%81CDN%E5%92%8C%E7%BB%95%E8%BF%87%E6%96%B9%E6%B3%95/image-20240123105326853.png">
+<meta property="og:image" content="http://example.com/2024/01/23/%E9%AA%8C%E8%AF%81CDN%E5%92%8C%E7%BB%95%E8%BF%87%E6%96%B9%E6%B3%95/image-20240123105354600.png">
+<meta property="og:image" content="http://example.com/2024/01/23/%E9%AA%8C%E8%AF%81CDN%E5%92%8C%E7%BB%95%E8%BF%87%E6%96%B9%E6%B3%95/image-20240123105746906.png">
+<meta property="og:image" content="http://example.com/2024/01/23/%E9%AA%8C%E8%AF%81CDN%E5%92%8C%E7%BB%95%E8%BF%87%E6%96%B9%E6%B3%95/image-20240123111242904.png">
+<meta property="og:image" content="http://example.com/2024/01/23/%E9%AA%8C%E8%AF%81CDN%E5%92%8C%E7%BB%95%E8%BF%87%E6%96%B9%E6%B3%95/image-20240123165428278.png">
+<meta property="og:image" content="http://example.com/2024/01/23/%E9%AA%8C%E8%AF%81CDN%E5%92%8C%E7%BB%95%E8%BF%87%E6%96%B9%E6%B3%95/image-20240123165445020.png">
+<meta property="og:image" content="http://example.com/2024/01/23/%E9%AA%8C%E8%AF%81CDN%E5%92%8C%E7%BB%95%E8%BF%87%E6%96%B9%E6%B3%95/image-20240123165502050.png">
+<meta property="og:image" content="http://example.com/2024/01/23/%E9%AA%8C%E8%AF%81CDN%E5%92%8C%E7%BB%95%E8%BF%87%E6%96%B9%E6%B3%95/image-20240123165515862.png">
+<meta property="og:image" content="http://example.com/2024/01/23/%E9%AA%8C%E8%AF%81CDN%E5%92%8C%E7%BB%95%E8%BF%87%E6%96%B9%E6%B3%95/image-20240123171535430.png">
+<meta property="og:image" content="http://example.com/2024/01/23/%E9%AA%8C%E8%AF%81CDN%E5%92%8C%E7%BB%95%E8%BF%87%E6%96%B9%E6%B3%95/image-20240123171551793.png">
+<meta property="og:image" content="http://example.com/2024/01/23/%E9%AA%8C%E8%AF%81CDN%E5%92%8C%E7%BB%95%E8%BF%87%E6%96%B9%E6%B3%95/image-20240123171811508.png">
+<meta property="og:image" content="http://example.com/2024/01/23/%E9%AA%8C%E8%AF%81CDN%E5%92%8C%E7%BB%95%E8%BF%87%E6%96%B9%E6%B3%95/image-20240123171844804.png">
+<meta property="og:image" content="http://example.com/2024/01/23/%E9%AA%8C%E8%AF%81CDN%E5%92%8C%E7%BB%95%E8%BF%87%E6%96%B9%E6%B3%95/image-20240123173512275.png">
+<meta property="article:published_time" content="2024-01-23T12:46:35.000Z">
+<meta property="article:modified_time" content="2024-01-23T12:56:40.252Z">
+<meta property="article:author" content="zzZxby">
+<meta property="article:tag" content="保持学习的热情">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2024/01/23/%E9%AA%8C%E8%AF%81CDN%E5%92%8C%E7%BB%95%E8%BF%87%E6%96%B9%E6%B3%95/image-20240123101910277.png">
+
+<link rel="canonical" href="http://example.com/2024/01/23/%E9%AA%8C%E8%AF%81CDN%E5%92%8C%E7%BB%95%E8%BF%87%E6%96%B9%E6%B3%95/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>验证CDN和绕过方法 | zzZxby's blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+<link rel="stylesheet" href="/dist/APlayer.min.css">
+<div id="aplayer"></div>
+<script type="text/javascript" src="/dist/APlayer.min.js"></script>
+<script type="text/javascript" src="/dist/music.js"></script>
+
+
+
+
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">zzZxby's blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/01/23/%E9%AA%8C%E8%AF%81CDN%E5%92%8C%E7%BB%95%E8%BF%87%E6%96%B9%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/zzZ.jpg">
+      <meta itemprop="name" content="zzZxby">
+      <meta itemprop="description" content="看山是山，看水是水">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zzZxby's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          验证CDN和绕过方法
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2024-01-23 20:46:35 / 修改时间：20:56:40" itemprop="dateCreated datePublished" datetime="2024-01-23T20:46:35+08:00">2024-01-23</time>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>552</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+            <div class="post-description">验证是否存在CDN并尝试绕过的方法</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="验证是否存在cdn">验证是否存在CDN</h1>
+<h2 id="在线网站">在线网站</h2>
+<p>站长之家：http://ping.chinaz.com/</p>
+<h3 id="存在cdn">存在CDN</h3>
+<p>以www.baidu.com为例</p>
+<p><img src="/2024/01/23/%E9%AA%8C%E8%AF%81CDN%E5%92%8C%E7%BB%95%E8%BF%87%E6%96%B9%E6%B3%95/image-20240123101910277.png"></p>
+<h3 id="不存在cdn">不存在CDN</h3>
+<p>网站：https://guballa.de/vigenere-solver</p>
+<p><img src="/2024/01/23/%E9%AA%8C%E8%AF%81CDN%E5%92%8C%E7%BB%95%E8%BF%87%E6%96%B9%E6%B3%95/image-20240123102213321.png"></p>
+<h2 id="nslookup">nslookup</h2>
+<h3 id="存在cdn-1">存在CDN</h3>
+<p>发现存在多个ip地址</p>
+<p><img src="/2024/01/23/%E9%AA%8C%E8%AF%81CDN%E5%92%8C%E7%BB%95%E8%BF%87%E6%96%B9%E6%B3%95/image-20240123102442017.png"></p>
+<p><img src="/2024/01/23/%E9%AA%8C%E8%AF%81CDN%E5%92%8C%E7%BB%95%E8%BF%87%E6%96%B9%E6%B3%95/image-20240123102451189.png"></p>
+<h3 id="不存在cdn-1">不存在CDN</h3>
+<p><img src="/2024/01/23/%E9%AA%8C%E8%AF%81CDN%E5%92%8C%E7%BB%95%E8%BF%87%E6%96%B9%E6%B3%95/image-20240123102505513.png"></p>
+<h1 id="绕过cdn查找真实ip">绕过CDN查找真实IP</h1>
+<h2 id="查找历史dns记录">查找历史DNS记录</h2>
+<p>查看IP与域名绑定的历史记录，可能会存在使用CDN前的记录</p>
+<h3 id="在线域名查询">在线域名查询</h3>
+<p>http://toolbar.netcraft.com/site_report?url=</p>
+<p><img src="/2024/01/23/%E9%AA%8C%E8%AF%81CDN%E5%92%8C%E7%BB%95%E8%BF%87%E6%96%B9%E6%B3%95/image-20240123103200521.png"></p>
+<p><img src="/2024/01/23/%E9%AA%8C%E8%AF%81CDN%E5%92%8C%E7%BB%95%E8%BF%87%E6%96%B9%E6%B3%95/image-20240123103214762.png"></p>
+<p><img src="/2024/01/23/%E9%AA%8C%E8%AF%81CDN%E5%92%8C%E7%BB%95%E8%BF%87%E6%96%B9%E6%B3%95/image-20240123103252067.png"></p>
+<h3 id="利用securitytrails平台">利用SecurityTrails平台</h3>
+<p><img src="/2024/01/23/%E9%AA%8C%E8%AF%81CDN%E5%92%8C%E7%BB%95%E8%BF%87%E6%96%B9%E6%B3%95/image-20240123103459842.png"></p>
+<p><img src="/2024/01/23/%E9%AA%8C%E8%AF%81CDN%E5%92%8C%E7%BB%95%E8%BF%87%E6%96%B9%E6%B3%95/image-20240123103620177.png"></p>
+<h2 id="查询子域名">查询子域名</h2>
+<h3 id="微步在线">微步在线</h3>
+<p>https://x.threatbook.cn/</p>
+<p><img src="/2024/01/23/%E9%AA%8C%E8%AF%81CDN%E5%92%8C%E7%BB%95%E8%BF%87%E6%96%B9%E6%B3%95/image-20240123104422426.png"></p>
+<p><img src="/2024/01/23/%E9%AA%8C%E8%AF%81CDN%E5%92%8C%E7%BB%95%E8%BF%87%E6%96%B9%E6%B3%95/image-20240123104531413.png"></p>
+<p><img src="/2024/01/23/%E9%AA%8C%E8%AF%81CDN%E5%92%8C%E7%BB%95%E8%BF%87%E6%96%B9%E6%B3%95/image-20240123104442965.png"></p>
+<p>后面的数据，域名不同，但IP解析都相同</p>
+<h3 id="google-搜索">Google 搜索</h3>
+<p>site:baidu.com -www就能查看除www外的子域名</p>
+<p><img src="/2024/01/23/%E9%AA%8C%E8%AF%81CDN%E5%92%8C%E7%BB%95%E8%BF%87%E6%96%B9%E6%B3%95/image-20240123104711731.png"></p>
+<h3 id="子域名扫描器">子域名扫描器</h3>
+<p>Layer子域名挖掘机</p>
+<p><img src="/2024/01/23/%E9%AA%8C%E8%AF%81CDN%E5%92%8C%E7%BB%95%E8%BF%87%E6%96%B9%E6%B3%95/image-20240123105211055.png"></p>
+<p>Subdomainbrute脚本</p>
+<p><img src="/2024/01/23/%E9%AA%8C%E8%AF%81CDN%E5%92%8C%E7%BB%95%E8%BF%87%E6%96%B9%E6%B3%95/image-20240123105326853.png"></p>
+<p><img src="/2024/01/23/%E9%AA%8C%E8%AF%81CDN%E5%92%8C%E7%BB%95%E8%BF%87%E6%96%B9%E6%B3%95/image-20240123105354600.png"></p>
+<h2 id="网络空间引擎搜索法">网络空间引擎搜索法</h2>
+<p>fofa可以根据跟定特征查询相关信息，可能找到真实IP</p>
+<p><img src="/2024/01/23/%E9%AA%8C%E8%AF%81CDN%E5%92%8C%E7%BB%95%E8%BF%87%E6%96%B9%E6%B3%95/image-20240123105746906.png"></p>
+<h2 id="利用ssl证书查找ip">利用SSL证书查找IP</h2>
+<p>用crt.sh查找目标网站SSL证书的HASH</p>
+<p><img src="/2024/01/23/%E9%AA%8C%E8%AF%81CDN%E5%92%8C%E7%BB%95%E8%BF%87%E6%96%B9%E6%B3%95/image-20240123111242904.png"></p>
+<p><img src="/2024/01/23/%E9%AA%8C%E8%AF%81CDN%E5%92%8C%E7%BB%95%E8%BF%87%E6%96%B9%E6%B3%95/image-20240123165428278.png"></p>
+<p><img src="/2024/01/23/%E9%AA%8C%E8%AF%81CDN%E5%92%8C%E7%BB%95%E8%BF%87%E6%96%B9%E6%B3%95/image-20240123165445020.png"></p>
+<p><img src="/2024/01/23/%E9%AA%8C%E8%AF%81CDN%E5%92%8C%E7%BB%95%E8%BF%87%E6%96%B9%E6%B3%95/image-20240123165502050.png"></p>
+<p><img src="/2024/01/23/%E9%AA%8C%E8%AF%81CDN%E5%92%8C%E7%BB%95%E8%BF%87%E6%96%B9%E6%B3%95/image-20240123165515862.png"></p>
+<h2 id="利用http标头寻找真实ip">利用HTTP标头寻找真实IP</h2>
+<p>当用户使用比较特别的服务器或者软件名称时，攻击者更容易找到目标</p>
+<p>如果网站可以提交信息，那么信息最终会被提交到真实的IP站点，真实的IP站点返回的http头部中就含了真实的IP地址，也可以根据http头部信息中的变动情况来判断出真实IP</p>
+<h2 id="使用国外主机解析域名">使用国外主机解析域名</h2>
+<p>有一些厂商只针对国内做了CDN处理，而对国外的线路没有进行处理，可以利用国外主机访问获取真实IP</p>
+<p>国内访问：</p>
+<p><img src="/2024/01/23/%E9%AA%8C%E8%AF%81CDN%E5%92%8C%E7%BB%95%E8%BF%87%E6%96%B9%E6%B3%95/image-20240123171535430.png"></p>
+<p>大陆境外线路： <img src="/2024/01/23/%E9%AA%8C%E8%AF%81CDN%E5%92%8C%E7%BB%95%E8%BF%87%E6%96%B9%E6%B3%95/image-20240123171551793.png"></p>
+<h2 id="网站邮件订阅查找">网站邮件订阅查找</h2>
+<p>邮件源码会包含发送者的IP地址</p>
+<p><img src="/2024/01/23/%E9%AA%8C%E8%AF%81CDN%E5%92%8C%E7%BB%95%E8%BF%87%E6%96%B9%E6%B3%95/image-20240123171811508.png"></p>
+<p><img src="/2024/01/23/%E9%AA%8C%E8%AF%81CDN%E5%92%8C%E7%BB%95%E8%BF%87%E6%96%B9%E6%B3%95/image-20240123171844804.png"></p>
+<p>这里现在网站都属于邮件代发，也很少能真正的找到发送者的真实IP</p>
+<h2 id="f5-ltm解码法">F5 LTM解码法</h2>
+<p>利用fofa直接搜索关键字</p>
+<p>发送HTTP请求到目标服务器并检查响应头。F5LTM通常会在响应头中包含特定的标识，如"Server:
+BigIP"或"X-Cnection:
+close"。如果目标服务器的响应头中包含这些标识，那么很可能正在使用F5LTM。</p>
+<p><img src="/2024/01/23/%E9%AA%8C%E8%AF%81CDN%E5%92%8C%E7%BB%95%E8%BF%87%E6%96%B9%E6%B3%95/image-20240123173512275.png"></p>
+<p>将1850148626转化为十进制0x6e470712，对应的IP地址就为12.07.47.6e，转化为十进制为：18.7.71.110</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2024/01/22/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E4%B8%80/" rel="prev" title="红日靶场一">
+      <i class="fa fa-chevron-left"></i> 红日靶场一
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%AA%8C%E8%AF%81%E6%98%AF%E5%90%A6%E5%AD%98%E5%9C%A8cdn"><span class="nav-number">1.</span> <span class="nav-text">验证是否存在CDN</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9C%A8%E7%BA%BF%E7%BD%91%E7%AB%99"><span class="nav-number">1.1.</span> <span class="nav-text">在线网站</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%98%E5%9C%A8cdn"><span class="nav-number">1.1.1.</span> <span class="nav-text">存在CDN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8D%E5%AD%98%E5%9C%A8cdn"><span class="nav-number">1.1.2.</span> <span class="nav-text">不存在CDN</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#nslookup"><span class="nav-number">1.2.</span> <span class="nav-text">nslookup</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%98%E5%9C%A8cdn-1"><span class="nav-number">1.2.1.</span> <span class="nav-text">存在CDN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8D%E5%AD%98%E5%9C%A8cdn-1"><span class="nav-number">1.2.2.</span> <span class="nav-text">不存在CDN</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BB%95%E8%BF%87cdn%E6%9F%A5%E6%89%BE%E7%9C%9F%E5%AE%9Eip"><span class="nav-number">2.</span> <span class="nav-text">绕过CDN查找真实IP</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E6%89%BE%E5%8E%86%E5%8F%B2dns%E8%AE%B0%E5%BD%95"><span class="nav-number">2.1.</span> <span class="nav-text">查找历史DNS记录</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%A8%E7%BA%BF%E5%9F%9F%E5%90%8D%E6%9F%A5%E8%AF%A2"><span class="nav-number">2.1.1.</span> <span class="nav-text">在线域名查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A9%E7%94%A8securitytrails%E5%B9%B3%E5%8F%B0"><span class="nav-number">2.1.2.</span> <span class="nav-text">利用SecurityTrails平台</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E5%AD%90%E5%9F%9F%E5%90%8D"><span class="nav-number">2.2.</span> <span class="nav-text">查询子域名</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BE%AE%E6%AD%A5%E5%9C%A8%E7%BA%BF"><span class="nav-number">2.2.1.</span> <span class="nav-text">微步在线</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#google-%E6%90%9C%E7%B4%A2"><span class="nav-number">2.2.2.</span> <span class="nav-text">Google 搜索</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%90%E5%9F%9F%E5%90%8D%E6%89%AB%E6%8F%8F%E5%99%A8"><span class="nav-number">2.2.3.</span> <span class="nav-text">子域名扫描器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E7%A9%BA%E9%97%B4%E5%BC%95%E6%93%8E%E6%90%9C%E7%B4%A2%E6%B3%95"><span class="nav-number">2.3.</span> <span class="nav-text">网络空间引擎搜索法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%A9%E7%94%A8ssl%E8%AF%81%E4%B9%A6%E6%9F%A5%E6%89%BEip"><span class="nav-number">2.4.</span> <span class="nav-text">利用SSL证书查找IP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%A9%E7%94%A8http%E6%A0%87%E5%A4%B4%E5%AF%BB%E6%89%BE%E7%9C%9F%E5%AE%9Eip"><span class="nav-number">2.5.</span> <span class="nav-text">利用HTTP标头寻找真实IP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E5%9B%BD%E5%A4%96%E4%B8%BB%E6%9C%BA%E8%A7%A3%E6%9E%90%E5%9F%9F%E5%90%8D"><span class="nav-number">2.6.</span> <span class="nav-text">使用国外主机解析域名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BD%91%E7%AB%99%E9%82%AE%E4%BB%B6%E8%AE%A2%E9%98%85%E6%9F%A5%E6%89%BE"><span class="nav-number">2.7.</span> <span class="nav-text">网站邮件订阅查找</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#f5-ltm%E8%A7%A3%E7%A0%81%E6%B3%95"><span class="nav-number">2.8.</span> <span class="nav-text">F5 LTM解码法</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="zzZxby"
+      src="/images/zzZ.jpg">
+  <p class="site-author-name" itemprop="name">zzZxby</p>
+  <div class="site-description" itemprop="description">看山是山，看水是水</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">33</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zzZxby</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">49k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">2:58</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+    <script defer src="/lib/three/canvas_lines.min.js"></script>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    // window.MathJax = {
+    //   loader: {
+    //
+    //       load: ['[tex]/mhchem'],
+    //
+    //     source: {
+    //       '[tex]/amsCd': '[tex]/amscd',
+    //       '[tex]/AMScd': '[tex]/amscd'
+    //     }
+    //   },
+    //   tex: {
+    //     inlineMath: {'[+]': [['$', '$']]},
+    //
+    //       packages: {'[+]': ['mhchem']},
+    //
+    //     tags: 'ams'
+    //   },
+    //   options: {
+    //     renderActions: {
+    //       findScript: [10, doc => {
+    //         document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+    //           const display = !!node.type.match(/; *mode=display/);
+    //           const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+    //           const text = document.createTextNode('');
+    //           node.parentNode.replaceChild(text, node);
+    //           math.start = {node: text, delim: '', n: 0};
+    //           math.end = {node: text, delim: '', n: 0};
+    //           doc.math.push(math);
+    //         });
+    //       }, '', false],
+    //       insertedScript: [200, () => {
+    //         document.querySelectorAll('mjx-container').forEach(node => {
+    //           let target = node.parentNode;
+    //           if (target.nodeName.toLowerCase() === 'li') {
+    //             target.parentNode.classList.add('has-jax');
+    //           }
+    //         });
+    //       }, '', false]
+    //     }
+    //   }
+    // };
+    window.MathJax = {
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+        processEscapes: true
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = 'https://cdn.jsdelivr.net/npm/mathjax@2.7.8/unpacked/MathJax.js?config=TeX-MML-AM_CHTML';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+
+  <script async src="/js/cursor/fireworks.js"></script>
+
+
+    </div>
+  
+  <style>
+    .copy-btn {
+      display: inline-block;
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 20px;
+      color: #333;
+      white-space: nowrap;
+      vertical-align: middle;
+      cursor: pointer;
+      background-color: #eee;
+      background-image: linear-gradient(#fcfcfc, #eee);
+      border: 1px solid #d5d5d5;
+      border-radius: 3px;
+      user-select: none;
+      outline: 0;
+    }
+
+    .highlight-wrap .copy-btn {
+      transition: opacity .3s ease-in-out;
+      opacity: 0;
+      padding: 2px 6px;
+      position: absolute;
+      right: 4px;
+      top: 8px;
+    }
+
+    .highlight-wrap:hover .copy-btn,
+    .highlight-wrap .copy-btn:focus {
+      opacity: 1
+    }
+
+    .highlight-wrap {
+      position: relative;
+    }
+  </style>
+  
+  <script>
+    $('.highlight').each(function (i, e) {
+      var $wrap = $('<div>').addClass('highlight-wrap')
+      $(e).after($wrap)
+      $wrap.append($('<button>').addClass('copy-btn').append('复制').on('click', function (e) {
+        var code = $(this).parent().find('.code').find('.line').map(function (i, e) {
+          return $(e).text()
+        }).toArray().join('\n')
+        var ta = document.createElement('textarea')
+        document.body.appendChild(ta)
+        ta.style.position = 'absolute'
+        ta.style.top = '0px'
+        ta.style.left = '0px'
+        ta.value = code
+        ta.select()
+        ta.focus()
+        var result = document.execCommand('copy')
+        document.body.removeChild(ta)
+        
+          if(result)$(this).text('复制成功')
+          else $(this).text('复制失败')
+        
+        $(this).blur()
+      })).on('mouseleave', function (e) {
+        var $b = $(this).find('.copy-btn')
+        setTimeout(function () {
+          $b.text('复制')
+        }, 300)
+      }).append(e)
+    })
+  </script>
+
+
+
+</body>
+</html>
